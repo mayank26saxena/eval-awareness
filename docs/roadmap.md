@@ -1,6 +1,6 @@
 # Roadmap
 
-Status as of 2026-10-25. Background and hypotheses are in [`research_statement.md`](research_statement.md).
+Status as of 2026-10-26. Background and hypotheses are in [`research_statement.md`](research_statement.md).
 
 ## Phase overview
 
@@ -10,7 +10,7 @@ Status as of 2026-10-25. Background and hypotheses are in [`research_statement.m
 | 1. Pilot | Qwen2.5-0.5B smoke test; Qwen2.5-7B behavior and probes | ✅ Done ([report](../results/reports/2026-10-25_pilot_qwen2.5-7b.md)) |
 | 2. Dataset v2/v3 | Fix the bare-shell stake confound (v2); scale to 42 tasks (v3) | ✅ Done |
 | 3. Scoring | LLM judge calibrated against hand labels | ✅ Local judge, 98% agreement; a stronger independent judge is planned |
-| 4. Probes and transfer | Layer-wise format/context probes; transfer to natural eval/deploy transcripts; second model family | In progress |
+| 4. Probes and transfer | Layer-wise format/context probes; transfer to natural eval/deploy transcripts; second model family | ✅ Done for Qwen2.5-7B and Qwen3-4B ([report](../results/reports/2026-10-26_round2_qwen.md)) |
 | 5. Activation readers | NLA (Qwen2.5-7B L20, Gemma-3-12B L32, Gemma-3-27B L41), Activation Oracle | Planned |
 | 6. Causality | LEACE format-free direction, NLA-edit steering, contrastive and random controls | Planned |
 | 7. Scale-up and write-up | Gemma-3-27B on GPU; workshop paper | Planned |
@@ -32,8 +32,8 @@ Status as of 2026-10-25. Background and hypotheses are in [`research_statement.m
 
 ### 4. Probes and transfer
 - [x] Layer-wise context, format and explicit probes; naive probe trained on the diagonal and tested off-diagonal
-- [ ] Transfer to natural transcripts (aware-bench)
-- [ ] Replication on a second family (Qwen3-4B-Instruct-2507)
+- [x] Transfer to natural transcripts (aware-bench), with length and language controls
+- [x] Replication on a second family (Qwen3-4B-Instruct-2507): the layer pattern does not replicate
 - [ ] Generalization to subtler cues
 
 ### 5. Activation readers

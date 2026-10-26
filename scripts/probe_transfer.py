@@ -21,6 +21,7 @@ Usage:
 import argparse
 import json
 import random
+from pathlib import Path
 
 import numpy as np
 from sklearn.model_selection import GroupKFold
@@ -71,7 +72,8 @@ def main():
     print(f"train: {len(train)} controlled items | natural: {sum(i['label'] for i in nat)} eval + "
           f"{sum(1 - i['label'] for i in nat)} deploy from {len({i['source'] for i in nat})} sources")
 
-    A_tr = extract(args.model, train, outdir / "activations_v2_main_behavior.npz")
+    train_stem = Path(args.train).stem
+    A_tr = extract(args.model, train, outdir / f"activations_{train_stem}_behavior.npz")
     A_nat = extract(args.model, nat, outdir / "activations_awarebench_natural.npz")
 
     ctx = np.array([it["context"] == "eval" for it in train], dtype=int)
@@ -95,8 +97,8 @@ def main():
         r["in_domain"] = auc(y, s)
         res["layers"][L] = r
         print(f"{L:5d} | {r['context_probe']:.2f}  {r['format_probe']:.2f}  {r['naive_probe']:.2f} | {r['in_domain']:.2f}")
-    (outdir / "probe_transfer_awarebench.json").write_text(json.dumps(res, indent=2))
-    print(f"-> {outdir / 'probe_transfer_awarebench.json'}")
+    (outdir / f"probe_transfer_awarebench_{train_stem}.json").write_text(json.dumps(res, indent=2))
+    print(f"-> {outdir / f'probe_transfer_awarebench_{train_stem}.json'}")
 
 
 if __name__ == "__main__":

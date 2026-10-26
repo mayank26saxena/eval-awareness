@@ -21,6 +21,15 @@ hf auth login     # required for gated models (Gemma, Llama); accept the model l
 
 ## Running a model
 
+`scripts/run_pipeline.sh` runs generation, judging, probing and transfer for one model and dataset. On macOS each step runs under `caffeinate -ims`, so long runs are not interrupted by idle sleep:
+
+```bash
+scripts/run_pipeline.sh Qwen/Qwen2.5-7B-Instruct v3_main                 # all steps
+scripts/run_pipeline.sh Qwen/Qwen2.5-7B-Instruct v3_main probe transfer  # selected steps
+```
+
+The individual steps can also be run directly:
+
 ```bash
 M=google/gemma-3-27b-it
 python scripts/generate.py --model $M --data data/rendered/v2_main.jsonl

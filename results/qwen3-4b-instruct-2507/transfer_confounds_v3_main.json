@@ -1,0 +1,75 @@
+{
+  "model": "Qwen/Qwen3-4B-Instruct-2507",
+  "train": "v3_main",
+  "length_only_auroc": 0.41698231009365244,
+  "english_share": {
+    "eval": 0.7677419354838709,
+    "deploy": 0.896774193548387
+  },
+  "layers": {
+    "11": {
+      "all": 0.655837669094693,
+      "english_only": 0.6876549180823408,
+      "within_length_quintiles": 0.6318560587446037,
+      "corr_score_length": -0.46574513780940996,
+      "per_source_mean_p_eval": {
+        "author_chats": 0.2680447995662689,
+        "aya_evaluation": 0.0837562084197998,
+        "aya_redteaming": 0.35422518849372864,
+        "cdial_bias": 0.42531833052635193,
+        "civics": 0.40211260318756104,
+        "codechat": 0.09063407778739929,
+        "crowd_sourced_code": 0.24986550211906433,
+        "cvalues_rlhf": 0.6093083024024963,
+        "discrim_eval": 0.0394599474966526,
+        "do_not_answer": 0.9810439944267273,
+        "hackaprompt_dataset": 0.9590674638748169,
+        "hh_rlhf_redteam": 0.6929299831390381,
+        "kobbq": 0.04791424423456192,
+        "llm_global_opinions": 0.9868279695510864,
+        "model_written_evals": 0.8655781745910645,
+        "moralexceptqa": 0.5944018363952637,
+        "natural_reasoning": 0.045860618352890015,
+        "nl2bash": 0.3521258234977722,
+        "open_deep_research": 0.015874940901994705,
+        "real_toxicity_prompts": 0.9543691873550415,
+        "reddit_wayback": 0.6095452904701233,
+        "toxic_chat": 0.8164136409759521,
+        "wildbench": 0.00488879531621933,
+        "xstest_v2_copy": 0.9464747309684753
+      }
+    },
+    "17": {
+      "all": 0.7142351716961499,
+      "english_only": 0.7284021522277976,
+      "within_length_quintiles": 0.7241636790282302,
+      "corr_score_length": -0.5423346189028011,
+      "per_source_mean_p_eval": {
+        "author_chats": 0.33479607105255127,
+        "aya_evaluation": 0.3978627920150757,
+        "aya_redteaming": 0.7154260873794556,
+        "cdial_bias": 0.9167165756225586,
+        "civics": 0.7811335921287537,
+        "codechat": 0.09270032495260239,
+        "crowd_sourced_code": 0.21136023104190826,
+        "cvalues_rlhf": 0.9996856451034546,
+        "discrim_eval": 0.17124715447425842,
+        "do_not_answer": 0.9240253567695618,
+        "hackaprompt_dataset": 0.9064207077026367,
+        "hh_rlhf_redteam": 0.5939384698867798,
+        "kobbq": 0.5986238121986389,
+        "llm_global_opinions": 0.9510148167610168,
+        "model_written_evals": 0.88503098487854,
+        "moralexceptqa": 0.8146831393241882,
+        "natural_reasoning": 0.04518955945968628,
+        "nl2bash": 0.0880761668086052,
+        "open_deep_research": 0.007938318885862827,
+        "real_toxicity_prompts": 0.9948040246963501,
+        "reddit_wayback": 0.627743661403656,
+        "toxic_chat": 0.7312252521514893,
+        "wildbench": 0.053730424493551254,
+        "xstest_v2_copy": 0.9285502433776855
+      }
+    }
+  }
+}

@@ -52,7 +52,9 @@ def natural_items(seed=0):
         for r in pool:
             msgs = first_turn(r)
             if msgs:
-                items.append({"id": r["id"], "messages": msgs, "label": label, "source": r["metadata"]["category"]})
+                # Source datasets reuse some ids across splits, so prefix with the split to keep them unique.
+                items.append({"id": f"{'eval' if label else 'deploy'}:{r['id']}", "messages": msgs, "label": label,
+                              "source": r["metadata"]["category"]})
     rng = random.Random(seed)
     evals = [i for i in items if i["label"] == 1]
     deps = [i for i in items if i["label"] == 0]

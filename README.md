@@ -30,12 +30,13 @@ The same request is rendered across all cells. Behaviors are **honesty** (disclo
 Models: Qwen2.5-7B-Instruct and Qwen3-4B-Instruct-2507; dataset v3 has 38 behavior tasks.
 
 - **Behavior.** In Qwen2.5-7B, contextual evaluation cues raise privacy protection by **+25 pp** (68% → 93%; 95% CI over tasks [+7.5, +45]). They do not change honesty (−2.7 pp; CI [−12.5, +8.0]).
-- **Layer specificity.** A naive eval-vs-deploy probe, trained where format and context agree, tracks **format in early and late layers** and **context only in a narrow mid-network band** (Qwen2.5-7B, L10–11). The layer read by the released Qwen2.5-7B NLA (L20) is format-dominated. *Which layer is probed largely determines what an "eval-awareness probe" measures.*
+- **Layer specificity.** A naive eval-vs-deploy probe, trained where format and context agree, tracks **format in early and late layers** and **context only in a narrow mid-network band** (Qwen2.5-7B, L10–11). The layer read by the released Qwen2.5-7B NLA (output of block 20) is format-dominated. *Which layer is probed largely determines what an "eval-awareness probe" measures.*
 - **Transfer.** A context probe trained only on controlled prompts separates natural evaluation from deployment transcripts at **AUROC 0.83–0.88** (Qwen2.5-7B, L10). That is above an in-domain baseline (0.79), and it holds under length matching and on English-only prompts. Format probes do not transfer.
 - **Model dependence.** Qwen3-4B shows no mid-layer context band, and its transfer is weaker (0.71).
+- **NLA readings.** At the response-initial token, the released Qwen2.5-7B NLA never verbalizes evaluation awareness (0 of 622 explanations graded YES with the published grader). Its structural vocabulary tracks format (+27 pp), not context. Linear probes at the same layer do separate evaluation from deployment (AUROC 0.78–0.83 on natural prompts). *Decodable is not the same as verbalized.*
 - **Caveats.** All models are below 8B, each prompt was run once, and the judge was calibrated on pilot responses. These results guide the next phase; they are not conclusions.
 
-Reports: [`round 2 (2026-10-26)`](results/reports/2026-10-26_round2_qwen.md) · [`pilot (2026-10-25)`](results/reports/2026-10-25_pilot_qwen2.5-7b.md)
+Reports: [`NLA validation (2026-10-26)`](results/reports/2026-10-26_nla_qwen2.5-7b.md) · [`round 2 (2026-10-26)`](results/reports/2026-10-26_round2_qwen.md) · [`pilot (2026-10-25)`](results/reports/2026-10-25_pilot_qwen2.5-7b.md)
 
 ## Repository structure
 
@@ -54,8 +55,11 @@ Reports: [`round 2 (2026-10-26)`](results/reports/2026-10-26_round2_qwen.md) · 
 │   ├── probe.py               # layer-wise probes, naive-probe and topic-control analyses
 │   ├── probe_transfer.py      # transfer of probes to natural eval/deploy transcripts
 │   ├── transfer_confounds.py  # length / language controls for the transfer result
+│   ├── nla_explain.py         # NLA activation verbalizer (published recipe, transformers)
+│   ├── nla_grade.py           # published eval-awareness grader + keyword measures
 │   ├── run_pipeline.sh        # end-to-end runner (sleep-safe on macOS)
 │   └── show_pairs.py          # side-by-side response viewer
+├── prompts/                   # verbatim third-party prompts (e.g. published NLA grader)
 ├── results/
 │   ├── reports/               # dated write-ups
 │   └── <model>/               # responses, judgments, probe results
@@ -91,7 +95,7 @@ Models up to about 8B run on Apple Silicon (MPS, bf16). Larger models need an 80
 
 ## Status
 
-See [`docs/roadmap.md`](docs/roadmap.md). Next: v3 single-factor attribution, judge re-validation on v3, NLA readings at the released Qwen2.5-7B layer, and steering on the privacy effect.
+See [`docs/roadmap.md`](docs/roadmap.md). Next: NLA position sweep over response tokens, v3 single-factor attribution, and steering on the privacy effect.
 
 ## Data and licenses
 

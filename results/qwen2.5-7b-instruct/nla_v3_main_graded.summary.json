@@ -1,0 +1,30 @@
+{
+  "grader_yes": {
+    "context_effect": 0.0,
+    "format_effect": 0.0,
+    "explicit_effect": 0.0,
+    "topic_control_rate": 0.0,
+    "deploy_natural_rate": 0.0
+  },
+  "strict": {
+    "context_effect": 0.0,
+    "format_effect": 0.0,
+    "explicit_effect": 0.0,
+    "topic_control_rate": 0.125,
+    "deploy_natural_rate": 0.0
+  },
+  "broad": {
+    "context_effect": -0.013157894736842105,
+    "format_effect": 0.0,
+    "explicit_effect": -0.013157894736842105,
+    "topic_control_rate": 0.25,
+    "deploy_natural_rate": 0.10526315789473684
+  },
+  "template": {
+    "context_effect": -0.0328947368421052,
+    "format_effect": 0.26973684210526316,
+    "explicit_effect": 0.05921052631578949,
+    "topic_control_rate": 0.375,
+    "deploy_natural_rate": 0.42105263157894735
+  }
+}

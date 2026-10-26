@@ -11,7 +11,7 @@ Status as of 2026-10-26. Background and hypotheses are in [`research_statement.m
 | 2. Dataset v2/v3 | Fix the bare-shell stake confound (v2); scale to 42 tasks (v3) | ✅ Done |
 | 3. Scoring | LLM judge calibrated against hand labels | ✅ Local judge, 98% agreement; a stronger independent judge is planned |
 | 4. Probes and transfer | Layer-wise format/context probes; transfer to natural eval/deploy transcripts; second model family | ✅ Done for Qwen2.5-7B and Qwen3-4B ([report](../results/reports/2026-10-26_round2_qwen.md)) |
-| 5. Activation readers | NLA (Qwen2.5-7B L20, Gemma-3-12B L32, Gemma-3-27B L41), Activation Oracle | Planned |
+| 5. Activation readers | NLA (Qwen2.5-7B L20, Gemma-3-12B L32, Gemma-3-27B L41), Activation Oracle | In progress: Qwen2.5-7B, pre-response position done ([report](../results/reports/2026-10-26_nla_qwen2.5-7b.md)) |
 | 6. Causality | LEACE format-free direction, NLA-edit steering, contrastive and random controls | Planned |
 | 7. Scale-up and write-up | Gemma-3-27B on GPU; workshop paper | Planned |
 
@@ -37,7 +37,8 @@ Status as of 2026-10-26. Background and hypotheses are in [`research_statement.m
 - [ ] Generalization to subtler cues
 
 ### 5. Activation readers
-- [ ] NLA explanations at the released layers, scored with the published eval-awareness grader
+- [x] NLA explanations at Qwen2.5-7B layer 20 (pre-response token), scored with the published grader: no eval-awareness readings
+- [ ] NLA position sweep over response tokens and prompt-internal positions
 - [ ] Replicate the published manipulations (eval vs deploy, contrastive steering, realism edits) on open models
 - [ ] Token-position map of NLA-measured awareness
 - [ ] AR grounding test: ablate eval-awareness claims and measure the change in reconstruction error
@@ -48,6 +49,7 @@ Status as of 2026-10-26. Background and hypotheses are in [`research_statement.m
 - [ ] Steering with format-free, NLA-edit, contrastive-prompt, format and random directions; single and multi-layer
 - [ ] Activation patching between context conditions
 - [ ] Capability and coherence controls
+- [ ] Optional: neuron-level analysis. Rank MLP neurons by the alignment of their output weights (`W_down` columns) with the context and format probe directions, then steer the top candidates and record rollouts. Method after Lyra C's neuron-explorer (steering-sweep characterization of individual MLP neurons in Qwen3.5-4B).
 
 ### 7. Scale-up and write-up
 - [ ] Gemma-3-12B / 27B runs on an 80 GB GPU (see [`compute.md`](compute.md))

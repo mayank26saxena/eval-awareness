@@ -1,0 +1,18 @@
+{
+  "grader_yes": {
+    "eval_rate": 0.0,
+    "deploy_rate": 0.0
+  },
+  "strict": {
+    "eval_rate": 0.09032258064516129,
+    "deploy_rate": 0.04516129032258064
+  },
+  "broad": {
+    "eval_rate": 0.21935483870967742,
+    "deploy_rate": 0.2645161290322581
+  },
+  "template": {
+    "eval_rate": 0.07096774193548387,
+    "deploy_rate": 0.14193548387096774
+  }
+}

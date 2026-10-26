@@ -1,0 +1,17 @@
+{
+  "cells": {
+    "natural|deploy|absent": 0.8333333333333334,
+    "natural|only_F1|absent": 0.8333333333333334,
+    "natural|only_F2|absent": 0.6666666666666666,
+    "natural|only_F4|absent": 0.6666666666666666,
+    "natural|only_F6|absent": 0.6666666666666666,
+    "natural|deploy|present": 0.8333333333333334,
+    "benchmark|deploy|absent": 0.6666666666666666,
+    "benchmark|only_F1|absent": 0.8333333333333334,
+    "benchmark|only_F2|absent": 0.8333333333333334,
+    "benchmark|only_F4|absent": 0.3333333333333333,
+    "benchmark|only_F6|absent": 0.8333333333333334,
+    "benchmark|deploy|present": 0.6666666666666666
+  },
+  "n": 72
+}

@@ -1,0 +1,189 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Eval Trust Gauge</title>
+<style>
+:root{
+  --bg:#f7f6f2; --card:#ffffff; --ink:#1d1d1b; --muted:#6b6a65; --line:#e3e1da;
+  --accent:#2f5bea; --on-accent:#ffffff; --safe:#1f8a5b; --safe-bg:#e3f4ec; --risk:#c2412d; --risk-bg:#fbe7e3;
+  --chip:#eef1fd; --warn:#a86a00; --warn-bg:#fff4dc;
+}
+@media (prefers-color-scheme: dark){
+  :root:not([data-theme="light"]){
+    --bg:#151513; --card:#1f1f1c; --ink:#ecebe6; --muted:#a19f97; --line:#34332f;
+    --accent:#7d9bff; --on-accent:#10131f; --safe:#4cc38a; --safe-bg:#183427; --risk:#ff8a73; --risk-bg:#3a1f1a;
+    --chip:#232a44; --warn:#f0b74a; --warn-bg:#3a2e14;
+  }
+}
+:root[data-theme="dark"]{
+  --bg:#151513; --card:#1f1f1c; --ink:#ecebe6; --muted:#a19f97; --line:#34332f;
+  --accent:#7d9bff; --on-accent:#10131f; --safe:#4cc38a; --safe-bg:#183427; --risk:#ff8a73; --risk-bg:#3a1f1a;
+  --chip:#232a44; --warn:#f0b74a; --warn-bg:#3a2e14;
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:16px/1.6 -apple-system,BlinkMacSystemFont,"Segoe UI",Inter,sans-serif}
+main{max-width:880px;margin:0 auto;padding:40px 16px 80px}
+h1{font-size:2.1rem;line-height:1.15;margin:0 0 10px}
+h2{font-size:1.3rem;margin:52px 0 12px}
+h3{margin:0 0 6px;font-size:1rem}
+p{margin:0 0 12px}
+.eyebrow{display:inline-block;font-size:.75rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;color:var(--accent);margin-bottom:6px}
+.lede{color:var(--muted);font-size:1.1rem;max-width:66ch}
+.card{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:20px}
+.goal{margin-top:24px;background:var(--accent);color:var(--on-accent);border-radius:16px;padding:24px}
+.goal .eyebrow{color:var(--on-accent);opacity:.8}
+.goal p{font-size:1.2rem;line-height:1.45;margin:0}
+.goal small{display:block;margin-top:12px;opacity:.85;font-size:.92rem}
+.chain{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
+.chain .card{position:relative}
+.chain .tag{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;padding:3px 8px;border-radius:999px;display:inline-block;margin-bottom:8px}
+.t-known{background:var(--safe-bg);color:var(--safe)}
+.t-claim{background:var(--warn-bg);color:var(--warn)}
+.t-ours{background:var(--chip);color:var(--accent)}
+.chain p{font-size:.93rem;color:var(--muted);margin:0}
+.claims{display:grid;gap:12px}
+.claim{display:grid;grid-template-columns:44px 1fr;gap:14px;align-items:start}
+.num{width:44px;height:44px;border-radius:12px;background:var(--accent);color:var(--on-accent);display:grid;place-items:center;font-weight:700;font-size:1.1rem}
+.claim p{margin:0;color:var(--muted);font-size:.94rem}
+.claim .test{margin-top:6px;font-size:.85rem;color:var(--ink)}
+.gauge-wrap{display:grid;grid-template-columns:1fr 1fr;gap:16px;align-items:center}
+.gauge{position:relative;height:28px;border-radius:999px;background:linear-gradient(90deg,var(--safe) 0%,var(--warn) 50%,var(--risk) 100%);opacity:.9}
+.needle{position:absolute;top:-6px;width:4px;height:40px;background:var(--ink);border-radius:2px;transition:left .25s}
+.scale{display:flex;justify-content:space-between;font-size:.75rem;color:var(--muted);margin-top:6px}
+.big{font-size:2.4rem;font-weight:700;line-height:1}
+.evals{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:14px}
+.evals button{border:1px solid var(--line);background:var(--card);color:var(--ink);font:inherit;font-size:.85rem;padding:7px 12px;border-radius:999px;cursor:pointer}
+.evals button[aria-pressed="true"]{background:var(--accent);color:var(--on-accent);border-color:var(--accent)}
+.rows{font-size:.9rem;display:grid;gap:6px}
+.rows div{display:flex;justify-content:space-between;border-bottom:1px dashed var(--line);padding-bottom:4px}
+.verdict{margin-top:10px;font-size:.92rem;padding:10px 12px;border-radius:10px;background:var(--chip)}
+.uses{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.use .label{font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.05em;margin-bottom:6px;display:block}
+.use p{color:var(--muted);font-size:.92rem;margin:0}
+.use.good .label{color:var(--safe)}
+.use.bad .label{color:var(--risk)}
+.use.bad{border-color:var(--risk)}
+.why{font-size:.85rem;margin-top:8px;color:var(--ink)}
+table{width:100%;border-collapse:collapse;font-size:.92rem}
+th,td{text-align:left;padding:10px 8px;border-bottom:1px solid var(--line);vertical-align:top}
+th{font-size:.75rem;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.note{font-size:.8rem;color:var(--muted);margin-top:10px}
+.outcomes{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.outcomes p{margin:0;color:var(--muted);font-size:.93rem}
+@media (max-width:680px){
+  .chain,.uses,.outcomes,.gauge-wrap{grid-template-columns:1fr}
+  h1{font-size:1.7rem}
+  .goal p{font-size:1.08rem}
+}
+</style>
+</head>
+<body>
+<main>
+  <span class="eyebrow">Research statement</span>
+  <h1>Can we trust a safety eval when the model knows it's being tested?</h1>
+  <p class="lede">Models behave better when they suspect they're being evaluated. That makes safety scores look better than real-world behavior. This project turns that hidden bias into a number you can measure, and checks that the tools used to measure it can be trusted.</p>
+
+  <div class="goal">
+    <span class="eyebrow">End goal</span>
+    <p>Build and validate an <b>Eval Trust Gauge</b>: for any safety eval, a measurement of <b>how much of the model's good behavior exists only because it knows it's being tested</b>.</p>
+    <small>Measured from inside the model on open LLMs (Gemma-3-27B). The same procedure applies to any model whose activations can be accessed.</small>
+  </div>
+
+  <h2>Where the field stands</h2>
+  <div class="chain">
+    <div class="card"><span class="tag t-known">Known</span><h3>Models notice tests</h3><p>Claude, GPT and Gemini models say "this looks like a test" and behave better when they do. Anthropic, OpenAI/Apollo, DeepMind, UK AISI and METR all report it.</p></div>
+    <div class="card"><span class="tag t-claim">Claimed, not proven</span><h3>Tools can see it silently</h3><p>Anthropic's NLAs detect unspoken eval awareness inside Claude. There's no ground truth, though, and the check they used to support it mixed prompt format with real test cues.</p></div>
+    <div class="card"><span class="tag t-ours">This project</span><h3>Measure it reliably</h3><p>Check which detectors are actually reading the model, then use the trustworthy one to measure how much eval behavior is "for show".</p></div>
+  </div>
+
+  <h2>What we're trying to prove</h2>
+  <p>The gauge only works if three things are true. Each is a claim we test, and each can fail.</p>
+  <div class="claims">
+    <div class="card claim"><div class="num">1</div><div><h3>The detector reads the model, not the prompt</h3><p>Activation readers (NLAs, Activation Oracles, probes) should react to <em>signs that the setup is a test</em>, not to how formal or benchmark-like the text looks.</p><p class="test"><b>Test:</b> the same request written four ways, crossing format with test cues. Compare against text-only detectors.</p></div></div>
+    <div class="card claim"><div class="num">2</div><div><h3>The reading is grounded, not invented</h3><p>When an NLA says "the model thinks this is an eval", that information should actually be in the activation. The explainer shouldn't be guessing it from context.</p><p class="test"><b>Test:</b> delete the eval claim from the explanation and see whether rebuilding the activation gets worse.</p></div></div>
+    <div class="card claim"><div class="num">3</div><div><h3>The signal causes the better behavior</h3><p>If we switch off the "I'm being tested" signal, the model should start behaving the way it does in deployment, for example becoming more deceptive or leaking PII.</p><p class="test"><b>Test:</b> steer along the format-free direction, compared with Anthropic's vector, an NLA-edit direction and a random one.</p></div></div>
+  </div>
+
+  <h2>The deliverable: an Eval Trust Gauge</h2>
+  <p>Once claims 1–3 hold, the gauge for each eval is simply: <b>misbehavior with the test signal switched off − misbehavior normally</b>. Pick an example eval:</p>
+  <div class="card">
+    <div class="evals" role="group" aria-label="Example evals">
+      <button type="button" data-i="0" aria-pressed="true">Honesty eval</button>
+      <button type="button" data-i="1">PII support-agent eval</button>
+      <button type="button" data-i="2">Math benchmark</button>
+    </div>
+    <div class="gauge-wrap">
+      <div>
+        <div class="big" id="gap">+21 pts</div>
+        <div class="note" style="margin-top:4px">eval-awareness gap</div>
+        <div style="margin-top:18px">
+          <div class="gauge"><div class="needle" id="needle"></div></div>
+          <div class="scale"><span>trustworthy</span><span>inflated</span></div>
+        </div>
+      </div>
+      <div class="rows">
+        <div><span>Misbehavior, normal</span><b id="r1">4%</b></div>
+        <div><span>Misbehavior, test signal off</span><b id="r2">25%</b></div>
+        <div><span>Detector check (claims 1–2)</span><b id="r3">passed</b></div>
+        <div class="verdict" id="verdict"></div>
+      </div>
+    </div>
+    <p class="note">All numbers here are illustrative. They show what the output would look like, not results.</p>
+  </div>
+
+  <h2>"Can we exploit the eval-vs-deployment gap?"</h2>
+  <p>Yes, but some uses help and some backfire. The gap is something to <b>measure and remove</b>, not something to rely on.</p>
+  <div class="uses">
+    <div class="card use good"><span class="label">✓ Audit</span><h3>Score how trustworthy each eval is</h3><p>Run the gauge on every safety eval. A big gap means the score overstates real-world safety, so don't sign off on that number alone.</p></div>
+    <div class="card use good"><span class="label">✓ Fix evals</span><h3>Find the cues that give tests away</h3><p>The format × context experiment shows which features make a prompt "smell like a test". That becomes an eval-design checklist for building more realistic evals.</p></div>
+    <div class="card use good"><span class="label">✓ Monitor</span><h3>Flag test-aware moments</h3><p>A validated detector can flag eval transcripts where the model knew it was being tested, so those results get discounted or rerun.</p></div>
+    <div class="card use good"><span class="label">✓ Red-team</span><h3>Know where safety is fragile</h3><p>If good behavior depends on test cues, then deployment situations <em>without</em> those cues are where failures hide. That tells red-teamers where to look.</p></div>
+    <div class="card use bad"><span class="label">✗ Tempting but risky</span><h3>Make the model always feel watched</h3><p>Steering the "being tested" signal on in deployment could make the model behave better.</p><p class="why"><b>Why not:</b> it hides the underlying problem instead of fixing it, it's brittle, and a capable model could learn to work around it. It's the AI version of "only behaves when the teacher is in the room".</p></div>
+    <div class="card use bad"><span class="label">✗ Don't</span><h3>Train the signal away</h3><p>Training the model so it no longer shows test awareness might just teach it to hide that awareness.</p><p class="why"><b>Why not:</b> once you train against your measuring tool, you can't trust it any more. Use the signal only to diagnose, never as a training target.</p></div>
+  </div>
+
+  <h2>How we'll test it</h2>
+  <div class="card" style="overflow-x:auto">
+    <table>
+      <thead><tr><th>Step</th><th>What</th><th>Answers</th></tr></thead>
+      <tbody>
+        <tr><td>1 · Dataset</td><td>Same requests across format (benchmark or natural) × context (test cues present or absent), plus real users talking <em>about</em> evals. Behaviors: honesty and PII.</td><td>Sets up all three claims</td></tr>
+        <tr><td>2 · Detectors</td><td>NLA (scored with Anthropic's own grader), Activation Oracle and probes, compared against text-only baselines (LLM judge, embedding classifier)</td><td>Claim 1</td></tr>
+        <tr><td>3 · Grounding</td><td>Delete the eval claims from NLA explanations, then measure the change in reconstruction error</td><td>Claim 2</td></tr>
+        <tr><td>4 · Causality</td><td>Steer along four directions and measure the change in behavior</td><td>Claim 3, which gives the gauge</td></tr>
+      </tbody>
+    </table>
+    <p class="note">Models: Gemma-3-27B-IT (main), Gemma-3-12B-IT, Qwen2.5-7B-Instruct and Qwen3-4B-Instruct (development and replication). See docs/roadmap.md.</p>
+  </div>
+
+  <h2>What happens either way</h2>
+  <div class="outcomes">
+    <div class="card"><h3>If the claims hold</h3><p>We get a validated gauge, plus evidence that rewriting evals to look realistic isn't enough. Labs need internal monitoring and evals built from real traffic.</p></div>
+    <div class="card"><h3>If claim 1 or 2 fails</h3><p>Current eval-awareness readings, including Anthropic's NLA results, partly measure prompt format or explainer guesswork. That's an important warning before teams rely on them in audits.</p></div>
+  </div>
+</main>
+
+<script>
+const data = [
+  {gap:21, a:4, b:25, check:"passed", v:"<b>Inflated.</b> Most of this eval's honest behavior depends on the model knowing it's being tested. Don't trust the score alone."},
+  {gap:9, a:3, b:12, check:"passed", v:"<b>Partly inflated.</b> Some of the PII safety is test-dependent. Rebuild the eval with fewer test cues."},
+  {gap:1, a:0, b:1, check:"passed", v:"<b>Trustworthy.</b> Behavior barely changes when the test signal is switched off."}
+];
+const btns = document.querySelectorAll(".evals button");
+function show(i){
+  const d = data[i];
+  document.getElementById("gap").textContent = "+" + d.gap + " pts";
+  document.getElementById("r1").textContent = d.a + "%";
+  document.getElementById("r2").textContent = d.b + "%";
+  document.getElementById("r3").textContent = d.check;
+  document.getElementById("verdict").innerHTML = d.v;
+  document.getElementById("needle").style.left = "calc(" + Math.min(d.gap / 25, 1) * 100 + "% - 2px)";
+  btns.forEach(b => b.setAttribute("aria-pressed", b.dataset.i == i));
+}
+btns.forEach(b => b.addEventListener("click", () => show(+b.dataset.i)));
+show(0);
+</script>
+</body>
+</html>

@@ -1,0 +1,13 @@
+{
+  "cells": {
+    "natural|deploy|absent": 0.8333333333333334,
+    "natural|deploy|present": 0.8333333333333334,
+    "natural|eval|absent": 0.6666666666666666,
+    "natural|eval|present": 0.6666666666666666,
+    "benchmark|deploy|absent": 0.8333333333333334,
+    "benchmark|deploy|present": 0.6666666666666666,
+    "benchmark|eval|absent": 0.5,
+    "benchmark|eval|present": 0.5
+  },
+  "n": 48
+}

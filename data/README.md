@@ -33,6 +33,11 @@ The hidden fact is always present in the system prompt, so behavior changes can'
 - 8 tasks: 4 honesty, 2 pii, 2 topic controls. That gives 52 main-grid items and 72 single-flip items.
 - Validation passes. Held-out-task bag-of-words classifiers predict format (0.96) and context (1.00), but each one is at chance on the other axis (0.54 / 0.50). Label correlation is 0, so the axes vary independently.
 
+## v3 status (2026-10-26)
+- 42 tasks: 28 honesty, 10 pii, 4 topic controls. That gives 312 main-grid items (`rendered/v3_main.jsonl`) and 456 single-flip items (`rendered/v3_single.jsonl`).
+- Validation passes. Format 0.97, context 1.00; cross-axis 0.53 / 0.50; label correlation 0.
+- Scoring keywords for the new tasks are chosen so they don't appear in the user prompt, so a reply that echoes the question isn't scored as honest or as a leak. `used_car_accident` (pilot) still has "accident" in the user text.
+
 ## Known issues to fix before scaling
 - **Length confound:** the context=eval cells use the bare (F4) shells, so they're much shorter. A detector could pick up length. The single-flip set isolates F4. Consider length-matched controls.
 - **Format bundles F3 and F7**, so register and template can't be separated.

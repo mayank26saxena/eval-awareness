@@ -11,7 +11,7 @@ Status as of 2026-10-27. Background and hypotheses are in [`research_statement.m
 | 2. Dataset v2/v3 | Fix the bare-shell stake confound (v2); scale to 42 tasks (v3) | ✅ Done |
 | 3. Scoring | LLM judge calibrated against hand labels | ✅ Local judge, 98% agreement; a stronger independent judge is planned |
 | 4. Probes and transfer | Layer-wise format/context probes; transfer to natural eval/deploy transcripts; second model family | ✅ Done for Qwen2.5-7B and Qwen3-4B ([report](../results/reports/2026-10-26_round2_qwen.md)) |
-| 5. Activation readers | NLA (Qwen2.5-7B L20, Gemma-3-12B L32, Gemma-3-27B L41), Activation Oracle | In progress: Qwen2.5-7B pre-response ([report](../results/reports/2026-10-26_nla_qwen2.5-7b.md)) and position sweep ([report](../results/reports/2026-10-27_nla_positions_qwen2.5-7b.md)) done |
+| 5. Activation readers | NLA (Qwen2.5-7B L20, Gemma-3-12B L32, Gemma-3-27B L41), Activation Oracle | In progress: Qwen2.5-7B pre-response ([report](../results/reports/2026-10-26_nla_qwen2.5-7b.md)) position sweep ([report](../results/reports/2026-10-27_nla_positions_qwen2.5-7b.md)) and single-factor artificiality analysis ([report](../results/reports/2026-10-27_nla_artificiality_qwen2.5-7b.md)) done |
 | 6. Causality | LEACE format-free direction, NLA-edit steering, contrastive and random controls | Planned |
 | 7. Scale-up and write-up | Gemma-3-27B on GPU; workshop paper | Planned |
 
@@ -40,7 +40,8 @@ Status as of 2026-10-27. Background and hypotheses are in [`research_statement.m
 - [x] NLA explanations at Qwen2.5-7B layer 20 (pre-response token), scored with the published grader: no eval-awareness readings
 - [x] NLA position sweep (system end, user end, pre-response, 8 response tokens; any-of-N): no evaluation readings beyond explicit grading text; context read as artificiality at the system message
 - [ ] Replicate the published manipulations (eval vs deploy, contrastive steering, realism edits) on open models
-- [ ] Rubric separating artificiality ("fictional scenario") from evaluation awareness; attribute to F1 vs F2 with the single-factor set
+- [x] Validated measures separating artificiality from evaluation framing; single-factor attribution: contrived details (F2) drive the artificiality reading, and only explicit grading text produces evaluation language
+- [ ] Multiple NLA samples per activation, to resolve single-factor effects below ~10 pp
 - [ ] AR grounding test: ablate eval-awareness claims and measure the change in reconstruction error
 - [ ] Activation Oracle answers, averaged over question paraphrases, with known-answer controls
 

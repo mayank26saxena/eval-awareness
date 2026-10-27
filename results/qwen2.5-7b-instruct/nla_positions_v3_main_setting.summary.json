@@ -1,0 +1,86 @@
+{
+  "system_end": {
+    "benchmark/deploy/absent": {
+      "artificial": 0.18421052631578946,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/deploy/present": {
+      "artificial": 0.10526315789473684,
+      "evaluation": 0.02631578947368421,
+      "n": 38
+    },
+    "benchmark/eval/absent": {
+      "artificial": 0.4473684210526316,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/eval/present": {
+      "artificial": 0.47368421052631576,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/deploy/absent": {
+      "artificial": 0.23684210526315788,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/deploy/present": {
+      "artificial": 0.13157894736842105,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/eval/absent": {
+      "artificial": 0.5263157894736842,
+      "evaluation": 0.05263157894736842,
+      "n": 38
+    },
+    "natural/eval/present": {
+      "artificial": 0.5526315789473685,
+      "evaluation": 0.0,
+      "n": 38
+    }
+  },
+  "user_end": {
+    "benchmark/deploy/absent": {
+      "artificial": 0.42105263157894735,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/deploy/present": {
+      "artificial": 0.23684210526315788,
+      "evaluation": 0.8157894736842105,
+      "n": 38
+    },
+    "benchmark/eval/absent": {
+      "artificial": 0.6578947368421053,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/eval/present": {
+      "artificial": 0.15789473684210525,
+      "evaluation": 0.8947368421052632,
+      "n": 38
+    },
+    "natural/deploy/absent": {
+      "artificial": 0.05263157894736842,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/deploy/present": {
+      "artificial": 0.15789473684210525,
+      "evaluation": 0.8947368421052632,
+      "n": 38
+    },
+    "natural/eval/absent": {
+      "artificial": 0.05263157894736842,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/eval/present": {
+      "artificial": 0.18421052631578946,
+      "evaluation": 0.9210526315789473,
+      "n": 38
+    }
+  }
+}

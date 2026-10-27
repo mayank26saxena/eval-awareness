@@ -1,7 +1,8 @@
 """Extract activations at multiple token positions of full transcripts (prompt + model response).
 
 For each item, the transcript is the chat-formatted prompt followed by the model's own response
-(from scripts/generate.py). One forward pass yields hidden states at:
+(from scripts/generate.py), or the prompt alone when --responses is omitted. One forward pass yields
+hidden states at:
   system_end     last token of the system message content
   user_end       last token of the user message content
   pre_response   last prompt token (where the response begins)
@@ -13,6 +14,7 @@ plus a .jsonl with per-position metadata. The output feeds scripts/nla_explain.p
 Usage:
   python scripts/extract_positions.py --model Qwen/Qwen2.5-7B-Instruct --data data/rendered/v3_main.jsonl \
       --responses results/qwen2.5-7b-instruct/responses_v3_main.jsonl --layer 21 --n-response 8
+  python scripts/extract_positions.py --data data/rendered/v3_single.jsonl   # prompt positions only
 """
 
 import argparse
@@ -38,7 +40,7 @@ def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("--model", default="Qwen/Qwen2.5-7B-Instruct")
     ap.add_argument("--data", required=True)
-    ap.add_argument("--responses", required=True)
+    ap.add_argument("--responses", default=None, help="omit to read prompt positions only")
     ap.add_argument("--layer", type=int, default=21, help="hidden_states index (NLA layer K -> K + 1)")
     ap.add_argument("--n-response", type=int, default=8)
     ap.add_argument("--seed", type=int, default=0)
@@ -46,8 +48,8 @@ def main():
     args = ap.parse_args()
 
     items = {it["id"]: it for it in read_jsonl(args.data)}
-    responses = {r["id"]: r["response"] for r in read_jsonl(args.responses)}
-    ids = [i for i in items if i in responses]
+    responses = {r["id"]: r["response"] for r in read_jsonl(args.responses)} if args.responses else None
+    ids = [i for i in items if responses is None or i in responses]
     tok, model = load_model(args.model)
     rng = random.Random(args.seed)
     stem = f"positions_{slug(args.data.split('/')[-1].replace('.jsonl', ''))}_L{args.layer}"
@@ -57,7 +59,7 @@ def main():
     for n, iid in enumerate(ids):
         it = items[iid]
         ptext = prompt_text(tok, it)
-        full = ptext + responses[iid] + tok.eos_token
+        full = ptext + responses[iid] + tok.eos_token if responses else ptext
         enc = tok(full, return_offsets_mapping=True, add_special_tokens=False)
         offsets = enc["offset_mapping"]
         n_prompt = len(tok(ptext, add_special_tokens=False)["input_ids"])
@@ -69,7 +71,7 @@ def main():
                 idx, cursor = content_end_token(offsets, full, m["content"], cursor)
                 positions.append((f"{m['role']}_end", idx))
         positions.append(("pre_response", n_prompt - 1))
-        resp = list(range(n_prompt, len(enc["input_ids"]) - 1))  # drop the end-of-turn token
+        resp = list(range(n_prompt, len(enc["input_ids"]) - 1)) if responses else []  # drop the end-of-turn token
         for idx in sorted(rng.sample(resp, min(args.n_response, len(resp)))):
             positions.append(("response", idx))
 

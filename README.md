@@ -35,9 +35,10 @@ Models: Qwen2.5-7B-Instruct and Qwen3-4B-Instruct-2507; dataset v3 has 38 behavi
 - **Model dependence.** Qwen3-4B shows no mid-layer context band, and its transfer is weaker (0.71).
 - **NLA readings.** At the response-initial token, the released Qwen2.5-7B NLA never verbalizes evaluation awareness (0 of 622 explanations graded YES with the published grader). Its structural vocabulary tracks format (+27 pp), not context. Linear probes at the same layer do separate evaluation from deployment (AUROC 0.78–0.83 on natural prompts). *Decodable is not the same as verbalized.*
 - **NLA position sweep.** Over 11 positions per transcript, including the model's own response, the published grader still finds no context effect (any-of-N YES 2% in both evaluation and deployment contexts). Every YES comes from an explicit grading statement in the prompt. The NLA does track context at the end of the system message, but describes it as a fictional scenario (98% vs 35%, format-invariant), which the rubric does not count as evaluation awareness. Response tokens carry no reading.
+- **What the NLA notices.** Measured with validated rubrics, the system-message reading is perceived artificiality: "fictional" or "contrived" in 50% of evaluation-context prompts vs 16% of deployment-context prompts, the same in both formats. Changing one cue at a time, only contrived details produce it alone (+18 pp, 95% CI [+8, +30]). No implicit cue produces evaluation language. Only an explicit grading line does (74–92%).
 - **Caveats.** All models are below 8B, each prompt was run once, and the judge was calibrated on pilot responses. These results guide the next phase; they are not conclusions.
 
-Reports: [`NLA position sweep (2026-10-27)`](results/reports/2026-10-27_nla_positions_qwen2.5-7b.md) · [`NLA validation (2026-10-26)`](results/reports/2026-10-26_nla_qwen2.5-7b.md) · [`round 2 (2026-10-26)`](results/reports/2026-10-26_round2_qwen.md) · [`pilot (2026-10-25)`](results/reports/2026-10-25_pilot_qwen2.5-7b.md)
+Reports: [`NLA artificiality (2026-10-27)`](results/reports/2026-10-27_nla_artificiality_qwen2.5-7b.md) · [`NLA position sweep (2026-10-27)`](results/reports/2026-10-27_nla_positions_qwen2.5-7b.md) · [`NLA validation (2026-10-26)`](results/reports/2026-10-26_nla_qwen2.5-7b.md) · [`round 2 (2026-10-26)`](results/reports/2026-10-26_round2_qwen.md) · [`pilot (2026-10-25)`](results/reports/2026-10-25_pilot_qwen2.5-7b.md)
 
 ## Repository structure
 
@@ -58,6 +59,7 @@ Reports: [`NLA position sweep (2026-10-27)`](results/reports/2026-10-27_nla_posi
 │   ├── transfer_confounds.py  # length / language controls for the transfer result
 │   ├── extract_positions.py   # activations at prompt-internal and response positions
 │   ├── nla_explain.py         # NLA activation verbalizer (published recipe, transformers)
+│   ├── nla_setting_rubric.py  # artificiality vs evaluation-framing measures
 │   ├── nla_grade.py           # published eval-awareness grader + keyword measures
 │   ├── run_pipeline.sh        # end-to-end runner (sleep-safe on macOS)
 │   └── show_pairs.py          # side-by-side response viewer
@@ -97,7 +99,7 @@ Models up to about 8B run on Apple Silicon (MPS, bf16). Larger models need an 80
 
 ## Status
 
-See [`docs/roadmap.md`](docs/roadmap.md). Next: separate artificiality from evaluation readings, v3 single-factor attribution, and steering on the privacy effect.
+See [`docs/roadmap.md`](docs/roadmap.md). Next: AR grounding test on the artificiality readings, behavior under single cues, and steering on the privacy effect.
 
 ## Data and licenses
 

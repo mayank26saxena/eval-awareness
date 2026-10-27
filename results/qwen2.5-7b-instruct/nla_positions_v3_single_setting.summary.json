@@ -1,0 +1,188 @@
+{
+  "pre_response": {
+    "benchmark/flip_F1": {
+      "artificial": 0.02631578947368421,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/flip_F2": {
+      "artificial": 0.0,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/flip_F4": {
+      "artificial": 0.02631578947368421,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/flip_F6": {
+      "artificial": 0.0,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/flip_F8": {
+      "artificial": 0.0,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/flip_none": {
+      "artificial": 0.0,
+      "evaluation": 0.02631578947368421,
+      "n": 38
+    },
+    "natural/flip_F1": {
+      "artificial": 0.0,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/flip_F2": {
+      "artificial": 0.02631578947368421,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/flip_F4": {
+      "artificial": 0.02631578947368421,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/flip_F6": {
+      "artificial": 0.02631578947368421,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/flip_F8": {
+      "artificial": 0.0,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/flip_none": {
+      "artificial": 0.0,
+      "evaluation": 0.0,
+      "n": 38
+    }
+  },
+  "system_end": {
+    "benchmark/flip_F1": {
+      "artificial": 0.18421052631578946,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/flip_F2": {
+      "artificial": 0.3684210526315789,
+      "evaluation": 0.07894736842105263,
+      "n": 38
+    },
+    "benchmark/flip_F4": {
+      "artificial": 0.15789473684210525,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/flip_F6": {
+      "artificial": 0.07894736842105263,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/flip_F8": {
+      "artificial": 0.10526315789473684,
+      "evaluation": 0.02631578947368421,
+      "n": 38
+    },
+    "benchmark/flip_none": {
+      "artificial": 0.10526315789473684,
+      "evaluation": 0.02631578947368421,
+      "n": 38
+    },
+    "natural/flip_F1": {
+      "artificial": 0.15789473684210525,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/flip_F2": {
+      "artificial": 0.3157894736842105,
+      "evaluation": 0.02631578947368421,
+      "n": 38
+    },
+    "natural/flip_F4": {
+      "artificial": 0.10526315789473684,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/flip_F6": {
+      "artificial": 0.18421052631578946,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/flip_F8": {
+      "artificial": 0.18421052631578946,
+      "evaluation": 0.02631578947368421,
+      "n": 38
+    },
+    "natural/flip_none": {
+      "artificial": 0.21052631578947367,
+      "evaluation": 0.02631578947368421,
+      "n": 38
+    }
+  },
+  "user_end": {
+    "benchmark/flip_F1": {
+      "artificial": 0.6052631578947368,
+      "evaluation": 0.02631578947368421,
+      "n": 38
+    },
+    "benchmark/flip_F2": {
+      "artificial": 0.5526315789473685,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/flip_F4": {
+      "artificial": 0.4473684210526316,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/flip_F6": {
+      "artificial": 0.5263157894736842,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "benchmark/flip_F8": {
+      "artificial": 0.21052631578947367,
+      "evaluation": 0.7368421052631579,
+      "n": 38
+    },
+    "benchmark/flip_none": {
+      "artificial": 0.3684210526315789,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/flip_F1": {
+      "artificial": 0.0,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/flip_F2": {
+      "artificial": 0.0,
+      "evaluation": 0.0,
+      "n": 38
+    },
+    "natural/flip_F4": {
+      "artificial": 0.0,
+      "evaluation": 0.02631578947368421,
+      "n": 38
+    },
+    "natural/flip_F6": {
+      "artificial": 0.0,
+      "evaluation": 0.02631578947368421,
+      "n": 38
+    },
+    "natural/flip_F8": {
+      "artificial": 0.15789473684210525,
+      "evaluation": 0.8157894736842105,
+      "n": 38
+    },
+    "natural/flip_none": {
+      "artificial": 0.0,
+      "evaluation": 0.0,
+      "n": 38
+    }
+  }
+}

@@ -76,7 +76,9 @@ def explain_batch(meta, tok, model, input_ids, pos, vecs, max_new_tokens, seed):
 
 def main():
     ap = argparse.ArgumentParser()
-    ap.add_argument("--acts", required=True, help="npz with acts [n, layers+1, d] and ids")
+    ap.add_argument("--acts", required=True,
+                    help="npz with ids and acts: [n, layers+1, d] (layer selected from the sidecar) or "
+                         "[n, d] already at the NLA layer (from extract_positions.py; ids 'item|position|token')")
     ap.add_argument("--data", required=True, help="jsonl with item metadata, aligned to the cache ids")
     ap.add_argument("--out", required=True)
     ap.add_argument("--av", default=AV_REPO)
@@ -104,12 +106,14 @@ def main():
     with out.open("a") as f:
         for b0 in range(0, len(todo), args.batch_size):
             batch = todo[b0 : b0 + args.batch_size]
-            results = explain_batch(meta, tok, model, input_ids, pos, [acts[i, layer] for i, _, _ in batch],
-                                    args.max_new_tokens, seed=b0)
+            vecs = [acts[i] if acts.ndim == 2 else acts[i, layer] for i, _, _ in batch]
+            results = explain_batch(meta, tok, model, input_ids, pos, vecs, args.max_new_tokens, seed=b0)
             for (i, iid, s), (expl, raw) in zip(batch, results):
-                it = items.get(iid, {})
-                row = {"id": iid, "sample": s, "layer_index": meta["extraction_layer_index"],
-                       "explanation": expl, "raw": raw,
+                item_id, ptype, tidx = (iid.split("|") + [None, None])[:3]
+                it = items.get(item_id, {})
+                row = {"id": iid, "item_id": item_id, "position_type": ptype or "pre_response",
+                       "token_index": int(tidx) if tidx else None, "sample": s,
+                       "layer_index": meta["extraction_layer_index"], "explanation": expl, "raw": raw,
                        **{k: it.get(k) for k in ("task_id", "behavior", "format", "context", "explicit")}}
                 f.write(json.dumps(row, ensure_ascii=False) + "\n")
                 n += 1

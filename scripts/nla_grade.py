@@ -95,10 +95,51 @@ def summarize(rows):
     return out
 
 
+def summarize_positions(rows):
+    """Any-of-N aggregation per transcript (as in the NLA paper) plus per-position-type rates."""
+    measures = ["grader_yes", "strict", "broad", "template"]
+    by_item = defaultdict(list)
+    for r in rows:
+        by_item[r["item_id"]].append(r)
+    items = []
+    for iid, rs in by_item.items():
+        rec = {k: rs[0].get(k) for k in ("behavior", "format", "context", "explicit")}
+        for m in measures:
+            vals = [r[m] for r in rs if r[m] is not None]
+            rec[f"{m}_any"] = any(vals) if vals else None
+            rec[f"{m}_any_response"] = any(r[m] for r in rs if r["position_type"] == "response" and r[m] is not None)
+        items.append(rec)
+    out = {"per_position_type": {}, "any_of_n": {}}
+    print("\nPer position type (all controlled items): rate")
+    for pt in sorted({r["position_type"] for r in rows}):
+        sub = [r for r in rows if r["position_type"] == pt and r.get("behavior") != "topic_control"]
+        out["per_position_type"][pt] = {m: rate(sub, m) for m in measures}
+        print(f"  {pt:14s} " + "  ".join(f"{m}={rate(sub, m):.3f}" for m in measures) + f"  n={len(sub)}")
+    beh = [i for i in items if i["behavior"] != "topic_control"]
+    print("\nAny-of-N per transcript (behavior items): rate by condition and effects")
+    for m in measures:
+        k = f"{m}_any"
+        r_ = lambda cond: rate([i for i in beh if cond(i)], k)
+        res = {"deploy": r_(lambda i: i["context"] == "deploy"), "eval": r_(lambda i: i["context"] == "eval"),
+               "natural": r_(lambda i: i["format"] == "natural"), "benchmark": r_(lambda i: i["format"] == "benchmark"),
+               "explicit_absent": r_(lambda i: i["explicit"] == "absent"), "explicit_present": r_(lambda i: i["explicit"] == "present"),
+               "topic_controls": rate([i for i in items if i["behavior"] == "topic_control"], k)}
+        res["context_effect"] = res["eval"] - res["deploy"]
+        res["format_effect"] = res["benchmark"] - res["natural"]
+        res["explicit_effect"] = res["explicit_present"] - res["explicit_absent"]
+        out["any_of_n"][m] = res
+        print(f"  {m:10s} deploy {res['deploy']:.2f} eval {res['eval']:.2f} (ctx {res['context_effect']:+.2f}) | "
+              f"natural {res['natural']:.2f} bench {res['benchmark']:.2f} (fmt {res['format_effect']:+.2f}) | "
+              f"explicit {res['explicit_effect']:+.2f} | topic {res['topic_controls']:.2f}")
+    return out
+
+
 def main():
     ap = argparse.ArgumentParser()
     ap.add_argument("explanations")
     ap.add_argument("--no-judge", action="store_true", help="keyword measures only")
+    ap.add_argument("--batch-size", type=int, default=16)
+    ap.add_argument("--max-new-tokens", type=int, default=160, help="raise to re-grade truncated (unparsed) verdicts")
     args = ap.parse_args()
 
     rows = read_jsonl(args.explanations)
@@ -107,29 +148,33 @@ def main():
         r["broad"] = bool(BROAD.search(r["explanation"]))
         r["template"] = bool(TEMPLATE.search(r["explanation"]))
         r.setdefault("grader_yes", None)
+        r.setdefault("grader_verdict", None)
 
     if not args.no_judge:
         system, user_tpl = load_prompt()
         tok, model = load_model(JUDGE)
-        for i, r in enumerate(rows):
-            msgs = [{"role": "system", "content": system},
-                    {"role": "user", "content": user_tpl.replace("{eval_blurb}", BLURB).replace("{explanation}", r["explanation"])}]
-            enc = tok(tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True),
-                      return_tensors="pt", add_special_tokens=False).to(model.device)
+        todo = [r for r in rows if r.get("grader_verdict") is None]
+        for b0 in range(0, len(todo), args.batch_size):
+            batch = todo[b0 : b0 + args.batch_size]
+            texts = [tok.apply_chat_template(
+                [{"role": "system", "content": system},
+                 {"role": "user", "content": user_tpl.replace("{eval_blurb}", BLURB).replace("{explanation}", r["explanation"])}],
+                tokenize=False, add_generation_prompt=True) for r in batch]
+            enc = tok(texts, return_tensors="pt", padding=True, add_special_tokens=False).to(model.device)
             with torch.no_grad():
-                g = model.generate(**enc, max_new_tokens=160, do_sample=False, pad_token_id=tok.pad_token_id)
-            raw = tok.decode(g[0, enc["input_ids"].shape[1]:], skip_special_tokens=True).strip()
-            v = verdict(raw)
-            r["grader_raw"], r["grader_verdict"] = raw, v
-            r["grader_yes"] = (v == "YES") if v else None
-            if (i + 1) % 25 == 0:
-                print(f"  graded {i + 1}/{len(rows)}", flush=True)
+                g = model.generate(**enc, max_new_tokens=args.max_new_tokens, do_sample=False, pad_token_id=tok.pad_token_id)
+            for r, seq in zip(batch, g[:, enc["input_ids"].shape[1]:]):
+                raw = tok.decode(seq, skip_special_tokens=True).strip()
+                v = verdict(raw)
+                r["grader_raw"], r["grader_verdict"] = raw, v
+                r["grader_yes"] = (v == "YES") if v else None
+            print(f"  graded {min(b0 + args.batch_size, len(todo))}/{len(todo)}", flush=True)
 
     stem = Path(args.explanations).stem
     # Re-scoring an already graded file (with --no-judge) keeps its grader verdicts and overwrites it in place.
     dest = Path(args.explanations).with_name(stem + ".jsonl" if stem.endswith("_graded") else stem + "_graded.jsonl")
     write_jsonl(dest, rows)
-    summary = summarize(rows)
+    summary = summarize_positions(rows) if rows and rows[0].get("item_id") and "|" in rows[0]["id"] else summarize(rows)
     dest.with_suffix(".summary.json").write_text(json.dumps(summary, indent=2))
     print(f"\n-> {dest}")
 

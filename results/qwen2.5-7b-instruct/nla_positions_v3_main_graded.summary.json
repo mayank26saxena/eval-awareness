@@ -1,0 +1,78 @@
+{
+  "per_position_type": {
+    "pre_response": {
+      "grader_yes": 0.0,
+      "strict": 0.003289473684210526,
+      "broad": 0.0625,
+      "template": 0.6447368421052632
+    },
+    "response": {
+      "grader_yes": 0.0,
+      "strict": 0.015625,
+      "broad": 0.109375,
+      "template": 0.07894736842105263
+    },
+    "system_end": {
+      "grader_yes": 0.003289473684210526,
+      "strict": 0.003289473684210526,
+      "broad": 0.6644736842105263,
+      "template": 0.09868421052631579
+    },
+    "user_end": {
+      "grader_yes": 0.01644736842105263,
+      "strict": 0.3157894736842105,
+      "broad": 0.506578947368421,
+      "template": 0.23355263157894737
+    }
+  },
+  "any_of_n": {
+    "grader_yes": {
+      "deploy": 0.019736842105263157,
+      "eval": 0.019736842105263157,
+      "natural": 0.02631578947368421,
+      "benchmark": 0.013157894736842105,
+      "explicit_absent": 0.0,
+      "explicit_present": 0.039473684210526314,
+      "topic_controls": 0.0,
+      "context_effect": 0.0,
+      "format_effect": -0.013157894736842105,
+      "explicit_effect": 0.039473684210526314
+    },
+    "strict": {
+      "deploy": 0.4144736842105263,
+      "eval": 0.34868421052631576,
+      "natural": 0.3881578947368421,
+      "benchmark": 0.375,
+      "explicit_absent": 0.1118421052631579,
+      "explicit_present": 0.6513157894736842,
+      "topic_controls": 0.625,
+      "context_effect": -0.06578947368421056,
+      "format_effect": -0.01315789473684209,
+      "explicit_effect": 0.5394736842105263
+    },
+    "broad": {
+      "deploy": 0.8618421052631579,
+      "eval": 1.0,
+      "natural": 0.9013157894736842,
+      "benchmark": 0.9605263157894737,
+      "explicit_absent": 0.9144736842105263,
+      "explicit_present": 0.9473684210526315,
+      "topic_controls": 1.0,
+      "context_effect": 0.13815789473684215,
+      "format_effect": 0.05921052631578949,
+      "explicit_effect": 0.0328947368421052
+    },
+    "template": {
+      "deploy": 0.8289473684210527,
+      "eval": 0.8223684210526315,
+      "natural": 0.75,
+      "benchmark": 0.9013157894736842,
+      "explicit_absent": 0.7631578947368421,
+      "explicit_present": 0.8881578947368421,
+      "topic_controls": 0.375,
+      "context_effect": -0.006578947368421129,
+      "format_effect": 0.15131578947368418,
+      "explicit_effect": 0.125
+    }
+  }
+}

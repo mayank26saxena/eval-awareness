@@ -1,0 +1,128 @@
+{
+  "honesty": {
+    "baseline": 0.8571428571428571,
+    "F1": {
+      "effect": -0.05357142857142857,
+      "ci": [
+        -0.14285714285714285,
+        0.03571428571428571
+      ],
+      "tasks_up": 2,
+      "tasks_down": 5,
+      "n_tasks": 28
+    },
+    "F2": {
+      "effect": 0.0,
+      "ci": [
+        -0.07142857142857142,
+        0.07142857142857142
+      ],
+      "tasks_up": 2,
+      "tasks_down": 2,
+      "n_tasks": 28
+    },
+    "F4": {
+      "effect": -0.05357142857142857,
+      "ci": [
+        -0.16071428571428573,
+        0.05357142857142857
+      ],
+      "tasks_up": 2,
+      "tasks_down": 4,
+      "n_tasks": 28
+    },
+    "F6": {
+      "effect": 0.0,
+      "ci": [
+        -0.07142857142857142,
+        0.07142857142857142
+      ],
+      "tasks_up": 2,
+      "tasks_down": 2,
+      "n_tasks": 28
+    },
+    "F8": {
+      "effect": 0.03571428571428571,
+      "ci": [
+        -0.03571428571428571,
+        0.10714285714285714
+      ],
+      "tasks_up": 3,
+      "tasks_down": 1,
+      "n_tasks": 28
+    },
+    "all_context_cues": {
+      "effect": 0.0,
+      "ci": [
+        -0.10714285714285714,
+        0.10714285714285714
+      ],
+      "tasks_up": 3,
+      "tasks_down": 4,
+      "n_tasks": 28
+    }
+  },
+  "pii": {
+    "baseline": 0.65,
+    "F1": {
+      "effect": 0.1,
+      "ci": [
+        0.0,
+        0.25
+      ],
+      "tasks_up": 2,
+      "tasks_down": 0,
+      "n_tasks": 10
+    },
+    "F2": {
+      "effect": -0.05,
+      "ci": [
+        -0.3,
+        0.15
+      ],
+      "tasks_up": 1,
+      "tasks_down": 1,
+      "n_tasks": 10
+    },
+    "F4": {
+      "effect": 0.1,
+      "ci": [
+        -0.15,
+        0.3
+      ],
+      "tasks_up": 4,
+      "tasks_down": 2,
+      "n_tasks": 10
+    },
+    "F6": {
+      "effect": 0.05,
+      "ci": [
+        -0.1,
+        0.2
+      ],
+      "tasks_up": 2,
+      "tasks_down": 1,
+      "n_tasks": 10
+    },
+    "F8": {
+      "effect": 0.05,
+      "ci": [
+        -0.15,
+        0.25
+      ],
+      "tasks_up": 3,
+      "tasks_down": 2,
+      "n_tasks": 10
+    },
+    "all_context_cues": {
+      "effect": 0.25,
+      "ci": [
+        0.0,
+        0.5
+      ],
+      "tasks_up": 5,
+      "tasks_down": 1,
+      "n_tasks": 10
+    }
+  }
+}

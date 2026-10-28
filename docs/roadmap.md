@@ -35,6 +35,7 @@ Status as of 2026-10-27. Background and hypotheses are in [`research_statement.m
 - [x] Transfer to natural transcripts (aware-bench), with length and language controls
 - [x] Replication on a second family (Qwen3-4B-Instruct-2507): the layer pattern does not replicate
 - [ ] Generalization to subtler cues
+- [x] Single-cue behavior (v3): no single cue reproduces the privacy effect; contrived details (the NLA-verbalized cue) change no behavior ([report](../results/reports/2026-10-27_single_factor_behavior_qwen2.5-7b.md))
 
 ### 5. Activation readers
 - [x] NLA explanations at Qwen2.5-7B layer 20 (pre-response token), scored with the published grader: no eval-awareness readings

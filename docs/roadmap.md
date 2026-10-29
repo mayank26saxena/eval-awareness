@@ -1,6 +1,6 @@
 # Roadmap
 
-Status as of 2026-10-27. Background and hypotheses are in [`research_statement.md`](research_statement.md).
+Status as of 2026-10-29. Background and hypotheses are in [`research_statement.md`](research_statement.md).
 
 ## Phase overview
 
@@ -12,7 +12,7 @@ Status as of 2026-10-27. Background and hypotheses are in [`research_statement.m
 | 3. Scoring | LLM judge calibrated against hand labels | ✅ Local judge, 98% agreement; a stronger independent judge is planned |
 | 4. Probes and transfer | Layer-wise format/context probes; transfer to natural eval/deploy transcripts; second model family | ✅ Done for Qwen2.5-7B and Qwen3-4B ([report](../results/reports/2026-10-26_round2_qwen.md)) |
 | 5. Activation readers | NLA (Qwen2.5-7B L20, Gemma-3-12B L32, Gemma-3-27B L41), Activation Oracle | In progress: Qwen2.5-7B pre-response ([report](../results/reports/2026-10-26_nla_qwen2.5-7b.md)) position sweep ([report](../results/reports/2026-10-27_nla_positions_qwen2.5-7b.md)) and single-factor artificiality analysis ([report](../results/reports/2026-10-27_nla_artificiality_qwen2.5-7b.md)) done |
-| 6. Causality | LEACE format-free direction, NLA-edit steering, contrastive and random controls | Planned |
+| 6. Causality | LEACE format-free direction, NLA-edit steering, contrastive and random controls | In progress |
 | 7. Scale-up and write-up | Gemma-3-27B on GPU; workshop paper | Planned |
 
 ## Phase details
@@ -48,7 +48,9 @@ Status as of 2026-10-27. Background and hypotheses are in [`research_statement.m
 
 ### 6. Causality
 - [ ] Format-free direction via LEACE
-- [ ] Steering with format-free, NLA-edit, contrastive-prompt, format and random directions; single and multi-layer
+- [x] Steering at layer 10 with context-probe, contrastive-prompt, format and random directions on the privacy tasks: the downstream readout moves, behavior does not follow; random directions disrupt protection as much ([report](../results/reports/2026-10-29_steering_privacy_qwen2.5-7b.md))
+- [ ] Steering at other layers and positions (system-message tokens), more random directions, sampled responses
+- [ ] Steering with LEACE format-free and NLA-edit directions; multi-layer
 - [ ] Activation patching between context conditions
 - [ ] Capability and coherence controls
 - [ ] Optional: neuron-level analysis. Rank MLP neurons by the alignment of their output weights (`W_down` columns) with the context and format probe directions, then steer the top candidates and record rollouts. Method after Lyra C's neuron-explorer (steering-sweep characterization of individual MLP neurons in Qwen3.5-4B).

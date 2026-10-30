@@ -1,6 +1,6 @@
 # Roadmap
 
-Status as of 2026-10-29. Background and hypotheses are in [`research_statement.md`](research_statement.md).
+Status as of 2026-10-30. Background and hypotheses are in [`research_statement.md`](research_statement.md).
 
 ## Phase overview
 
@@ -49,7 +49,8 @@ Status as of 2026-10-29. Background and hypotheses are in [`research_statement.m
 ### 6. Causality
 - [ ] Format-free direction via LEACE
 - [x] Steering at layer 10 with context-probe, contrastive-prompt, format and random directions on the privacy tasks: the downstream readout moves, behavior does not follow; random directions disrupt protection as much ([report](../results/reports/2026-10-29_steering_privacy_qwen2.5-7b.md))
-- [ ] Steering at other layers and positions (system-message tokens), more random directions, sampled responses
+- [x] Steering null checks: 20 random directions and 10 sampled responses per prompt; the null holds and excludes full mediation ([report](../results/reports/2026-10-30_steering_null_qwen2.5-7b.md))
+- [ ] Steering at other layers (14, 20) and only at system-message positions, with sampled responses
 - [ ] Steering with LEACE format-free and NLA-edit directions; multi-layer
 - [ ] Activation patching between context conditions
 - [ ] Capability and coherence controls

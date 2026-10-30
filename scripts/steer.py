@@ -11,7 +11,8 @@ Each direction is unit-normalized and added as alpha * norm_unit * d to the outp
 at the last prompt token at that layer. Positive alpha points toward eval (context) or benchmark (format).
 
 For a coherence control, each response's mean token negative log-likelihood under the unsteered model is
-recorded (`nll`).
+recorded (`nll`). Decoding is greedy by default; with --samples N, N responses per cell are sampled with the
+model's default generation settings (seeded per prompt, direction and alpha) and numbered by `sample`.
 
 Usage:
   python scripts/steer.py --data data/rendered/v3_main.jsonl --behavior pii --explicit absent \
@@ -21,6 +22,7 @@ Usage:
 import argparse
 import json
 import time
+import zlib
 from pathlib import Path
 
 import numpy as np
@@ -66,6 +68,7 @@ def main():
     ap.add_argument("--directions", nargs="+", default=["context_probe", "format_probe", "context_mean",
                                                          "random_0", "random_1", "random_2"])
     ap.add_argument("--max-new-tokens", type=int, default=300)
+    ap.add_argument("--samples", type=int, default=0, help="0 = greedy; N = N sampled responses per cell")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
@@ -93,6 +96,7 @@ def main():
     block.register_forward_hook(hook)
     out_path = Path(args.out)
     done = {(r["id"], r["direction"], r["alpha"]) for r in read_jsonl(out_path)} if out_path.exists() else set()
+    eos = set(model.generation_config.eos_token_id) | {tok.pad_token_id}
     cos_logged = False
     t0, n = time.time(), 0
     with out_path.open("a") as f:
@@ -114,17 +118,27 @@ def main():
                         continue
                     state["vec"] = (torch.tensor(dirs[name] * a * norm_unit, dtype=torch.bfloat16, device=model.device)
                                     if a else None)
+                    sample_kw = (dict(do_sample=True, num_return_sequences=args.samples) if args.samples
+                                 else dict(do_sample=False))
+                    torch.manual_seed(zlib.crc32(repr(key).encode()))
                     with torch.no_grad():
-                        gen = model.generate(**enc, max_new_tokens=args.max_new_tokens, do_sample=False,
-                                             pad_token_id=tok.pad_token_id)
+                        gen = model.generate(**enc, max_new_tokens=args.max_new_tokens, pad_token_id=tok.pad_token_id,
+                                             **sample_kw)
                         state["vec"] = None
-                        logits = model(gen).logits[0, n_prompt - 1 : -1].float()
-                        tgt = gen[0, n_prompt:]
-                        nll = float(torch.nn.functional.cross_entropy(logits, tgt).item()) if len(tgt) else float("nan")
-                    row = {k: it[k] for k in ("id", "task_id", "behavior", "format", "context", "explicit")}
-                    row.update(model=args.model, layer=args.layer, direction=key[1], alpha=a, nll=nll,
-                               response=tok.decode(gen[0, n_prompt:], skip_special_tokens=True).strip())
-                    f.write(json.dumps(row, ensure_ascii=False) + "\n")
+                        for k, seq in enumerate(gen):
+                            tgt = seq[n_prompt:].tolist()
+                            end = next((j for j, t in enumerate(tgt) if t in eos), len(tgt))
+                            seq = seq[: n_prompt + min(end + 1, len(tgt))]  # keep end-of-turn, drop padding
+                            nll = float("nan")
+                            if len(seq) > n_prompt:
+                                logits = model(seq[None]).logits[0, n_prompt - 1 : -1].float()
+                                nll = float(torch.nn.functional.cross_entropy(logits, seq[n_prompt:]).item())
+                            row = {k_: it[k_] for k_ in ("id", "task_id", "behavior", "format", "context", "explicit")}
+                            row.update(model=args.model, layer=args.layer, direction=key[1], alpha=a, nll=nll,
+                                       response=tok.decode(seq[n_prompt:], skip_special_tokens=True).strip())
+                            if args.samples:
+                                row["sample"] = k
+                            f.write(json.dumps(row, ensure_ascii=False) + "\n")
                     f.flush()
                     n += 1
                     print(f"  {n} done, {it['id']} {key[1]} {a:+g}  nll {nll:.2f}  {time.time() - t0:.0f}s", flush=True)

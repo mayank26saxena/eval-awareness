@@ -423,6 +423,286 @@
         "n": 20
       },
       {
+        "direction": "random_10",
+        "alpha": -0.5,
+        "protect": 0.55,
+        "change": -0.1,
+        "ci": [
+          -0.45,
+          0.2
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.4684146583080292,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_10",
+        "alpha": 0.5,
+        "protect": 0.6,
+        "change": -0.05,
+        "ci": [
+          -0.35,
+          0.2
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5494749754667282,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_11",
+        "alpha": -0.5,
+        "protect": 0.75,
+        "change": 0.1,
+        "ci": [
+          -0.15,
+          0.3
+        ],
+        "change_coherent": 0.1,
+        "nll": 0.5286353453993797,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_11",
+        "alpha": 0.5,
+        "protect": 0.55,
+        "change": -0.1,
+        "ci": [
+          -0.4,
+          0.15
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.5125893607735634,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_12",
+        "alpha": -0.5,
+        "protect": 0.5,
+        "change": -0.15,
+        "ci": [
+          -0.45,
+          0.1
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.5470142275094986,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_12",
+        "alpha": 0.5,
+        "protect": 0.7,
+        "change": 0.05,
+        "ci": [
+          -0.1,
+          0.2
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.502297367155552,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_13",
+        "alpha": -0.5,
+        "protect": 0.55,
+        "change": -0.1,
+        "ci": [
+          -0.35,
+          0.1
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.4942253291606903,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_13",
+        "alpha": 0.5,
+        "protect": 0.55,
+        "change": -0.1,
+        "ci": [
+          -0.3,
+          0.0
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.5466030806303024,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_14",
+        "alpha": -0.5,
+        "protect": 0.5,
+        "change": -0.15,
+        "ci": [
+          -0.4,
+          0.1
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.5262528449296952,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_14",
+        "alpha": 0.5,
+        "protect": 0.65,
+        "change": 0.0,
+        "ci": [
+          -0.25,
+          0.2
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.49854349344968796,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_15",
+        "alpha": -0.5,
+        "protect": 0.65,
+        "change": 0.0,
+        "ci": [
+          -0.25,
+          0.2
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.5058659315109253,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_15",
+        "alpha": 0.5,
+        "protect": 0.6,
+        "change": -0.05,
+        "ci": [
+          -0.2,
+          0.1
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.47634969726204873,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_16",
+        "alpha": -0.5,
+        "protect": 0.4,
+        "change": -0.25,
+        "ci": [
+          -0.4,
+          -0.1
+        ],
+        "change_coherent": -0.25,
+        "nll": 0.5212406709790229,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_16",
+        "alpha": 0.5,
+        "protect": 0.6,
+        "change": -0.05,
+        "ci": [
+          -0.3,
+          0.15
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.48946826457977294,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_17",
+        "alpha": -0.5,
+        "protect": 0.6,
+        "change": -0.05,
+        "ci": [
+          -0.3,
+          0.15
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.48226107507944105,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_17",
+        "alpha": 0.5,
+        "protect": 0.5,
+        "change": -0.15,
+        "ci": [
+          -0.4,
+          0.05
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.5257907912135125,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_18",
+        "alpha": -0.5,
+        "protect": 0.6,
+        "change": -0.05,
+        "ci": [
+          -0.3,
+          0.15
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.4909530088305473,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_18",
+        "alpha": 0.5,
+        "protect": 0.75,
+        "change": 0.1,
+        "ci": [
+          -0.1,
+          0.3
+        ],
+        "change_coherent": 0.1,
+        "nll": 0.4955875724554062,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_19",
+        "alpha": -0.5,
+        "protect": 0.65,
+        "change": 0.0,
+        "ci": [
+          -0.15,
+          0.15
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.528313335776329,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_19",
+        "alpha": 0.5,
+        "protect": 0.45,
+        "change": -0.2,
+        "ci": [
+          -0.45,
+          0.05
+        ],
+        "change_coherent": -0.2,
+        "nll": 0.49080041199922564,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
         "direction": "random_2",
         "alpha": -1.0,
         "protect": 0.35,
@@ -503,6 +783,202 @@
         ],
         "change_coherent": -0.15,
         "nll": 1.0489502161741258,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_3",
+        "alpha": -0.5,
+        "protect": 0.6,
+        "change": -0.05,
+        "ci": [
+          -0.35,
+          0.2
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5181314036250114,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_3",
+        "alpha": 0.5,
+        "protect": 0.65,
+        "change": 0.0,
+        "ci": [
+          -0.2,
+          0.2
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.49749752432107924,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_4",
+        "alpha": -0.5,
+        "protect": 0.6,
+        "change": -0.05,
+        "ci": [
+          -0.2,
+          0.1
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.4964838683605194,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_4",
+        "alpha": 0.5,
+        "protect": 0.65,
+        "change": 0.0,
+        "ci": [
+          -0.25,
+          0.2
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.5191399767994881,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_5",
+        "alpha": -0.5,
+        "protect": 0.7,
+        "change": 0.05,
+        "ci": [
+          -0.15,
+          0.25
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.48859277069568635,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_5",
+        "alpha": 0.5,
+        "protect": 0.65,
+        "change": 0.0,
+        "ci": [
+          -0.25,
+          0.2
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.48915507048368456,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_6",
+        "alpha": -0.5,
+        "protect": 0.55,
+        "change": -0.1,
+        "ci": [
+          -0.35,
+          0.1
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.5131581887602806,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_6",
+        "alpha": 0.5,
+        "protect": 0.7,
+        "change": 0.05,
+        "ci": [
+          -0.25,
+          0.3
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.4805954426527023,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_7",
+        "alpha": -0.5,
+        "protect": 0.55,
+        "change": -0.1,
+        "ci": [
+          -0.4,
+          0.15
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.49294852316379545,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_7",
+        "alpha": 0.5,
+        "protect": 0.45,
+        "change": -0.2,
+        "ci": [
+          -0.45,
+          0.05
+        ],
+        "change_coherent": -0.2,
+        "nll": 0.5356209978461266,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_8",
+        "alpha": -0.5,
+        "protect": 0.65,
+        "change": 0.0,
+        "ci": [
+          -0.25,
+          0.2
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.529340872168541,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_8",
+        "alpha": 0.5,
+        "protect": 0.6,
+        "change": -0.05,
+        "ci": [
+          -0.35,
+          0.2
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5236390754580498,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_9",
+        "alpha": -0.5,
+        "protect": 0.5,
+        "change": -0.15,
+        "ci": [
+          -0.4,
+          0.05
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.49392746686935424,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_9",
+        "alpha": 0.5,
+        "protect": 0.55,
+        "change": -0.1,
+        "ci": [
+          -0.4,
+          0.15
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.5180629447102547,
         "degenerate": 0.0,
         "n": 20
       }
@@ -932,6 +1408,286 @@
         "n": 20
       },
       {
+        "direction": "random_10",
+        "alpha": -0.5,
+        "protect": 0.75,
+        "change": -0.15,
+        "ci": [
+          -0.35,
+          0.05
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.5225248619914055,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_10",
+        "alpha": 0.5,
+        "protect": 0.85,
+        "change": -0.05,
+        "ci": [
+          -0.2,
+          0.1
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5820971876382828,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_11",
+        "alpha": -0.5,
+        "protect": 0.85,
+        "change": -0.05,
+        "ci": [
+          -0.3,
+          0.2
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5358749568462372,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_11",
+        "alpha": 0.5,
+        "protect": 0.7,
+        "change": -0.2,
+        "ci": [
+          -0.5,
+          0.1
+        ],
+        "change_coherent": -0.2,
+        "nll": 0.5647394090890885,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_12",
+        "alpha": -0.5,
+        "protect": 0.6,
+        "change": -0.3,
+        "ci": [
+          -0.5,
+          -0.1
+        ],
+        "change_coherent": -0.3,
+        "nll": 0.5683672994375228,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_12",
+        "alpha": 0.5,
+        "protect": 0.85,
+        "change": -0.05,
+        "ci": [
+          -0.2,
+          0.1
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5492842495441437,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_13",
+        "alpha": -0.5,
+        "protect": 0.85,
+        "change": -0.05,
+        "ci": [
+          -0.2,
+          0.1
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5470337852835655,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_13",
+        "alpha": 0.5,
+        "protect": 0.55,
+        "change": -0.35,
+        "ci": [
+          -0.6,
+          -0.1
+        ],
+        "change_coherent": -0.35,
+        "nll": 0.583355838060379,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_14",
+        "alpha": -0.5,
+        "protect": 0.9,
+        "change": 0.0,
+        "ci": [
+          -0.2,
+          0.2
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.5315674051642418,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_14",
+        "alpha": 0.5,
+        "protect": 0.85,
+        "change": -0.05,
+        "ci": [
+          -0.25,
+          0.15
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5495103806257248,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_15",
+        "alpha": -0.5,
+        "protect": 0.7,
+        "change": -0.2,
+        "ci": [
+          -0.45,
+          0.05
+        ],
+        "change_coherent": -0.2,
+        "nll": 0.6005882486701012,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_15",
+        "alpha": 0.5,
+        "protect": 0.65,
+        "change": -0.25,
+        "ci": [
+          -0.55,
+          0.0
+        ],
+        "change_coherent": -0.25,
+        "nll": 0.5635725975036621,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_16",
+        "alpha": -0.5,
+        "protect": 0.65,
+        "change": -0.25,
+        "ci": [
+          -0.55,
+          0.0
+        ],
+        "change_coherent": -0.25,
+        "nll": 0.5716479808092118,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_16",
+        "alpha": 0.5,
+        "protect": 0.9,
+        "change": 0.0,
+        "ci": [
+          -0.2,
+          0.2
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.54476800262928,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_17",
+        "alpha": -0.5,
+        "protect": 0.85,
+        "change": -0.05,
+        "ci": [
+          -0.25,
+          0.15
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5692152827978134,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_17",
+        "alpha": 0.5,
+        "protect": 0.65,
+        "change": -0.25,
+        "ci": [
+          -0.5,
+          0.0
+        ],
+        "change_coherent": -0.25,
+        "nll": 0.5443911492824555,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_18",
+        "alpha": -0.5,
+        "protect": 0.6,
+        "change": -0.3,
+        "ci": [
+          -0.6,
+          0.0
+        ],
+        "change_coherent": -0.3,
+        "nll": 0.535058157145977,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_18",
+        "alpha": 0.5,
+        "protect": 0.75,
+        "change": -0.15,
+        "ci": [
+          -0.4,
+          0.1
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.5605593606829643,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_19",
+        "alpha": -0.5,
+        "protect": 0.85,
+        "change": -0.05,
+        "ci": [
+          -0.3,
+          0.2
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.531274788081646,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_19",
+        "alpha": 0.5,
+        "protect": 0.8,
+        "change": -0.1,
+        "ci": [
+          -0.35,
+          0.15
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.6284023761749268,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
         "direction": "random_2",
         "alpha": -1.0,
         "protect": 0.1,
@@ -1014,6 +1770,202 @@
         "nll": 1.4288705050945283,
         "degenerate": 0.0,
         "n": 20
+      },
+      {
+        "direction": "random_3",
+        "alpha": -0.5,
+        "protect": 0.55,
+        "change": -0.35,
+        "ci": [
+          -0.55,
+          -0.15
+        ],
+        "change_coherent": -0.35,
+        "nll": 0.541567187011242,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_3",
+        "alpha": 0.5,
+        "protect": 0.8,
+        "change": -0.1,
+        "ci": [
+          -0.3,
+          0.1
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.5829098537564278,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_4",
+        "alpha": -0.5,
+        "protect": 0.7,
+        "change": -0.2,
+        "ci": [
+          -0.4,
+          0.0
+        ],
+        "change_coherent": -0.2,
+        "nll": 0.5069716244935989,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_4",
+        "alpha": 0.5,
+        "protect": 0.8,
+        "change": -0.1,
+        "ci": [
+          -0.3,
+          0.1
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.5807971403002739,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_5",
+        "alpha": -0.5,
+        "protect": 0.7,
+        "change": -0.2,
+        "ci": [
+          -0.35,
+          -0.05
+        ],
+        "change_coherent": -0.2,
+        "nll": 0.5194684937596321,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_5",
+        "alpha": 0.5,
+        "protect": 0.8,
+        "change": -0.1,
+        "ci": [
+          -0.3,
+          0.1
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.5634475246071815,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_6",
+        "alpha": -0.5,
+        "protect": 0.7,
+        "change": -0.2,
+        "ci": [
+          -0.35,
+          -0.05
+        ],
+        "change_coherent": -0.2,
+        "nll": 0.54439457654953,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_6",
+        "alpha": 0.5,
+        "protect": 0.85,
+        "change": -0.05,
+        "ci": [
+          -0.25,
+          0.15
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5233043193817138,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_7",
+        "alpha": -0.5,
+        "protect": 0.8,
+        "change": -0.1,
+        "ci": [
+          -0.25,
+          0.0
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.5086037054657936,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_7",
+        "alpha": 0.5,
+        "protect": 0.7,
+        "change": -0.2,
+        "ci": [
+          -0.35,
+          -0.05
+        ],
+        "change_coherent": -0.2,
+        "nll": 0.5027044042944908,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_8",
+        "alpha": -0.5,
+        "protect": 0.6,
+        "change": -0.3,
+        "ci": [
+          -0.6,
+          -0.05
+        ],
+        "change_coherent": -0.3,
+        "nll": 0.6130928307771683,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_8",
+        "alpha": 0.5,
+        "protect": 0.7,
+        "change": -0.2,
+        "ci": [
+          -0.5,
+          0.05
+        ],
+        "change_coherent": -0.2,
+        "nll": 0.501354455947876,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_9",
+        "alpha": -0.5,
+        "protect": 0.7,
+        "change": -0.2,
+        "ci": [
+          -0.45,
+          -0.05
+        ],
+        "change_coherent": -0.2,
+        "nll": 0.5500529617071152,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_9",
+        "alpha": 0.5,
+        "protect": 0.7,
+        "change": -0.2,
+        "ci": [
+          -0.35,
+          -0.05
+        ],
+        "change_coherent": -0.2,
+        "nll": 0.60931296646595,
+        "degenerate": 0.0,
+        "n": 20
       }
     ]
   },
@@ -1034,7 +1986,8 @@
       "ci": [
         -0.25,
         0.125
-      ]
+      ],
+      "frac_random_at_least": 0.75
     },
     {
       "direction": "context_mean",
@@ -1061,7 +2014,8 @@
       "ci": [
         -0.1,
         0.4
-      ]
+      ],
+      "frac_random_at_least": 0.3
     },
     {
       "direction": "context_probe",
@@ -1088,7 +2042,8 @@
       "ci": [
         -0.175,
         0.2
-      ]
+      ],
+      "frac_random_at_least": 0.65
     },
     {
       "direction": "format_probe",
@@ -1154,6 +2109,96 @@
       ]
     },
     {
+      "direction": "random_10",
+      "alpha": 0.5,
+      "effect": 0.075,
+      "ci": [
+        -0.05,
+        0.2
+      ]
+    },
+    {
+      "direction": "random_11",
+      "alpha": 0.5,
+      "effect": -0.175,
+      "ci": [
+        -0.4,
+        0.05
+      ]
+    },
+    {
+      "direction": "random_12",
+      "alpha": 0.5,
+      "effect": 0.225,
+      "ci": [
+        0.025,
+        0.425
+      ]
+    },
+    {
+      "direction": "random_13",
+      "alpha": 0.5,
+      "effect": -0.15,
+      "ci": [
+        -0.275,
+        -0.025
+      ]
+    },
+    {
+      "direction": "random_14",
+      "alpha": 0.5,
+      "effect": 0.05,
+      "ci": [
+        -0.075,
+        0.175
+      ]
+    },
+    {
+      "direction": "random_15",
+      "alpha": 0.5,
+      "effect": -0.05,
+      "ci": [
+        -0.2,
+        0.1
+      ]
+    },
+    {
+      "direction": "random_16",
+      "alpha": 0.5,
+      "effect": 0.225,
+      "ci": [
+        -0.025,
+        0.45
+      ]
+    },
+    {
+      "direction": "random_17",
+      "alpha": 0.5,
+      "effect": -0.15,
+      "ci": [
+        -0.275,
+        -0.025
+      ]
+    },
+    {
+      "direction": "random_18",
+      "alpha": 0.5,
+      "effect": 0.15,
+      "ci": [
+        0.025,
+        0.275
+      ]
+    },
+    {
+      "direction": "random_19",
+      "alpha": 0.5,
+      "effect": -0.125,
+      "ci": [
+        -0.3,
+        0.025
+      ]
+    },
+    {
       "direction": "random_2",
       "alpha": 0.25,
       "effect": 0.025,
@@ -1179,6 +2224,96 @@
         0.075,
         0.525
       ]
+    },
+    {
+      "direction": "random_3",
+      "alpha": 0.5,
+      "effect": 0.15,
+      "ci": [
+        -0.025,
+        0.3
+      ]
+    },
+    {
+      "direction": "random_4",
+      "alpha": 0.5,
+      "effect": 0.075,
+      "ci": [
+        -0.1,
+        0.25
+      ]
+    },
+    {
+      "direction": "random_5",
+      "alpha": 0.5,
+      "effect": 0.025,
+      "ci": [
+        -0.15,
+        0.175
+      ]
+    },
+    {
+      "direction": "random_6",
+      "alpha": 0.5,
+      "effect": 0.15,
+      "ci": [
+        0.025,
+        0.275
+      ]
+    },
+    {
+      "direction": "random_7",
+      "alpha": 0.5,
+      "effect": -0.1,
+      "ci": [
+        -0.25,
+        0.1
+      ]
+    },
+    {
+      "direction": "random_8",
+      "alpha": 0.5,
+      "effect": 0.025,
+      "ci": [
+        -0.15,
+        0.2
+      ]
+    },
+    {
+      "direction": "random_9",
+      "alpha": 0.5,
+      "effect": 0.025,
+      "ci": [
+        -0.15,
+        0.2
+      ]
     }
-  ]
+  ],
+  "random_null": {
+    "0.5": {
+      "effects": [
+        -0.175,
+        -0.15,
+        -0.15,
+        -0.125,
+        -0.1,
+        -0.05,
+        -0.025,
+        0.025,
+        0.025,
+        0.025,
+        0.05,
+        0.075,
+        0.075,
+        0.125,
+        0.15,
+        0.15,
+        0.15,
+        0.225,
+        0.225,
+        0.35
+      ],
+      "sd": 0.14301154719664752
+    }
+  }
 }

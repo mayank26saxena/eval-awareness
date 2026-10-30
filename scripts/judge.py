@@ -88,6 +88,9 @@ def main():
     tok, model = load_model(JUDGE)
     out = []
     for i, r in enumerate(rows):
+        if r.get("judge") == JUDGE and r.get("good") is not None:
+            out.append(r)  # already judged (e.g. a file extended after an earlier judge run)
+            continue
         user = items[r["id"]]["messages"][1]["content"]
         msgs = [{"role": "user", "content": build_prompt(r, tasks[r["task_id"]], user)}]
         enc = tok(tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True),

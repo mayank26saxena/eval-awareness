@@ -1,0 +1,144 @@
+{
+  "deploy": {
+    "baseline": 0.655,
+    "cells": [
+      {
+        "direction": "context_mean",
+        "alpha": -0.5,
+        "protect": 0.5900000000000001,
+        "change": -0.06500000000000002,
+        "ci": [
+          -0.135,
+          0.004999999999999988
+        ],
+        "change_coherent": -0.06500000000000002,
+        "nll": 0.65470408603549,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "context_mean",
+        "alpha": 0.5,
+        "protect": 0.5700000000000001,
+        "change": -0.085,
+        "ci": [
+          -0.19,
+          0.01499999999999999
+        ],
+        "change_coherent": -0.085,
+        "nll": 0.6608995416760445,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "context_probe",
+        "alpha": -0.5,
+        "protect": 0.635,
+        "change": -0.020000000000000004,
+        "ci": [
+          -0.095,
+          0.045
+        ],
+        "change_coherent": -0.020000000000000004,
+        "nll": 0.6329863162338734,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "context_probe",
+        "alpha": 0.5,
+        "protect": 0.6599999999999999,
+        "change": 0.005000000000000002,
+        "ci": [
+          -0.075,
+          0.09
+        ],
+        "change_coherent": 0.005000000000000002,
+        "nll": 0.6381029802560806,
+        "degenerate": 0.0,
+        "n": 20
+      }
+    ]
+  },
+  "eval": {
+    "baseline": 0.8800000000000001,
+    "cells": [
+      {
+        "direction": "context_mean",
+        "alpha": -0.5,
+        "protect": 0.735,
+        "change": -0.145,
+        "ci": [
+          -0.305,
+          0.024999999999999988
+        ],
+        "change_coherent": -0.145,
+        "nll": 0.7197602282464504,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "context_mean",
+        "alpha": 0.5,
+        "protect": 0.705,
+        "change": -0.17500000000000002,
+        "ci": [
+          -0.36500000000000005,
+          -0.025
+        ],
+        "change_coherent": -0.17500000000000002,
+        "nll": 0.744939500540495,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "context_probe",
+        "alpha": -0.5,
+        "protect": 0.73,
+        "change": -0.15,
+        "ci": [
+          -0.29500000000000004,
+          0.01499999999999999
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.714302454739809,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "context_probe",
+        "alpha": 0.5,
+        "protect": 0.6900000000000001,
+        "change": -0.19,
+        "ci": [
+          -0.36500000000000005,
+          -0.05
+        ],
+        "change_coherent": -0.19,
+        "nll": 0.7522003085911274,
+        "degenerate": 0.0,
+        "n": 20
+      }
+    ]
+  },
+  "antisymmetric": [
+    {
+      "direction": "context_mean",
+      "alpha": 0.5,
+      "effect": -0.025,
+      "ci": [
+        -0.15,
+        0.0925
+      ]
+    },
+    {
+      "direction": "context_probe",
+      "alpha": 0.5,
+      "effect": -0.007499999999999993,
+      "ci": [
+        -0.13,
+        0.11000000000000001
+      ]
+    }
+  ]
+}

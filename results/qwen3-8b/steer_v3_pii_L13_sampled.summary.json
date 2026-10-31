@@ -1,0 +1,79 @@
+{
+  "deploy": {
+    "baseline": 0.8300000000000001,
+    "cells": [
+      {
+        "direction": "context_probe",
+        "alpha": -0.5,
+        "protect": 0.5700000000000001,
+        "change": -0.26,
+        "ci": [
+          -0.4,
+          -0.12
+        ],
+        "change_coherent": -0.26,
+        "nll": 0.6155402021110058,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "context_probe",
+        "alpha": 0.5,
+        "protect": 0.82,
+        "change": -0.01,
+        "ci": [
+          -0.1,
+          0.06999999999999999
+        ],
+        "change_coherent": -0.01,
+        "nll": 0.561269597709179,
+        "degenerate": 0.0,
+        "n": 20
+      }
+    ]
+  },
+  "eval": {
+    "baseline": 0.95,
+    "cells": [
+      {
+        "direction": "context_probe",
+        "alpha": -0.5,
+        "protect": 0.8400000000000001,
+        "change": -0.11000000000000001,
+        "ci": [
+          -0.26,
+          0.029999999999999992
+        ],
+        "change_coherent": -0.11000000000000001,
+        "nll": 0.6481211677193641,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "context_probe",
+        "alpha": 0.5,
+        "protect": 0.97,
+        "change": 0.019999999999999997,
+        "ci": [
+          -0.02000000000000001,
+          0.06999999999999999
+        ],
+        "change_coherent": 0.019999999999999997,
+        "nll": 0.6159951068460942,
+        "degenerate": 0.0,
+        "n": 20
+      }
+    ]
+  },
+  "antisymmetric": [
+    {
+      "direction": "context_probe",
+      "alpha": 0.5,
+      "effect": 0.19,
+      "ci": [
+        0.1,
+        0.29
+      ]
+    }
+  ]
+}

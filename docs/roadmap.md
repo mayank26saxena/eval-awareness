@@ -1,6 +1,6 @@
 # Roadmap
 
-Status as of 2026-10-31: **complete at the sub-8B scale.** Conclusions are in the [final summary](../results/reports/2026-10-31_final_summary.md). Unchecked items below are deferred, not in progress. Background and hypotheses are in [`research_statement.md`](research_statement.md).
+Status as of 2026-10-31: **complete at the ≤8B scale.** Conclusions are in the [final summary](../results/reports/2026-10-31_final_summary.md). Unchecked items below are deferred, not in progress. Background and hypotheses are in [`research_statement.md`](research_statement.md).
 
 ## Phase overview
 
@@ -51,6 +51,7 @@ Status as of 2026-10-31: **complete at the sub-8B scale.** Conclusions are in th
 - [x] Steering at layer 10 with context-probe, contrastive-prompt, format and random directions on the privacy tasks: the downstream readout moves, behavior does not follow; random directions disrupt protection as much ([report](../results/reports/2026-10-29_steering_privacy_qwen2.5-7b.md))
 - [x] Steering null checks: 20 random directions and 10 sampled responses per prompt; the null holds and excludes full mediation ([report](../results/reports/2026-10-30_steering_null_qwen2.5-7b.md))
 - [x] Steering at Qwen2.5-7B layer 20 (tight null, 0 pp [−5, +3]) and replication in Qwen3-4B at layer 13 (+51 pp sign-specific, beyond all random directions, but no significant natural gap to mediate) ([report](../results/reports/2026-10-31_steering_layer20_qwen3.md))
+- [x] Third model (Qwen3-8B): probes show a mid-network context band; layer-13 steering has a modest one-sided effect (+19 pp), natural gap n.s. ([report](../results/reports/2026-10-31_steering_qwen3-8b.md))
 - [ ] Steering only at system-message positions
 - [ ] Qwen3-4B: test whether the context direction is a refusal direction (benign-request refusals under steering; cosine with a refusal direction)
 - [ ] Steering with LEACE format-free and NLA-edit directions; multi-layer

@@ -1,0 +1,747 @@
+{
+  "deploy": {
+    "baseline": 0.75,
+    "cells": [
+      {
+        "direction": "context_probe",
+        "alpha": -0.5,
+        "protect": 0.55,
+        "change": -0.2,
+        "ci": [
+          -0.5,
+          0.05
+        ],
+        "change_coherent": -0.2,
+        "nll": 0.5800807848572731,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "context_probe",
+        "alpha": 0.5,
+        "protect": 0.9,
+        "change": 0.15,
+        "ci": [
+          0.0,
+          0.3
+        ],
+        "change_coherent": 0.15,
+        "nll": 0.5154184535145759,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_0",
+        "alpha": -0.5,
+        "protect": 0.8,
+        "change": 0.05,
+        "ci": [
+          0.0,
+          0.15
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.49224826097488406,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_0",
+        "alpha": 0.5,
+        "protect": 0.85,
+        "change": 0.1,
+        "ci": [
+          -0.1,
+          0.3
+        ],
+        "change_coherent": 0.1,
+        "nll": 0.6457752235233783,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_1",
+        "alpha": -0.5,
+        "protect": 0.8,
+        "change": 0.05,
+        "ci": [
+          0.0,
+          0.15
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.5389497712254524,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_1",
+        "alpha": 0.5,
+        "protect": 0.9,
+        "change": 0.15,
+        "ci": [
+          -0.05,
+          0.35
+        ],
+        "change_coherent": 0.15,
+        "nll": 0.6405230298638344,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_2",
+        "alpha": -0.5,
+        "protect": 0.7,
+        "change": -0.05,
+        "ci": [
+          -0.25,
+          0.15
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.49485584273934363,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_2",
+        "alpha": 0.5,
+        "protect": 0.8,
+        "change": 0.05,
+        "ci": [
+          -0.1,
+          0.2
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.6663067221641541,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_3",
+        "alpha": -0.5,
+        "protect": 0.85,
+        "change": 0.1,
+        "ci": [
+          -0.1,
+          0.3
+        ],
+        "change_coherent": 0.1,
+        "nll": 0.5214088171720505,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_3",
+        "alpha": 0.5,
+        "protect": 0.6,
+        "change": -0.15,
+        "ci": [
+          -0.45,
+          0.15
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.5673644296824932,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_4",
+        "alpha": -0.5,
+        "protect": 0.7,
+        "change": -0.05,
+        "ci": [
+          -0.2,
+          0.1
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5735537558794022,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_4",
+        "alpha": 0.5,
+        "protect": 0.8,
+        "change": 0.05,
+        "ci": [
+          -0.1,
+          0.2
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.5807560563087464,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_5",
+        "alpha": -0.5,
+        "protect": 0.75,
+        "change": 0.0,
+        "ci": [
+          -0.2,
+          0.2
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.6632609859108924,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_5",
+        "alpha": 0.5,
+        "protect": 0.85,
+        "change": 0.1,
+        "ci": [
+          -0.1,
+          0.3
+        ],
+        "change_coherent": 0.1,
+        "nll": 0.6359682992100716,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_6",
+        "alpha": -0.5,
+        "protect": 0.9,
+        "change": 0.15,
+        "ci": [
+          0.0,
+          0.3
+        ],
+        "change_coherent": 0.15,
+        "nll": 0.6425343438982963,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_6",
+        "alpha": 0.5,
+        "protect": 0.7,
+        "change": -0.05,
+        "ci": [
+          -0.25,
+          0.15
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.49917886704206466,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_7",
+        "alpha": -0.5,
+        "protect": 0.85,
+        "change": 0.1,
+        "ci": [
+          -0.1,
+          0.3
+        ],
+        "change_coherent": 0.1,
+        "nll": 0.5240146800875664,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_7",
+        "alpha": 0.5,
+        "protect": 0.8,
+        "change": 0.05,
+        "ci": [
+          -0.1,
+          0.2
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.48412132635712624,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_8",
+        "alpha": -0.5,
+        "protect": 0.7,
+        "change": -0.05,
+        "ci": [
+          -0.2,
+          0.1
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.538777157664299,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_8",
+        "alpha": 0.5,
+        "protect": 0.6,
+        "change": -0.15,
+        "ci": [
+          -0.45,
+          0.15
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.5676694944500923,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_9",
+        "alpha": -0.5,
+        "protect": 0.7,
+        "change": -0.05,
+        "ci": [
+          -0.2,
+          0.1
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5167136996984482,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_9",
+        "alpha": 0.5,
+        "protect": 0.6,
+        "change": -0.15,
+        "ci": [
+          -0.4,
+          0.05
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.5454768136143684,
+        "degenerate": 0.0,
+        "n": 20
+      }
+    ]
+  },
+  "eval": {
+    "baseline": 0.95,
+    "cells": [
+      {
+        "direction": "context_probe",
+        "alpha": -0.5,
+        "protect": 0.9,
+        "change": -0.05,
+        "ci": [
+          -0.15,
+          0.0
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.6739911034703254,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "context_probe",
+        "alpha": 0.5,
+        "protect": 0.9,
+        "change": -0.05,
+        "ci": [
+          -0.2,
+          0.1
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.5630697414278985,
+        "degenerate": 0.05,
+        "n": 20
+      },
+      {
+        "direction": "random_0",
+        "alpha": -0.5,
+        "protect": 0.85,
+        "change": -0.1,
+        "ci": [
+          -0.3,
+          0.1
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.524708716571331,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_0",
+        "alpha": 0.5,
+        "protect": 1.0,
+        "change": 0.05,
+        "ci": [
+          0.0,
+          0.15
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.7198606565594673,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_1",
+        "alpha": -0.5,
+        "protect": 1.0,
+        "change": 0.05,
+        "ci": [
+          0.0,
+          0.15
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.5371051870286465,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_1",
+        "alpha": 0.5,
+        "protect": 1.0,
+        "change": 0.05,
+        "ci": [
+          0.0,
+          0.15
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.6454590991139412,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_2",
+        "alpha": -0.5,
+        "protect": 0.95,
+        "change": 0.0,
+        "ci": [
+          -0.15,
+          0.15
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.5301271788775921,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_2",
+        "alpha": 0.5,
+        "protect": 1.0,
+        "change": 0.05,
+        "ci": [
+          0.0,
+          0.15
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.6420891575515271,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_3",
+        "alpha": -0.5,
+        "protect": 0.9,
+        "change": -0.05,
+        "ci": [
+          -0.2,
+          0.1
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5889518052339554,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_3",
+        "alpha": 0.5,
+        "protect": 0.8,
+        "change": -0.15,
+        "ci": [
+          -0.4,
+          0.1
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.6201939165592194,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_4",
+        "alpha": -0.5,
+        "protect": 0.8,
+        "change": -0.15,
+        "ci": [
+          -0.4,
+          0.1
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.5349925585091114,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_4",
+        "alpha": 0.5,
+        "protect": 1.0,
+        "change": 0.05,
+        "ci": [
+          0.0,
+          0.15
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.6880201891064643,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_5",
+        "alpha": -0.5,
+        "protect": 0.8,
+        "change": -0.15,
+        "ci": [
+          -0.3,
+          0.0
+        ],
+        "change_coherent": -0.15,
+        "nll": 0.6877563580870628,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_5",
+        "alpha": 0.5,
+        "protect": 0.9,
+        "change": -0.05,
+        "ci": [
+          -0.2,
+          0.1
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.593539035320282,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_6",
+        "alpha": -0.5,
+        "protect": 0.9,
+        "change": -0.05,
+        "ci": [
+          -0.15,
+          0.0
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.6947525665163994,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_6",
+        "alpha": 0.5,
+        "protect": 0.95,
+        "change": 0.0,
+        "ci": [
+          0.0,
+          0.0
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.507573501765728,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_7",
+        "alpha": -0.5,
+        "protect": 0.85,
+        "change": -0.1,
+        "ci": [
+          -0.35,
+          0.1
+        ],
+        "change_coherent": -0.1,
+        "nll": 0.6193449631333351,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_7",
+        "alpha": 0.5,
+        "protect": 0.7,
+        "change": -0.25,
+        "ci": [
+          -0.45,
+          -0.05
+        ],
+        "change_coherent": -0.25,
+        "nll": 0.5031271934509277,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_8",
+        "alpha": -0.5,
+        "protect": 1.0,
+        "change": 0.05,
+        "ci": [
+          0.0,
+          0.15
+        ],
+        "change_coherent": 0.05,
+        "nll": 0.6257518619298935,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_8",
+        "alpha": 0.5,
+        "protect": 0.65,
+        "change": -0.3,
+        "ci": [
+          -0.55,
+          -0.05
+        ],
+        "change_coherent": -0.3,
+        "nll": 0.694793963432312,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_9",
+        "alpha": -0.5,
+        "protect": 0.95,
+        "change": 0.0,
+        "ci": [
+          -0.15,
+          0.15
+        ],
+        "change_coherent": 0.0,
+        "nll": 0.5056078195571899,
+        "degenerate": 0.0,
+        "n": 20
+      },
+      {
+        "direction": "random_9",
+        "alpha": 0.5,
+        "protect": 0.9,
+        "change": -0.05,
+        "ci": [
+          -0.3,
+          0.15
+        ],
+        "change_coherent": -0.05,
+        "nll": 0.5859543368220329,
+        "degenerate": 0.0,
+        "n": 20
+      }
+    ]
+  },
+  "antisymmetric": [
+    {
+      "direction": "context_probe",
+      "alpha": 0.5,
+      "effect": 0.175,
+      "ci": [
+        0.075,
+        0.3
+      ],
+      "frac_random_at_least": 0.0
+    },
+    {
+      "direction": "random_0",
+      "alpha": 0.5,
+      "effect": 0.1,
+      "ci": [
+        0.0,
+        0.2
+      ]
+    },
+    {
+      "direction": "random_1",
+      "alpha": 0.5,
+      "effect": 0.05,
+      "ci": [
+        -0.05,
+        0.15
+      ]
+    },
+    {
+      "direction": "random_2",
+      "alpha": 0.5,
+      "effect": 0.075,
+      "ci": [
+        -0.05,
+        0.2
+      ]
+    },
+    {
+      "direction": "random_3",
+      "alpha": 0.5,
+      "effect": -0.175,
+      "ci": [
+        -0.35,
+        -0.025
+      ]
+    },
+    {
+      "direction": "random_4",
+      "alpha": 0.5,
+      "effect": 0.15,
+      "ci": [
+        0.025,
+        0.275
+      ]
+    },
+    {
+      "direction": "random_5",
+      "alpha": 0.5,
+      "effect": 0.1,
+      "ci": [
+        -0.05,
+        0.275
+      ]
+    },
+    {
+      "direction": "random_6",
+      "alpha": 0.5,
+      "effect": -0.075,
+      "ci": [
+        -0.175,
+        0.025
+      ]
+    },
+    {
+      "direction": "random_7",
+      "alpha": 0.5,
+      "effect": -0.1,
+      "ci": [
+        -0.275,
+        0.075
+      ]
+    },
+    {
+      "direction": "random_8",
+      "alpha": 0.5,
+      "effect": -0.225,
+      "ci": [
+        -0.4,
+        -0.025
+      ]
+    },
+    {
+      "direction": "random_9",
+      "alpha": 0.5,
+      "effect": -0.075,
+      "ci": [
+        -0.225,
+        0.075
+      ]
+    }
+  ],
+  "random_null": {
+    "0.5": {
+      "effects": [
+        -0.225,
+        -0.175,
+        -0.1,
+        -0.075,
+        -0.075,
+        0.05,
+        0.075,
+        0.1,
+        0.1,
+        0.15
+      ],
+      "sd": 0.12912633779020882
+    }
+  }
+}

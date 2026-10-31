@@ -35,8 +35,10 @@ def prompt_text(tok, item):
     """Chat-formatted prompt ending where the assistant's reply begins.
 
     Templates without a system role (e.g. Gemma) fold the system prompt into the first user turn themselves.
+    Hybrid reasoning models (Qwen3-8B) run with thinking off; other templates ignore the flag.
     """
-    return tok.apply_chat_template(item["messages"], tokenize=False, add_generation_prompt=True)
+    return tok.apply_chat_template(item["messages"], tokenize=False, add_generation_prompt=True,
+                                   enable_thinking=False)
 
 
 def read_jsonl(path):

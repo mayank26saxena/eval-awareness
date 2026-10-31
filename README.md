@@ -27,10 +27,10 @@ The same request is rendered across all cells. Behaviors are **honesty** (disclo
 
 ## Results
 
-**Conclusion.** Activation detectors do read evaluation context, not only prompt format, but only at the right layer; and what they read does not account for the behavioral difference between evaluation and deployment. In Qwen2.5-7B the decoded context direction is causally inert while context raises privacy protection by ~25 pp; in Qwen3-4B it strongly controls privacy refusals while context barely changes behavior. A detector reading alone is therefore not evidence that behavior on an evaluation depends on recognizing the test. Full summary: [`final summary (2026-10-31)`](results/reports/2026-10-31_final_summary.md).
+**Conclusion.** Activation detectors do read evaluation context, not only prompt format, but only at the right layer; and what they read does not account for the behavioral difference between evaluation and deployment. In Qwen2.5-7B the decoded context direction is causally inert while context raises privacy protection by ~25 pp; in Qwen3-4B (strongly) and Qwen3-8B (modestly) it controls privacy refusals while context does not reliably change behavior. A detector reading alone is therefore not evidence that behavior on an evaluation depends on recognizing the test. Full summary: [`final summary (2026-10-31)`](results/reports/2026-10-31_final_summary.md).
 
 
-Models: Qwen2.5-7B-Instruct and Qwen3-4B-Instruct-2507; dataset v3 has 38 behavior tasks.
+Models: Qwen2.5-7B-Instruct, Qwen3-4B-Instruct-2507 and Qwen3-8B; dataset v3 has 38 behavior tasks.
 
 - **Behavior.** In Qwen2.5-7B, contextual evaluation cues raise privacy protection by **+25 pp** (68% → 93%; 95% CI over tasks [+7.5, +45]). They do not change honesty (−2.7 pp; CI [−12.5, +8.0]).
 - **Layer specificity.** A naive eval-vs-deploy probe, trained where format and context agree, tracks **format in early and late layers** and **context only in a narrow mid-network band** (Qwen2.5-7B, L10–11). The layer read by the released Qwen2.5-7B NLA (output of block 20) is format-dominated. *Which layer is probed largely determines what an "eval-awareness probe" measures.*
@@ -42,9 +42,10 @@ Models: Qwen2.5-7B-Instruct and Qwen3-4B-Instruct-2507; dataset v3 has 38 behavi
 - **Single cues and behavior.** No single context cue reproduces the +25 pp privacy effect (single-cue effects −5 to +10 pp, none significant). Contrived details, the cue the NLA verbalizes, change neither privacy nor honesty. The clearest task (clinic) changes only when all cues are present.
 - **Steering.** Adding the layer-10 context direction moves a downstream context probe by up to ~70% of the natural eval–deploy gap, but privacy protection does not follow: the sign-specific effect is −5 to +15 pp (n.s.), while random directions of the same norm lower protection as much or more. The decodable context representation does not drive the privacy effect at this layer. The null holds against 20 random directions (the context directions rank at the 30th and 75th percentiles) and with 10 sampled responses per prompt (sign-specific effect −1 pp [−13, +11]), which excludes full mediation of the +22 pp gap. At layer 20, where steering moves the downstream readout by about twice the natural gap, the sign-specific effect is 0 pp [−5, +3].
 - **Second model.** In Qwen3-4B, steering the layer-13 context direction does change privacy protection: +51 pp [+33, +68] sign-specific, beyond all 10 random directions. It does so on deployment prompts as much as on evaluation prompts, producing generic refusals, and the model's natural eval–deploy gap is only +9.5 pp [−16.5, +35]. The direction acts as a caution lever, not as a mediator of an evaluation effect.
-- **Caveats.** Models are below 8B; two behaviors, with a significant gap only in privacy; one local judge (calibrated 47/48 against hand labels), which grades its own model in the Qwen3-4B experiments.
+- **Third model.** Qwen3-8B shows a mid-network context band like Qwen2.5-7B (naive probe, L10–18). Its layer-13 context direction has a modest, one-sided effect: +19 pp [+10, +29] sign-specific, driven by "deploy" steering lowering protection, at the top of the random distribution. Its natural gap is +12 pp [−4, +34] (n.s.).
+- **Caveats.** Models are 8B or smaller; two behaviors, with a significant gap only in privacy; one local judge (calibrated 47/48 against hand labels), which grades its own model in the Qwen3-4B experiments.
 
-Reports: [`final summary (2026-10-31)`](results/reports/2026-10-31_final_summary.md) · [`steering, layer 20 and Qwen3-4B (2026-10-31)`](results/reports/2026-10-31_steering_layer20_qwen3.md) · [`steering null (2026-10-30)`](results/reports/2026-10-30_steering_null_qwen2.5-7b.md) · [`steering (2026-10-29)`](results/reports/2026-10-29_steering_privacy_qwen2.5-7b.md) · [`single-cue behavior (2026-10-27)`](results/reports/2026-10-27_single_factor_behavior_qwen2.5-7b.md) · [`NLA artificiality (2026-10-27)`](results/reports/2026-10-27_nla_artificiality_qwen2.5-7b.md) · [`NLA position sweep (2026-10-27)`](results/reports/2026-10-27_nla_positions_qwen2.5-7b.md) · [`NLA validation (2026-10-26)`](results/reports/2026-10-26_nla_qwen2.5-7b.md) · [`round 2 (2026-10-26)`](results/reports/2026-10-26_round2_qwen.md) · [`pilot (2026-10-25)`](results/reports/2026-10-25_pilot_qwen2.5-7b.md)
+Reports: [`final summary (2026-10-31)`](results/reports/2026-10-31_final_summary.md) · [`Qwen3-8B (2026-10-31)`](results/reports/2026-10-31_steering_qwen3-8b.md) · [`steering, layer 20 and Qwen3-4B (2026-10-31)`](results/reports/2026-10-31_steering_layer20_qwen3.md) · [`steering null (2026-10-30)`](results/reports/2026-10-30_steering_null_qwen2.5-7b.md) · [`steering (2026-10-29)`](results/reports/2026-10-29_steering_privacy_qwen2.5-7b.md) · [`single-cue behavior (2026-10-27)`](results/reports/2026-10-27_single_factor_behavior_qwen2.5-7b.md) · [`NLA artificiality (2026-10-27)`](results/reports/2026-10-27_nla_artificiality_qwen2.5-7b.md) · [`NLA position sweep (2026-10-27)`](results/reports/2026-10-27_nla_positions_qwen2.5-7b.md) · [`NLA validation (2026-10-26)`](results/reports/2026-10-26_nla_qwen2.5-7b.md) · [`round 2 (2026-10-26)`](results/reports/2026-10-26_round2_qwen.md) · [`pilot (2026-10-25)`](results/reports/2026-10-25_pilot_qwen2.5-7b.md)
 
 ## Repository structure
 
@@ -109,7 +110,7 @@ Models up to about 8B run on Apple Silicon (MPS, bf16). Larger models need an 80
 
 ## Status
 
-Complete at the sub-8B scale (October 2026). Deferred directions (LEACE erasure, larger models, Activation Oracles, NLA grounding tests) are listed in [`docs/roadmap.md`](docs/roadmap.md).
+Complete at the ≤8B scale (October 2026). Deferred directions (LEACE erasure, larger models, Activation Oracles, NLA grounding tests) are listed in [`docs/roadmap.md`](docs/roadmap.md).
 
 ## Data and licenses
 

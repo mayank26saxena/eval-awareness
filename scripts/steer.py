@@ -69,6 +69,9 @@ def main():
                                                          "random_0", "random_1", "random_2"])
     ap.add_argument("--max-new-tokens", type=int, default=300)
     ap.add_argument("--samples", type=int, default=0, help="0 = greedy; N = N sampled responses per cell")
+    ap.add_argument("--sample-batch", type=int, default=0, help="draw samples in chunks of this size (0 = all at once)")
+    ap.add_argument("--sampling", nargs=3, type=float, default=None, metavar=("TEMP", "TOP_P", "TOP_K"),
+                    help="override the model's default sampling settings (e.g. 0.7 0.8 20 for Qwen3-8B without thinking)")
     ap.add_argument("--limit", type=int, default=None)
     ap.add_argument("--out", required=True)
     args = ap.parse_args()
@@ -83,6 +86,9 @@ def main():
                and it["context"] in args.contexts][: args.limit]
 
     tok, model = load_model(args.model)
+    if args.sampling:
+        gc = model.generation_config
+        gc.temperature, gc.top_p, gc.top_k = args.sampling[0], args.sampling[1], int(args.sampling[2])
     block = model.model.layers[args.layer - 1]
     state = {"vec": None}
 
@@ -119,12 +125,15 @@ def main():
                         continue
                     state["vec"] = (torch.tensor(dirs[name] * a * norm_unit, dtype=torch.bfloat16, device=model.device)
                                     if a else None)
-                    sample_kw = (dict(do_sample=True, num_return_sequences=args.samples) if args.samples
-                                 else dict(do_sample=False))
+                    # Sampled responses are drawn in chunks of --sample-batch to bound memory (8B models on 24 GB)
+                    chunks = ([min(args.sample_batch or args.samples, args.samples - i)
+                               for i in range(0, args.samples, args.sample_batch or args.samples)]
+                              if args.samples else [0])
                     torch.manual_seed(zlib.crc32(repr(key).encode()))
                     with torch.no_grad():
-                        gen = model.generate(**enc, max_new_tokens=args.max_new_tokens, pad_token_id=tok.pad_token_id,
-                                             **sample_kw)
+                        gen = [seq for c in chunks for seq in model.generate(
+                            **enc, max_new_tokens=args.max_new_tokens, pad_token_id=tok.pad_token_id,
+                            **(dict(do_sample=True, num_return_sequences=c) if c else dict(do_sample=False)))]
                         state["vec"] = None
                         for k, seq in enumerate(gen):
                             tgt = seq[n_prompt:].tolist()
@@ -141,6 +150,8 @@ def main():
                                 row["sample"] = k
                             f.write(json.dumps(row, ensure_ascii=False) + "\n")
                     f.flush()
+                    if model.device.type == "mps":
+                        torch.mps.empty_cache()
                     n += 1
                     print(f"  {n} done, {it['id']} {key[1]} {a:+g}  nll {nll:.2f}  {time.time() - t0:.0f}s", flush=True)
     print(f"-> {out_path}")

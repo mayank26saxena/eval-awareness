@@ -96,7 +96,8 @@ def main():
     block.register_forward_hook(hook)
     out_path = Path(args.out)
     done = {(r["id"], r["direction"], r["alpha"]) for r in read_jsonl(out_path)} if out_path.exists() else set()
-    eos = set(model.generation_config.eos_token_id) | {tok.pad_token_id}
+    eos = model.generation_config.eos_token_id
+    eos = set(eos if isinstance(eos, list) else [eos]) | {tok.pad_token_id}
     cos_logged = False
     t0, n = time.time(), 0
     with out_path.open("a") as f:

@@ -1,6 +1,6 @@
 # Roadmap
 
-Status as of 2026-10-30. Background and hypotheses are in [`research_statement.md`](research_statement.md).
+Status as of 2026-10-31: **complete at the sub-8B scale.** Conclusions are in the [final summary](../results/reports/2026-10-31_final_summary.md). Unchecked items below are deferred, not in progress. Background and hypotheses are in [`research_statement.md`](research_statement.md).
 
 ## Phase overview
 
@@ -11,9 +11,9 @@ Status as of 2026-10-30. Background and hypotheses are in [`research_statement.m
 | 2. Dataset v2/v3 | Fix the bare-shell stake confound (v2); scale to 42 tasks (v3) | ✅ Done |
 | 3. Scoring | LLM judge calibrated against hand labels | ✅ Local judge, 98% agreement; a stronger independent judge is planned |
 | 4. Probes and transfer | Layer-wise format/context probes; transfer to natural eval/deploy transcripts; second model family | ✅ Done for Qwen2.5-7B and Qwen3-4B ([report](../results/reports/2026-10-26_round2_qwen.md)) |
-| 5. Activation readers | NLA (Qwen2.5-7B L20, Gemma-3-12B L32, Gemma-3-27B L41), Activation Oracle | In progress: Qwen2.5-7B pre-response ([report](../results/reports/2026-10-26_nla_qwen2.5-7b.md)) position sweep ([report](../results/reports/2026-10-27_nla_positions_qwen2.5-7b.md)) and single-factor artificiality analysis ([report](../results/reports/2026-10-27_nla_artificiality_qwen2.5-7b.md)) done |
-| 6. Causality | LEACE format-free direction, NLA-edit steering, contrastive and random controls | In progress |
-| 7. Scale-up and write-up | Gemma-3-27B on GPU; workshop paper | Planned |
+| 5. Activation readers | NLA (Qwen2.5-7B L20, Gemma-3-12B L32, Gemma-3-27B L41), Activation Oracle | ✅ Done for the Qwen2.5-7B NLA; Gemma NLAs and Activation Oracle deferred. Pre-response ([report](../results/reports/2026-10-26_nla_qwen2.5-7b.md)) position sweep ([report](../results/reports/2026-10-27_nla_positions_qwen2.5-7b.md)) and single-factor artificiality analysis ([report](../results/reports/2026-10-27_nla_artificiality_qwen2.5-7b.md)) done |
+| 6. Causality | LEACE format-free direction, NLA-edit steering, contrastive and random controls | ✅ Done for single-direction steering in both models ([report](../results/reports/2026-10-31_steering_layer20_qwen3.md)); LEACE and patching deferred |
+| 7. Scale-up and write-up | Gemma-3-27B on GPU; workshop paper | Final summary written ([report](../results/reports/2026-10-31_final_summary.md)); scale-up deferred |
 
 ## Phase details
 
@@ -50,7 +50,9 @@ Status as of 2026-10-30. Background and hypotheses are in [`research_statement.m
 - [ ] Format-free direction via LEACE
 - [x] Steering at layer 10 with context-probe, contrastive-prompt, format and random directions on the privacy tasks: the downstream readout moves, behavior does not follow; random directions disrupt protection as much ([report](../results/reports/2026-10-29_steering_privacy_qwen2.5-7b.md))
 - [x] Steering null checks: 20 random directions and 10 sampled responses per prompt; the null holds and excludes full mediation ([report](../results/reports/2026-10-30_steering_null_qwen2.5-7b.md))
-- [ ] Steering at other layers (14, 20) and only at system-message positions, with sampled responses
+- [x] Steering at Qwen2.5-7B layer 20 (tight null, 0 pp [−5, +3]) and replication in Qwen3-4B at layer 13 (+51 pp sign-specific, beyond all random directions, but no significant natural gap to mediate) ([report](../results/reports/2026-10-31_steering_layer20_qwen3.md))
+- [ ] Steering only at system-message positions
+- [ ] Qwen3-4B: test whether the context direction is a refusal direction (benign-request refusals under steering; cosine with a refusal direction)
 - [ ] Steering with LEACE format-free and NLA-edit directions; multi-layer
 - [ ] Activation patching between context conditions
 - [ ] Capability and coherence controls
@@ -59,6 +61,7 @@ Status as of 2026-10-30. Background and hypotheses are in [`research_statement.m
 ### 7. Scale-up and write-up
 - [ ] Gemma-3-12B / 27B runs on an 80 GB GPU (see [`compute.md`](compute.md))
 - [ ] Optional: Llama-3.3-70B via NDIF
+- [x] Final summary report ([2026-10-31](../results/reports/2026-10-31_final_summary.md))
 - [ ] Main figure: behavior gap · detector decomposition · steering dose-response
 - [ ] Workshop paper or technical report; dataset and harness release
 

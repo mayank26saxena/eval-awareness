@@ -5,8 +5,12 @@ Inputs
   --claude   optional jsonl of Claude validation labels: task_id, cell, model, k, claude_good (True = protected)
 Method
   item-level protection = mean over k of good; contrast = paired difference in item means.
-  With Claude labels: prediction-powered estimate, judge mean + rectifier, rectifier estimated per (model, benchmark)
-  from the labelled replies (pooled over cells; a bias-by-cell-group check is printed).
+  With Claude labels (primary, deviation 6): misclassification correction (Rogan-Gladen). The judge's sensitivity and
+  specificity against Claude are estimated per (model, benchmark) from the labelled replies pooled over cells, and each
+  cell's judged rate p is corrected to (p + spec - 1) / (sens + spec - 1). This assumes the judge's error rates do not
+  depend on the cell, which the design supports (the judge sees the same cue-free prompt in every cell) and which is
+  checked by printing error rates by cell. Sensitivity analyses: per-cell prediction-powered rectifier (--mode ppi_cell,
+  assumption-free but noisy) and judge-only (--mode judge).
   Intervals: item-level cluster bootstrap (resample items within benchmark, B = 10,000 by default).
   Pooling over models: DerSimonian-Laird random effects on the per-model estimates (SE from the bootstrap).
   Holm correction within family F1; equivalence by two one-sided tests at +-3 points.
@@ -62,6 +66,9 @@ class Table:
         self.lab_diff_sum = np.zeros(n)  # sum of (claude - judge) over labelled replies, per item
         self.lab_cnt = np.zeros(n)
         self.lab_cell = defaultdict(lambda: np.zeros(n))
+        self.conf = {k: np.zeros(n) for k in ("tp", "fn", "fp", "tn")}  # judge vs Claude (positive = protected)
+        self.rect_cell = {c: np.zeros(n) for c in CELL_NAMES}
+        self.lab_cell_cnt = {c: np.zeros(n) for c in CELL_NAMES}
         self.claude_sum = {c: np.zeros(n) for c in CELL_NAMES}
         self.claude_cnt = {c: np.zeros(n) for c in CELL_NAMES}
         for r in rows:
@@ -71,6 +78,10 @@ class Table:
             key = (r["task_id"], r["cell"], r["model"], r["k"])
             if key in claude:
                 cg = float(claude[key])
+                jg = bool(r["good"])
+                self.conf[("tp" if jg else "fn") if cg else ("fp" if jg else "tn")][i] += 1
+                self.rect_cell[c][i] += cg - float(jg)
+                self.lab_cell_cnt[c][i] += 1
                 self.lab_diff_sum[i] += cg - float(r["good"])
                 self.lab_cnt[i] += 1
                 self.claude_sum[c][i] += cg
@@ -79,11 +90,25 @@ class Table:
     def cell_means(self, idx, mode):
         """Mean protection per cell over the items in idx (with repeats). mode: judge | ppi | claude."""
         out = {}
+        if mode == "rg":
+            tp, fn, fp, tn = (self.conf[k][idx].sum() for k in ("tp", "fn", "fp", "tn"))
+            sens = tp / (tp + fn) if tp + fn else 1.0
+            spec = tn / (tn + fp) if tn + fp else 1.0
+            youden = max(sens + spec - 1, 0.05)
         if mode == "ppi":
             w = self.lab_cnt[idx]
             rect = self.lab_diff_sum[idx].sum() / w.sum() if w.sum() > 0 else 0.0
         for c in CELL_NAMES:
             js, jc = self.judge_sum[c][idx], self.judge_cnt[c][idx]
+            if mode == "rg":
+                m = js.sum() / jc.sum() if jc.sum() > 0 else float("nan")
+                out[c] = (m + spec - 1) / youden
+                continue
+            if mode == "ppi_cell":
+                m = js.sum() / jc.sum() if jc.sum() > 0 else float("nan")
+                lc = self.lab_cell_cnt[c][idx].sum()
+                out[c] = m + (self.rect_cell[c][idx].sum() / lc if lc else 0.0)
+                continue
             if mode == "claude":
                 cs, cc = self.claude_sum[c][idx], self.claude_cnt[c][idx]
                 out[c] = (cs.sum() / cc.sum()) if cc.sum() > 0 else float("nan")
@@ -139,6 +164,8 @@ def main():
     ap.add_argument("--confirmatory-models", nargs="*", default=None)
     ap.add_argument("--out", default=None)
     ap.add_argument("--seed", type=int, default=1)
+    ap.add_argument("--mode", choices=["rg", "ppi_cell", "ppi", "judge", "claude"], default=None,
+                    help="default: rg with --claude, judge without")
     a = ap.parse_args()
     rows = load(a.judged)
     claude = {}
@@ -149,7 +176,7 @@ def main():
     models = a.models or sorted({r["model"] for r in rows})
     conf = a.confirmatory_models or models
     rng = np.random.default_rng(a.seed)
-    mode = "ppi" if claude else "judge"
+    mode = a.mode or ("rg" if claude else "judge")
     results = {}
     specs = {**F1, **OTHER}
     cells = {}
@@ -159,6 +186,19 @@ def main():
             if sub:
                 cells[(m, bench)] = Table(sub, claude)
     print(f"mode={mode}; models={models}; strata={len(cells)}; replies={len(rows)}; labelled={sum(1 for r in rows if (r['task_id'], r['cell'], r['model'], r['k']) in claude)}")
+    if claude:
+        print("Judge error rates against Claude, by model x benchmark (sens = judge says protected when Claude does):")
+        for (m, b), t in cells.items():
+            tp, fn, fp, tn = (t.conf[k].sum() for k in ("tp", "fn", "fp", "tn"))
+            print(f"  {m.split('/')[-1]}/{b}: n={int(tp + fn + fp + tn)} sens={tp / max(tp + fn, 1):.2f} spec={tn / max(tn + fp, 1):.2f}")
+        print("Disagreement rate by cell (all strata pooled), to check the constant-error assumption:")
+        dis = {c: [0, 0] for c in CELL_NAMES}
+        for r in rows:
+            k = (r["task_id"], r["cell"], r["model"], r["k"])
+            if k in claude:
+                dis[r["cell"]][0] += bool(claude[k]) != bool(r["good"])
+                dis[r["cell"]][1] += 1
+        print("  " + "  ".join(f"{c} {v[0]}/{v[1]}" for c, v in dis.items() if v[1]))
     # absolute protection per cell (judge, claude-labelled subset, ppi)
     print("\nProtection by cell (pooled mean over models and benchmarks, judge-only):")
     for c in CELL_NAMES:

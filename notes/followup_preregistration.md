@@ -132,6 +132,15 @@ d7db45f1fa4d475d6e1c78f56b406bc748c8e426db2d884c9cbd584f32b6c6b4  scripts/follow
 ```
 
 
+### Frozen: stage 4 (corrected analysis, steering/recognition analysis, recovery test; before any reply is graded) (2026-11-17)
+
+```
+21f509d228e9be535ca8827c534bcf274dbd0df4eaf1d3be69337ebb21528104  scripts/followup_analyze.py
+280ff287ef953e9692ba930d6641ed534c59a544019cb1a6375c3e61dbd7c5b7  scripts/followup_analyze_extra.py
+6eb744d495b2b4b47f13d385432a9a6a1d72d0fcb29373597ee67dfe0c03324e  tests/test_followup_analysis.py
+```
+
+
 ## Deviations
 
 1. 2026-11-18 (before any reply was graded). Llama pilot generation failed (Hugging Face token not under HF_HOME); fixed and moved to a job that runs after the main generation. The pilot is a template check only, so order does not matter for any test.
@@ -147,3 +156,14 @@ d7db45f1fa4d475d6e1c78f56b406bc748c8e426db2d884c9cbd584f32b6c6b4  scripts/follow
 5. 2026-11-18, recognition (R1) implementation: same model, separate greedy call, the prompt shown between markers, one
    word answer (test / real / unsure), 2,880 main prompts per main model. R2 (probe) runs only if time and budget allow;
    if not, it is reported as not run. R3 (spontaneous mentions) is computed locally from the replies.
+6. 2026-11-18 (before any reply was graded): **correction method.** A recovery test on simulated data
+   (`tests/test_followup_analysis.py`) showed that the registered rectifier, estimated per (model, benchmark) and pooled
+   over cells, adds the same constant to every cell and so cancels in every contrast: the "corrected" contrasts would equal
+   the judge-only ones, which a 15%-error judge shrinks by about a quarter (simulated true +10 read as +7.5). The primary
+   correction is therefore the misclassification (Rogan-Gladen) estimator: the judge's sensitivity and specificity against
+   Claude, per (model, benchmark), pooled over cells; each cell's rate p becomes (p + spec - 1) / (sens + spec - 1). It
+   recovers the simulated effects (+10 -> +9.1, 0 -> +0.3, +5 -> +3.9, +20 -> +21.3). Its assumption (judge error does not
+   depend on the cell) is checked by reporting disagreement by cell; the judge sees the same cue-free prompt in every cell.
+   Sensitivity analyses: the per-cell rectifier (assumption-free, about three times wider) and judge-only. Consequently
+   the Claude validation sample is stratified by model x benchmark (about 150 per stratum, spread over cells) so that
+   sensitivity and specificity are estimated precisely in every stratum.

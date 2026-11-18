@@ -109,6 +109,15 @@ b81f4196fe41a355329d40070719f08f0c58e8c5ca4dca1902942d20f50a490c  data/followup/
 ```
 
 
+### Frozen: stage 2 (analysis, before any reply is judged) (2026-11-17)
+
+```
+bf1a7e854758706617db2ae5018f773ea98146f77c6caea48863f1ebdd5aa60c  scripts/followup_analyze.py
+5d44cf6072c31efde1f82ef9051d9ee60794d72eeb94f07dcce8d080975bd82c  scripts/followup_driver.sh
+fac32c63546127bd89f3b69697bf1f591e59a13b08676f40bb431943cf797cca  scripts/followup_watchdog.sh
+```
+
+
 ## Deviations
 
 (none yet)

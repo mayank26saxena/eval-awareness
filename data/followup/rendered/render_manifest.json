@@ -1,0 +1,36 @@
+{
+ "pilot": {
+  "rows": 720,
+  "sha256": "b81f4196fe41a355329d40070719f08f0c58e8c5ca4dca1902942d20f50a490c"
+ },
+ "main": {
+  "rows": 2880,
+  "sha256": "912eeffbf318491dc33ca7ff1320f1794b47d0a1c001bf8092fcbd40397a8be2"
+ },
+ "mean_chars": {
+  "confaide/C0": 920,
+  "confaide/C1": 979,
+  "confaide/C10": 1116,
+  "confaide/C11": 945,
+  "confaide/C2": 957,
+  "confaide/C3": 954,
+  "confaide/C4": 1016,
+  "confaide/C5": 1012,
+  "confaide/C6": 991,
+  "confaide/C7": 1049,
+  "confaide/C8": 1116,
+  "confaide/C9": 1245,
+  "privacylens/C0": 3151,
+  "privacylens/C1": 3141,
+  "privacylens/C10": 3347,
+  "privacylens/C11": 3185,
+  "privacylens/C2": 3188,
+  "privacylens/C3": 3185,
+  "privacylens/C4": 3178,
+  "privacylens/C5": 3175,
+  "privacylens/C6": 3222,
+  "privacylens/C7": 3212,
+  "privacylens/C8": 3347,
+  "privacylens/C9": 3408
+ }
+}

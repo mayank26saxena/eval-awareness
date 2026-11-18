@@ -1,0 +1,448 @@
+{
+ "rule": "lowercase name tokens (from the frozen name list, ambiguous words excluded) followed by . _ digit @ or quote, remaining in the C1 prompt",
+ "items": {
+  "privacylens_main247": {
+   "split": "pilot",
+   "names_in_handles": [
+    "dan",
+    "smith"
+   ]
+  },
+  "privacylens_main251": {
+   "split": "pilot",
+   "names_in_handles": [
+    "alex",
+    "doe",
+    "jones",
+    "julia",
+    "smith"
+   ]
+  },
+  "privacylens_main347": {
+   "split": "pilot",
+   "names_in_handles": [
+    "julia",
+    "tom"
+   ]
+  },
+  "privacylens_main362": {
+   "split": "pilot",
+   "names_in_handles": [
+    "chen",
+    "connor",
+    "emily",
+    "harris",
+    "johnson",
+    "julia",
+    "lisa",
+    "mike",
+    "sarah",
+    "smith",
+    "thompson",
+    "tom"
+   ]
+  },
+  "privacylens_main398": {
+   "split": "pilot",
+   "names_in_handles": [
+    "connor",
+    "david",
+    "elizabeth",
+    "miller",
+    "sarah",
+    "smith"
+   ]
+  },
+  "privacylens_main423": {
+   "split": "pilot",
+   "names_in_handles": [
+    "alex"
+   ]
+  },
+  "privacylens_main491": {
+   "split": "pilot",
+   "names_in_handles": [
+    "anna",
+    "doe",
+    "emily",
+    "jane",
+    "michael",
+    "thompson"
+   ]
+  },
+  "privacylens_main63": {
+   "split": "pilot",
+   "names_in_handles": [
+    "jane"
+   ]
+  },
+  "privacylens_main124": {
+   "split": "main",
+   "names_in_handles": [
+    "alex",
+    "jane"
+   ]
+  },
+  "privacylens_main128": {
+   "split": "main",
+   "names_in_handles": [
+    "doe",
+    "emily",
+    "john"
+   ]
+  },
+  "privacylens_main163": {
+   "split": "main",
+   "names_in_handles": [
+    "connor",
+    "harrison",
+    "lucy",
+    "sarah",
+    "smith",
+    "tom"
+   ]
+  },
+  "privacylens_main184": {
+   "split": "main",
+   "names_in_handles": [
+    "jane",
+    "jones",
+    "lee",
+    "lucy",
+    "martha",
+    "mike",
+    "smith",
+    "tom"
+   ]
+  },
+  "privacylens_main209": {
+   "split": "main",
+   "names_in_handles": [
+    "jane",
+    "kate",
+    "mike"
+   ]
+  },
+  "privacylens_main24": {
+   "split": "main",
+   "names_in_handles": [
+    "doe",
+    "emily",
+    "john"
+   ]
+  },
+  "privacylens_main252": {
+   "split": "main",
+   "names_in_handles": [
+    "connor",
+    "doe",
+    "johnson",
+    "lisa",
+    "sarah",
+    "smith",
+    "tom"
+   ]
+  },
+  "privacylens_main257": {
+   "split": "main",
+   "names_in_handles": [
+    "emily",
+    "johnson",
+    "smith",
+    "taylor",
+    "wilson"
+   ]
+  },
+  "privacylens_main260": {
+   "split": "main",
+   "names_in_handles": [
+    "watson"
+   ]
+  },
+  "privacylens_main263": {
+   "split": "main",
+   "names_in_handles": [
+    "tom"
+   ]
+  },
+  "privacylens_main264": {
+   "split": "main",
+   "names_in_handles": [
+    "doe",
+    "emily",
+    "john",
+    "lucas"
+   ]
+  },
+  "privacylens_main266": {
+   "split": "main",
+   "names_in_handles": [
+    "lisa",
+    "sarah",
+    "tom"
+   ]
+  },
+  "privacylens_main277": {
+   "split": "main",
+   "names_in_handles": [
+    "david",
+    "elaine",
+    "emily",
+    "lucas",
+    "michael",
+    "robert",
+    "sarah"
+   ]
+  },
+  "privacylens_main278": {
+   "split": "main",
+   "names_in_handles": [
+    "doe",
+    "emily",
+    "harrison",
+    "linda",
+    "mike"
+   ]
+  },
+  "privacylens_main283": {
+   "split": "main",
+   "names_in_handles": [
+    "bob",
+    "doe",
+    "john"
+   ]
+  },
+  "privacylens_main285": {
+   "split": "main",
+   "names_in_handles": [
+    "anderson",
+    "emily",
+    "michael",
+    "taylor"
+   ]
+  },
+  "privacylens_main290": {
+   "split": "main",
+   "names_in_handles": [
+    "clark",
+    "emily",
+    "harris",
+    "julia",
+    "lee",
+    "lucas",
+    "michael",
+    "samantha",
+    "thompson"
+   ]
+  },
+  "privacylens_main296": {
+   "split": "main",
+   "names_in_handles": [
+    "alex",
+    "jane",
+    "smith"
+   ]
+  },
+  "privacylens_main311": {
+   "split": "main",
+   "names_in_handles": [
+    "alex",
+    "dan",
+    "fred",
+    "jane",
+    "sarah",
+    "tommy"
+   ]
+  },
+  "privacylens_main319": {
+   "split": "main",
+   "names_in_handles": [
+    "alex"
+   ]
+  },
+  "privacylens_main329": {
+   "split": "main",
+   "names_in_handles": [
+    "dawson",
+    "doe",
+    "emily",
+    "jane",
+    "jones",
+    "lisa",
+    "sarah",
+    "smith"
+   ]
+  },
+  "privacylens_main341": {
+   "split": "main",
+   "names_in_handles": [
+    "carlos",
+    "doe",
+    "jane",
+    "rodriguez",
+    "thompson"
+   ]
+  },
+  "privacylens_main343": {
+   "split": "main",
+   "names_in_handles": [
+    "doe",
+    "jane",
+    "lisa"
+   ]
+  },
+  "privacylens_main350": {
+   "split": "main",
+   "names_in_handles": [
+    "emily",
+    "jacob",
+    "laura",
+    "tom"
+   ]
+  },
+  "privacylens_main351": {
+   "split": "main",
+   "names_in_handles": [
+    "doe",
+    "emily",
+    "jane",
+    "kathy"
+   ]
+  },
+  "privacylens_main361": {
+   "split": "main",
+   "names_in_handles": [
+    "emily",
+    "jacob",
+    "lisa",
+    "tom"
+   ]
+  },
+  "privacylens_main38": {
+   "split": "main",
+   "names_in_handles": [
+    "doe"
+   ]
+  },
+  "privacylens_main383": {
+   "split": "main",
+   "names_in_handles": [
+    "daniel",
+    "doe",
+    "emily",
+    "john",
+    "michael",
+    "sarah"
+   ]
+  },
+  "privacylens_main388": {
+   "split": "main",
+   "names_in_handles": [
+    "emily",
+    "harrington",
+    "smith"
+   ]
+  },
+  "privacylens_main393": {
+   "split": "main",
+   "names_in_handles": [
+    "linda"
+   ]
+  },
+  "privacylens_main397": {
+   "split": "main",
+   "names_in_handles": [
+    "emily"
+   ]
+  },
+  "privacylens_main401": {
+   "split": "main",
+   "names_in_handles": [
+    "alice",
+    "doe",
+    "emily",
+    "jane",
+    "john",
+    "johnson",
+    "lee",
+    "smith",
+    "turner"
+   ]
+  },
+  "privacylens_main430": {
+   "split": "main",
+   "names_in_handles": [
+    "doe",
+    "emily",
+    "jones",
+    "mike",
+    "sarah",
+    "smith"
+   ]
+  },
+  "privacylens_main440": {
+   "split": "main",
+   "names_in_handles": [
+    "sarah"
+   ]
+  },
+  "privacylens_main453": {
+   "split": "main",
+   "names_in_handles": [
+    "alex"
+   ]
+  },
+  "privacylens_main462": {
+   "split": "main",
+   "names_in_handles": [
+    "harrison",
+    "linda"
+   ]
+  },
+  "privacylens_main62": {
+   "split": "main",
+   "names_in_handles": [
+    "harold",
+    "smith"
+   ]
+  },
+  "privacylens_main68": {
+   "split": "main",
+   "names_in_handles": [
+    "doe",
+    "jane"
+   ]
+  },
+  "privacylens_main73": {
+   "split": "main",
+   "names_in_handles": [
+    "doe",
+    "jane",
+    "johnson",
+    "julia",
+    "lisa",
+    "mary",
+    "mike",
+    "paul",
+    "smith",
+    "susan",
+    "tom"
+   ]
+  },
+  "privacylens_main76": {
+   "split": "main",
+   "names_in_handles": [
+    "jane",
+    "smith",
+    "tim",
+    "wilson"
+   ]
+  },
+  "privacylens_main96": {
+   "split": "main",
+   "names_in_handles": [
+    "thompson"
+   ]
+  }
+ }
+}

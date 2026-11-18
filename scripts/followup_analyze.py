@@ -163,11 +163,16 @@ def main():
     ap.add_argument("--models", nargs="*", default=None, help="restrict to these model ids (default: every model in the files)")
     ap.add_argument("--confirmatory-models", nargs="*", default=None)
     ap.add_argument("--out", default=None)
+    ap.add_argument("--exclude", default=None, help="json with an 'items' dict of task ids to drop (sensitivity analyses)")
     ap.add_argument("--seed", type=int, default=1)
     ap.add_argument("--mode", choices=["rg", "ppi_cell", "ppi", "judge", "claude"], default=None,
                     help="default: rg with --claude, judge without")
     a = ap.parse_args()
     rows = load(a.judged)
+    if a.exclude:
+        drop = set(json.load(open(a.exclude))["items"])
+        rows = [r for r in rows if r["task_id"] not in drop]
+        print(f"excluded {len(drop)} items listed in {a.exclude}")
     claude = {}
     if a.claude:
         for l in open(a.claude):

@@ -144,6 +144,10 @@ document.getElementById("export").onclick = () => {
 const drop = document.getElementById("drop");
 drop.ondragover = e => { e.preventDefault(); }; drop.ondrop = e => { e.preventDefault(); const f = e.dataTransfer.files[0]; f.text().then(t => load(t, f.name)); };
 document.getElementById("file").onchange = e => { const f = e.target.files[0]; f.text().then(t => load(t, f.name)); };
+// When served over http, ?sheet=<path> loads the sheet directly (grades still save per file name)
+const sheetParam = new URLSearchParams(location.search).get("sheet");
+if (sheetParam) fetch(sheetParam).then(r => r.ok ? r.text() : Promise.reject(r.status)).then(t => load(t, sheetParam.split("/").pop()))
+  .catch(e => { document.getElementById("drop").insertAdjacentHTML("beforebegin", `<p class="muted">Could not load ${sheetParam} (${e}); drop the file instead.</p>`); });
 </script>
 </body>
 </html>

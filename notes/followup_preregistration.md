@@ -141,6 +141,15 @@ d7db45f1fa4d475d6e1c78f56b406bc748c8e426db2d884c9cbd584f32b6c6b4  scripts/follow
 ```
 
 
+### Frozen: stage 5 (pilot review: N-incomplete item list, exclusion option; before any main reply is graded) (2026-11-17)
+
+```
+756b1c63009a334098db785eff2f39df785e49e55cafd847a6e425930219c163  data/followup/n_incomplete_items.json
+afeffed0448ef07029afdfbd1c61690ea560574a98e1fc5986c57dde55dcd170  scripts/followup_analyze.py
+d65e6751044601252ecb8d336af3e47e9b8d06ae2a911b7b0e597783cc1c1aa8  tools/followup_grader.html
+```
+
+
 ## Deviations
 
 1. 2026-11-18 (before any reply was graded). Llama pilot generation failed (Hugging Face token not under HF_HOME); fixed and moved to a job that runs after the main generation. The pilot is a template check only, so order does not matter for any test.
@@ -167,3 +176,11 @@ d7db45f1fa4d475d6e1c78f56b406bc748c8e426db2d884c9cbd584f32b6c6b4  scripts/follow
    Sensitivity analyses: the per-cell rectifier (assumption-free, about three times wider) and judge-only. Consequently
    the Claude validation sample is stratified by model x benchmark (about 150 per stratum, spread over cells) so that
    sensitivity and specificity are estimated precisely in every stratum.
+7. 2026-11-18 (pilot review, before any main reply was graded): the name operator replaces capitalised names and full
+   email addresses but not lowercase user handles such as `mark.thompson83` in PrivacyLens tool outputs. In 41 of the 120
+   main PrivacyLens items (none in ConfAIde) a real name therefore survives inside a handle in the N cells. Fixed list:
+   `data/followup/n_incomplete_items.json`. The registered analysis is unchanged; a sensitivity analysis repeats every
+   N-related contrast without these items (`followup_analyze.py --exclude data/followup/n_incomplete_items.json`).
+   Pilot review also found: 0 of 2,880 judge verdicts unparsed; 5.5% of replies hit the 384-token limit (PrivacyLens 9%),
+   evenly across cells (11 to 15 per cell); truncated replies are mostly leaks already (12% judged protected), so
+   truncation does not hide leaks. Truncation is reported per cell.

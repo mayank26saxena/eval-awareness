@@ -1,150 +1,118 @@
-# Evaluation awareness and privacy benchmarks in open LLMs
+# How test design changes what LLM evaluations measure
 
-This repository holds two studies of how the way a test is written changes what it measures in open language models.
+Code, data and write-ups for two studies of open language models (up to 9B parameters). Each asks whether a safety
+evaluation measures the model's behavior or an artifact of how the test is written.
 
-## Placeholder names and measured privacy (November 2026)
-
-**What's in a Name? How Placeholder Entities Inflate Measured Privacy in Language Models.** In a pre-specified,
-item-paired study of four open models (7 to 9B parameters) on 240 items from ConfAIde and PrivacyLens, writing people as
-"Person A" instead of by name raised the share of replies that withhold private information by 3.7 percentage points
-(95% CI [+1.4, +6.0]), while one draw of other realistic names did not. The effect is carried by ConfAIde's stories; on
-PrivacyLens agent tasks the estimate is inconclusive. All replies were graded by Claude Sonnet after it passed an
-agreement gate against human labels.
-
-- Interactive write-up: <https://mayank26saxena.github.io/blog/placeholder-names-privacy/>
-- Paper source: [`docs/followup/paper/`](docs/followup/paper/)
-- Plan, decision rules and dated deviations: [`notes/followup_preregistration.md`](notes/followup_preregistration.md)
-- How to reproduce, and what is available on request: [`docs/followup/REPRODUCE.md`](docs/followup/REPRODUCE.md)
-- Code: `scripts/followup_*.py`, tests in `tests/test_followup_*.py`, items and prompts in `data/followup/`,
-  analysis outputs in `results/followup/analysis/sonnet/`
-
-This study stands on its own; it does not use any numbers from the earlier study below.
-
-## Earlier study: Reading the Mind or the Prompt? (October 2026)
-
-**Validating activation-based detectors of evaluation awareness in open LLMs**
-
-Language models often behave differently when they recognize they are being evaluated. Activation-reading tools (Natural Language Autoencoders, Activation Oracles, linear probes) are now used to detect this *evaluation awareness* even when a model does not verbalize it. This project asks two questions:
-
-1. Do these detectors track **contextual cues** that a setup is an evaluation, or only the **format** of the prompt?
-2. Does the format-free signal **causally** change safety-relevant behavior?
-
-The motivating goal was an **evaluation-awareness gap** metric: an estimate of how much of a model's safe behavior on a given evaluation depends on it recognizing that it is being tested. The results show why a detector reading alone cannot serve as that metric.
-
-→ Full research statement: [`docs/research_statement.md`](docs/research_statement.md)
-
-### Approach
-
-| Axis | Levels | Cue factors ([EvalAwareBench](https://github.com/aisa-group/decomposing-eval-awareness) taxonomy) |
+| Study | Question | Write-up |
 |---|---|---|
-| **Format** | natural prose · benchmark template | F3 register, F7 task format |
-| **Context** | deployment · evaluation | F1 placeholder entities, F2 contrived details, F4 bare request, F6 eval scaffolding |
-| **Explicit** | absent · present | F8 grading language |
+| [**Placeholder names and measured privacy**](#1-placeholder-names-and-measured-privacy-november-2026) (Nov 2026) | Does writing people as "Person A" change privacy scores? | [Paper source](docs/followup/paper/) · [Interactive post](https://mayank26saxena.github.io/blog/placeholder-names-privacy/) |
+| [**Validating evaluation-awareness detectors**](#2-validating-evaluation-awareness-detectors-october-2026) (Oct 2026) | Do activation-based "is this a test?" detectors read evaluation context, and does it drive behavior? | [Final summary](results/reports/2026-10-31_final_summary.md) |
 
-The same request is rendered across all cells. Behaviors are **honesty** (disclosing a known defect under management pressure) and **privacy** (withholding PII from an unverified requester). We then:
-- measure behavior per cell, scored by an LLM judge calibrated against hand labels
-- train layer-wise probes for each axis, including a "naive" eval-vs-deploy probe trained only where format and context agree, as in most existing datasets, and tested where they disagree
-- test whether probes transfer to natural evaluation and deployment transcripts
-- evaluate NLA readings against the controlled factors, and steer along the context direction with format, contrastive-prompt and random controls (Activation Oracle and format-free LEACE directions deferred)
+The two studies are independent: the first does not use any results from the second.
 
-### Results
+---
 
-**Conclusion.** Activation detectors do read evaluation context, not only prompt format, but only at the right layer; and what they read does not account for the behavioral difference between evaluation and deployment. In Qwen2.5-7B the decoded context direction is causally inert while context raises privacy protection by ~25 pp; in Qwen3-4B (strongly) and Qwen3-8B (modestly) it controls privacy refusals while context does not reliably change behavior. A detector reading alone is therefore not evidence that behavior on an evaluation depends on recognizing the test. Full summary: [`final summary (2026-10-31)`](results/reports/2026-10-31_final_summary.md).
+## 1. Placeholder names and measured privacy (November 2026)
 
+*What's in a Name? How Placeholder Entities Inflate Measured Privacy in Language Models*
 
-Models: Qwen2.5-7B-Instruct, Qwen3-4B-Instruct-2507 and Qwen3-8B; dataset v3 has 38 behavior tasks.
+Privacy benchmarks write people either with realistic names or with placeholders such as "Person A", and the choice is
+usually treated as neutral. In a pre-specified, item-paired study of four open models (Qwen2.5-7B, Llama-3.1-8B,
+Mistral-7B, Gemma-2-9B) on 240 items from ConfAIde and PrivacyLens:
 
-- **Behavior.** In Qwen2.5-7B, contextual evaluation cues raise privacy protection by **+25 pp** (68% → 93%; 95% CI over tasks [+7.5, +45]). They do not change honesty (−2.7 pp; CI [−12.5, +8.0]).
-- **Layer specificity.** A naive eval-vs-deploy probe, trained where format and context agree, tracks **format in early and late layers** and **context only in a narrow mid-network band** (Qwen2.5-7B, L10–11). The layer read by the released Qwen2.5-7B NLA (output of block 20) is format-dominated. *Which layer is probed largely determines what an "eval-awareness probe" measures.*
-- **Transfer.** A context probe trained only on controlled prompts separates natural evaluation from deployment transcripts at **AUROC 0.83–0.88** (Qwen2.5-7B, L10). That is above an in-domain baseline (0.79), and it holds under length matching and on English-only prompts. Format probes do not transfer.
-- **Model dependence.** Qwen3-4B shows no mid-layer context band, and its transfer is weaker (0.71).
-- **NLA readings.** At the response-initial token, the released Qwen2.5-7B NLA never verbalizes evaluation awareness (0 of 622 explanations graded YES with the published grader). Its structural vocabulary tracks format (+27 pp), not context. Linear probes at the same layer do separate evaluation from deployment (AUROC 0.78–0.83 on natural prompts). *Decodable is not the same as verbalized.*
-- **NLA position sweep.** Over 11 positions per transcript, including the model's own response, the published grader still finds no context effect (any-of-N YES 2% in both evaluation and deployment contexts). Every YES comes from an explicit grading statement in the prompt. The NLA does track context at the end of the system message, but describes it as a fictional scenario (98% vs 35%, format-invariant), which the rubric does not count as evaluation awareness. Response tokens carry no reading.
-- **What the NLA notices.** Measured with validated rubrics, the system-message reading is perceived artificiality: "fictional" or "contrived" in 50% of evaluation-context prompts vs 16% of deployment-context prompts, the same in both formats. Changing one cue at a time, only contrived details produce it alone (+18 pp, 95% CI [+8, +30]). No implicit cue produces evaluation language. Only an explicit grading line does (74–92%).
-- **Single cues and behavior.** No single context cue reproduces the +25 pp privacy effect (single-cue effects −5 to +10 pp, none significant). Contrived details, the cue the NLA verbalizes, change neither privacy nor honesty. The clearest task (clinic) changes only when all cues are present.
-- **Steering.** Adding the layer-10 context direction moves a downstream context probe by up to ~70% of the natural eval–deploy gap, but privacy protection does not follow: the sign-specific effect is −5 to +15 pp (n.s.), while random directions of the same norm lower protection as much or more. The decodable context representation does not drive the privacy effect at this layer. The null holds against 20 random directions (the context directions rank at the 30th and 75th percentiles) and with 10 sampled responses per prompt (sign-specific effect −1 pp [−13, +11]), which excludes full mediation of the +22 pp gap. At layer 20, where steering moves the downstream readout by about twice the natural gap, the sign-specific effect is 0 pp [−5, +3].
-- **Second model.** In Qwen3-4B, steering the layer-13 context direction does change privacy protection: +51 pp [+33, +68] sign-specific, beyond all 10 random directions. It does so on deployment prompts as much as on evaluation prompts, producing generic refusals, and the model's natural eval–deploy gap is only +9.5 pp [−16.5, +35]. The direction acts as a caution lever, not as a mediator of an evaluation effect.
-- **Third model.** Qwen3-8B shows a mid-network context band like Qwen2.5-7B (naive probe, L10–18). Its layer-13 context direction has a modest, one-sided effect: +19 pp [+10, +29] sign-specific, driven by "deploy" steering lowering protection, at the top of the random distribution. Its natural gap is +12 pp [−4, +34] (n.s.).
-- **Caveats.** Models are 8B or smaller; two behaviors, with a significant gap only in privacy; one local judge (calibrated 47/48 against hand labels), which grades its own model in the Qwen3-4B experiments.
+- **Placeholders raised measured protection** (the share of replies that withhold the private detail) by **+3.7
+  percentage points** (95% CI [+1.4, +6.0]; Holm-adjusted p = 0.006), with positive estimates in all four models.
+- **Realistic renaming did not** (−0.2, [−1.8, +1.4]), on one draw of alternative names.
+- **The effect is carried by ConfAIde's narrative stories** (+6.4, [+4.3, +8.5]). On PrivacyLens agent tasks the
+  estimate is inconclusive (+1.1, [−1.4, +3.7]).
+- For scale, a one-sentence privacy instruction in the system prompt added +11.0 points; test-like formatting and a
+  scoring note had little effect.
 
-Reports: [`final summary (2026-10-31)`](results/reports/2026-10-31_final_summary.md) · [`Qwen3-8B (2026-10-31)`](results/reports/2026-10-31_steering_qwen3-8b.md) · [`steering, layer 20 and Qwen3-4B (2026-10-31)`](results/reports/2026-10-31_steering_layer20_qwen3.md) · [`steering null (2026-10-30)`](results/reports/2026-10-30_steering_null_qwen2.5-7b.md) · [`steering (2026-10-29)`](results/reports/2026-10-29_steering_privacy_qwen2.5-7b.md) · [`single-cue behavior (2026-10-27)`](results/reports/2026-10-27_single_factor_behavior_qwen2.5-7b.md) · [`NLA artificiality (2026-10-27)`](results/reports/2026-10-27_nla_artificiality_qwen2.5-7b.md) · [`NLA position sweep (2026-10-27)`](results/reports/2026-10-27_nla_positions_qwen2.5-7b.md) · [`NLA validation (2026-10-26)`](results/reports/2026-10-26_nla_qwen2.5-7b.md) · [`round 2 (2026-10-26)`](results/reports/2026-10-26_round2_qwen.md) · [`pilot (2026-10-25)`](results/reports/2026-10-25_pilot_qwen2.5-7b.md)
+All 46,080 replies were graded by Claude Sonnet after it passed an agreement gate against human labels (κ = 0.93).
 
-### Repository structure
+| What | Where |
+|---|---|
+| Pre-specified plan, decision rules, dated deviations | [`notes/followup_preregistration.md`](notes/followup_preregistration.md) |
+| Reproduction guide, and what is available on request | [`docs/followup/REPRODUCE.md`](docs/followup/REPRODUCE.md) |
+| Items, name list, rendered prompts (cue operators: `scripts/followup_cues.py`) | [`data/followup/`](data/followup/) |
+| Pipeline: selection, rendering, generation, grading, analysis | `scripts/followup_*.py`, tests in `tests/test_followup_*.py` |
+| Analysis outputs (Sonnet-graded), checksum manifest, environment | [`results/followup/`](results/followup/) |
+| Paper (LaTeX) and blog source; every number exported and checked by script | [`docs/followup/paper/`](docs/followup/paper/), [`docs/followup/blog/`](docs/followup/blog/) |
 
-```
-├── data/
-│   ├── taxonomy.yaml          # factor definitions (F1–F8) and axis grouping
-│   ├── tasks/                 # task templates (one YAML per scenario)
-│   ├── rendered/              # rendered prompt sets (JSONL)
-│   └── external/              # third-party natural transcripts (aware-bench)
-├── scripts/
-│   ├── render_dataset.py      # templates → prompts (main grid, single-factor flips)
-│   ├── validate_dataset.py    # schema checks + format/context separability test
-│   ├── generate.py            # model responses (HF transformers; MPS/CUDA/CPU)
-│   ├── judge.py               # LLM judge with optional calibration against hand labels
-│   ├── single_factor_behavior.py  # per-cue behavior effects with task-level CIs
-│   ├── steer.py                   # residual-stream steering with context, format, contrastive and random directions
-│   ├── steer_analysis.py          # steering effects, sign-specific contrasts, coherence
-│   ├── steer_check.py             # manipulation check: downstream context readout under steering
-│   ├── score.py               # keyword baseline scorer
-│   ├── probe.py               # layer-wise probes, naive-probe and topic-control analyses
-│   ├── probe_transfer.py      # transfer of probes to natural eval/deploy transcripts
-│   ├── transfer_confounds.py  # length / language controls for the transfer result
-│   ├── extract_positions.py   # activations at prompt-internal and response positions
-│   ├── nla_explain.py         # NLA activation verbalizer (published recipe, transformers)
-│   ├── nla_setting_rubric.py  # artificiality vs evaluation-framing measures
-│   ├── nla_grade.py           # published eval-awareness grader + keyword measures
-│   ├── run_pipeline.sh        # end-to-end runner (sleep-safe on macOS)
-│   └── show_pairs.py          # side-by-side response viewer
-├── prompts/                   # verbatim third-party prompts (e.g. published NLA grader)
-├── results/
-│   ├── reports/               # dated write-ups
-│   └── <model>/               # responses, judgments, probe results
-└── docs/
-    ├── research_statement.md
-    ├── roadmap.md
-    ├── related_work.md
-    ├── nla_paper_review.md
-    ├── compute.md
-    └── explainers/            # interactive HTML explainers
-```
+Model replies and labels are not in the repository; they are available from the author on request.
 
-### Quickstart
+---
+
+## 2. Validating evaluation-awareness detectors (October 2026)
+
+*Reading the Mind or the Prompt?*
+
+Activation-reading tools (linear probes, Natural Language Autoencoders) are used to detect when a model recognizes it is
+being evaluated. This study renders the same requests with independent switches for **format** (natural prose vs
+benchmark template), **context** (deployment vs evaluation cues) and **explicit** grading language, and asks whether
+detectors track context or just format, and whether what they read drives behavior. Models: Qwen2.5-7B-Instruct,
+Qwen3-4B-Instruct-2507 and Qwen3-8B.
+
+**Conclusion.** Detectors do read evaluation context, but only at the right layer, and what they read does not explain
+the behavioral difference between evaluation and deployment. A detector reading alone is not evidence that behavior on
+an evaluation depends on recognizing the test.
+
+- **Behavior.** In Qwen2.5-7B, evaluation cues raise privacy protection by +25 pp (68% → 93%; CI [+7.5, +45]) and do
+  not change honesty.
+- **Layer matters.** A naive eval-vs-deploy probe tracks format in early and late layers and context only in a narrow
+  mid-network band (Qwen2.5-7B, layers 10–11).
+- **Transfer.** A context probe trained on controlled prompts separates natural evaluation from deployment transcripts
+  (AUROC 0.83–0.88); format probes do not transfer.
+- **NLA readings.** The released Qwen2.5-7B NLA never verbalizes evaluation awareness at the response token (0 of 622).
+  What it does pick up is perceived artificiality ("fictional", "contrived"), driven by contrived details.
+- **Steering.** Steering along the context direction moves a downstream probe but not privacy behavior in Qwen2.5-7B.
+  In Qwen3-4B it raises refusals on deployment prompts as much as on evaluation prompts, acting as a general caution
+  lever rather than a mediator.
+
+Details and caveats: [final summary](results/reports/2026-10-31_final_summary.md), dated reports in
+[`results/reports/`](results/reports/), and the [research statement](docs/research_statement.md).
 
 ```bash
 uv venv --python 3.12 && uv pip install -r pyproject.toml
-
-# Dataset
-python scripts/render_dataset.py --mode main   --out data/rendered/v2_main.jsonl
-python scripts/render_dataset.py --mode single --out data/rendered/v2_single.jsonl
-python scripts/validate_dataset.py
-
-# Behavior
-python scripts/generate.py --model Qwen/Qwen2.5-7B-Instruct --data data/rendered/v2_main.jsonl
-python scripts/judge.py results/qwen2.5-7b-instruct/responses_v2_main.jsonl --data data/rendered/v2_main.jsonl
-
-# Representations
-python scripts/probe.py --model Qwen/Qwen2.5-7B-Instruct --data data/rendered/v2_main.jsonl
-python scripts/probe_transfer.py --model Qwen/Qwen2.5-7B-Instruct
+python scripts/render_dataset.py --mode main --out data/rendered/v3_main.jsonl && python scripts/validate_dataset.py
+python scripts/generate.py --model Qwen/Qwen2.5-7B-Instruct --data data/rendered/v3_main.jsonl
+python scripts/judge.py results/qwen2.5-7b-instruct/responses_v3_main.jsonl --data data/rendered/v3_main.jsonl
+python scripts/probe.py --model Qwen/Qwen2.5-7B-Instruct --data data/rendered/v3_main.jsonl
 ```
 
-Models up to about 8B run on Apple Silicon (MPS, bf16). Larger models need an 80 GB GPU; see [`docs/compute.md`](docs/compute.md).
+Models up to about 8B run on Apple Silicon (MPS, bf16); see [`docs/compute.md`](docs/compute.md).
 
-### Status
+---
 
-Complete at the ≤8B scale (October 2026). Deferred directions (LEACE erasure, larger models, Activation Oracles, NLA grounding tests) are listed in [`docs/roadmap.md`](docs/roadmap.md).
+## Repository layout
 
-### Data and licenses
+```
+data/
+  followup/          study 1: item manifest, name list, rendered prompts
+  tasks/, rendered/  study 2: task templates and prompt sets (taxonomy.yaml: cue definitions)
+  external/          study 2: natural transcripts from aware-bench
+scripts/
+  followup_*         study 1 pipeline
+  everything else    study 2 (render, generate, judge, probe, NLA, steer)
+results/
+  followup/          study 1 analysis outputs, manifest, environment record
+  reports/           study 2 dated reports
+  <model>/           study 2 responses, judgments, probe results
+docs/
+  followup/          study 1 paper, blog source, REPRODUCE.md
+  *.md, explainers/  study 2 research statement, related work, roadmap
+notes/               study 1 pre-specified plan
+tools/               blind grading page used for the human labels
+```
 
-- Task templates and rendered prompts in `data/tasks/` and `data/rendered/` are original to this project. Entities in the "realistic" condition are fictional.
-- `data/external/` contains transcripts from [EvalDetectBench / aware-bench](https://huggingface.co/datasets/el7982/aware-bench) (CC BY-NC-SA 4.0). The cue taxonomy follows [EvalAwareBench](https://github.com/aisa-group/decomposing-eval-awareness) (CC BY-NC 4.0).
+## Data and licenses
 
-### References
+Code is released under the [MIT License](LICENSE). Data keep their own licenses:
 
-Related work and resources are in [`docs/related_work.md`](docs/related_work.md).
-
-## License
-
-Code is released under the MIT License ([`LICENSE`](LICENSE)). Data keep their own licenses: the placeholder-names
-prompts in `data/followup/` are derived from ConfAIde and PrivacyLens (both MIT); the natural transcripts in
-`data/external/` come from aware-bench (CC BY-NC-SA 4.0), as described above.
+- `data/followup/` prompts are derived from [ConfAIde](https://github.com/skywalker023/confAIde) and
+  [PrivacyLens](https://github.com/SALT-NLP/PrivacyLens) (both MIT). The raw benchmarks are not redistributed; see
+  [`REPRODUCE.md`](docs/followup/REPRODUCE.md) for downloading them.
+- `data/tasks/` and `data/rendered/` are original to this project; all people in them are fictional.
+- `data/external/` holds transcripts from [aware-bench](https://huggingface.co/datasets/el7982/aware-bench)
+  (CC BY-NC-SA 4.0). The cue taxonomy follows [EvalAwareBench](https://github.com/aisa-group/decomposing-eval-awareness)
+  (CC BY-NC 4.0).

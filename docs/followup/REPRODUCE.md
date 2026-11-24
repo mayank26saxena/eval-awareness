@@ -5,7 +5,7 @@ Paper: *What's in a Name? How Placeholder Entities Inflate Measured Privacy in L
 
 The design, decision rules and every dated deviation are in `notes/followup_preregistration.md`, which also lists
 SHA-256 checksums of every input, frozen in stages before any output existed (git history shows the order:
-`FREEZE1` → `FREEZE2` → `FREEZE3` → `FREEZE4` → `FREEZE5`).
+`485b790` (stage 1) → `46c10c5` → `fe81b9b` → `97bab26` → `a6036a1` (stage 5)).
 
 ## What is in this repository, and what is on request
 

@@ -1,0 +1,226 @@
+{
+ "Qwen/Qwen2.5-7B-Instruct|steer_P - P": {
+  "est": 0.18174019607843137,
+  "lo": 0.13785014005602242,
+  "hi": 0.22570028011204482,
+  "p": 1.1102230246251565e-15,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 119
+  },
+  "by_benchmark": {
+   "confaide": 0.24583333333333332,
+   "privacylens": 0.11764705882352941
+  },
+  "equiv4": false,
+  "p_holm": 6.661338147750939e-15
+ },
+ "Qwen/Qwen2.5-7B-Instruct|steer - P": {
+  "est": 0.02687146892655367,
+  "lo": -0.011122881355932202,
+  "hi": 0.06680790960451978,
+  "p": 0.17621798248152953,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 118
+  },
+  "by_benchmark": {
+   "confaide": 0.07916666666666666,
+   "privacylens": -0.025423728813559324
+  },
+  "equiv4": false,
+  "p_holm": 0.17621798248152953
+ },
+ "Qwen/Qwen2.5-7B-Instruct|steer - random": {
+  "est": 0.075,
+  "lo": 0.03734243697478992,
+  "hi": 0.1125704656862745,
+  "p": 8.349499989401821e-05,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 119
+  },
+  "by_benchmark": {
+   "confaide": 0.15,
+   "privacylens": 0.0
+  },
+  "equiv4": false,
+  "p_holm": 0.0002504849996820546
+ },
+ "Qwen/Qwen2.5-7B-Instruct|steer - base": {
+  "est": 0.10014005602240895,
+  "lo": 0.058403361344537816,
+  "hi": 0.14213979341736693,
+  "p": 2.209619266002605e-06,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 119
+  },
+  "by_benchmark": {
+   "confaide": 0.16666666666666666,
+   "privacylens": 0.03361344537815126
+  },
+  "equiv4": false,
+  "p_holm": null
+ },
+ "Qwen/Qwen2.5-7B-Instruct|random - base": {
+  "est": 0.025,
+  "lo": -0.008333333333333333,
+  "hi": 0.05838541666666591,
+  "p": 0.14916684030198235,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 120
+  },
+  "by_benchmark": {
+   "confaide": 0.016666666666666666,
+   "privacylens": 0.03333333333333333
+  },
+  "equiv4": false,
+  "p_holm": null
+ },
+ "Qwen/Qwen2.5-7B-Instruct|P - base": {
+  "est": 0.0710609243697479,
+  "lo": 0.035451680672268907,
+  "hi": 0.10672268907563026,
+  "p": 0.0001198167010612039,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 119
+  },
+  "by_benchmark": {
+   "confaide": 0.0875,
+   "privacylens": 0.0546218487394958
+  },
+  "equiv4": false,
+  "p_holm": null
+ },
+ "Qwen/Qwen2.5-7B-Instruct|random_P - P": {
+  "est": -0.0019432773109243698,
+  "lo": -0.03736038165266107,
+  "hi": 0.03161764705882353,
+  "p": 0.9122330957929825,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 119
+  },
+  "by_benchmark": {
+   "confaide": -0.0375,
+   "privacylens": 0.03361344537815126
+  },
+  "equiv4": true,
+  "p_holm": null
+ },
+ "mistralai/Mistral-7B-Instruct-v0.3|steer_P - P": {
+  "est": 0.18541666666666667,
+  "lo": 0.13125,
+  "hi": 0.23958333333333331,
+  "p": 1.461364362853601e-11,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 120
+  },
+  "by_benchmark": {
+   "confaide": 0.25416666666666665,
+   "privacylens": 0.11666666666666667
+  },
+  "equiv4": false,
+  "p_holm": 5.845457451414404e-11
+ },
+ "mistralai/Mistral-7B-Instruct-v0.3|steer - P": {
+  "est": 0.08124999999999999,
+  "lo": 0.03125,
+  "hi": 0.13125,
+  "p": 0.0018477974382284934,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 120
+  },
+  "by_benchmark": {
+   "confaide": 0.075,
+   "privacylens": 0.0875
+  },
+  "equiv4": false,
+  "p_holm": 0.003695594876456987
+ },
+ "mistralai/Mistral-7B-Instruct-v0.3|steer - random": {
+  "est": 0.19166666666666668,
+  "lo": 0.14375,
+  "hi": 0.2396354166666659,
+  "p": 9.769962616701378e-15,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 120
+  },
+  "by_benchmark": {
+   "confaide": 0.25833333333333336,
+   "privacylens": 0.125
+  },
+  "equiv4": false,
+  "p_holm": 4.884981308350689e-14
+ },
+ "mistralai/Mistral-7B-Instruct-v0.3|steer - base": {
+  "est": 0.20416666666666666,
+  "lo": 0.15833333333333333,
+  "hi": 0.2520833333333333,
+  "p": 0.0,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 120
+  },
+  "by_benchmark": {
+   "confaide": 0.2625,
+   "privacylens": 0.14583333333333334
+  },
+  "equiv4": false,
+  "p_holm": null
+ },
+ "mistralai/Mistral-7B-Instruct-v0.3|random - base": {
+  "est": 0.012499999999999999,
+  "lo": -0.024999999999999998,
+  "hi": 0.05,
+  "p": 0.5095860248591677,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 120
+  },
+  "by_benchmark": {
+   "confaide": 0.004166666666666667,
+   "privacylens": 0.020833333333333332
+  },
+  "equiv4": false,
+  "p_holm": null
+ },
+ "mistralai/Mistral-7B-Instruct-v0.3|P - base": {
+  "est": 0.12291666666666667,
+  "lo": 0.08125,
+  "hi": 0.16666666666666666,
+  "p": 1.4335919340524583e-08,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 120
+  },
+  "by_benchmark": {
+   "confaide": 0.1875,
+   "privacylens": 0.058333333333333334
+  },
+  "equiv4": false,
+  "p_holm": null
+ },
+ "mistralai/Mistral-7B-Instruct-v0.3|random_P - P": {
+  "est": 0.020833333333333332,
+  "lo": -0.020833333333333336,
+  "hi": 0.0625,
+  "p": 0.3262579774325418,
+  "n_items": {
+   "confaide": 120,
+   "privacylens": 120
+  },
+  "by_benchmark": {
+   "confaide": 0.04583333333333333,
+   "privacylens": -0.004166666666666667
+  },
+  "equiv4": false,
+  "p_holm": null
+ }
+}

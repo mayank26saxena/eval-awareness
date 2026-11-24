@@ -1,6 +1,7 @@
 """Shared helpers: loading models on the Mac (MPS) and turning dataset items into chat prompts."""
 
 import json
+import os
 from pathlib import Path
 
 import torch
@@ -21,13 +22,19 @@ def load_model(name):
     if tok.pad_token is None:
         tok.pad_token = tok.eos_token
     kwargs = dict(dtype=torch.bfloat16)
+    eight_bit = os.environ.get("EA_LOAD_IN_8BIT") == "1"  # models too large for the GPU in bf16 (e.g. 32B on 48 GB)
+    if eight_bit:
+        from transformers import BitsAndBytesConfig
+        kwargs.update(quantization_config=BitsAndBytesConfig(load_in_8bit=True), device_map="auto")
     try:
         model = AutoModelForCausalLM.from_pretrained(name, **kwargs)
     except ValueError:
         # Gemma-3 4B+ checkpoints are image-text models; text-only prompts work through this class.
         from transformers import AutoModelForImageTextToText
         model = AutoModelForImageTextToText.from_pretrained(name, **kwargs)
-    model.to(device()).eval()
+    if not eight_bit:
+        model.to(device())
+    model.eval()
     return tok, model
 
 
@@ -37,8 +44,15 @@ def prompt_text(tok, item):
     Templates without a system role (e.g. Gemma) fold the system prompt into the first user turn themselves.
     Hybrid reasoning models (Qwen3-8B) run with thinking off; other templates ignore the flag.
     """
-    return tok.apply_chat_template(item["messages"], tokenize=False, add_generation_prompt=True,
-                                   enable_thinking=False)
+    msgs = item["messages"]
+    try:
+        return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True, enable_thinking=False)
+    except Exception as e:
+        # Gemma-2 rejects the system role outright; fold it into the first user turn as Gemma-3's template does.
+        if "system" not in str(e).lower() or msgs[0]["role"] != "system":
+            raise
+        msgs = [dict(msgs[1], content=msgs[0]["content"] + "\n\n" + msgs[1]["content"])] + msgs[2:]
+        return tok.apply_chat_template(msgs, tokenize=False, add_generation_prompt=True, enable_thinking=False)
 
 
 def read_jsonl(path):

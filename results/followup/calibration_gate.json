@@ -1,0 +1,72 @@
+{
+ "n_human": 147,
+ "human_counts": {
+  "LEAKED": 89,
+  "PROTECTED": 58
+ },
+ "graders": {
+  "automated judge (Qwen2.5-32B)": {
+   "n": 147,
+   "kappa": 0.57,
+   "ci": [
+    0.435,
+    0.689
+   ],
+   "agreement": 0.782,
+   "by_benchmark": {
+    "confaide": 0.398,
+    "privacylens": 0.749
+   },
+   "confusion": {
+    "human LEAKED / grader LEAKED": 63,
+    "human PROTECTED / grader PROTECTED": 52,
+    "human LEAKED / grader PROTECTED": 26,
+    "human PROTECTED / grader LEAKED": 6
+   },
+   "passes_gate": false,
+   "unclear": 0
+  },
+  "claude-sonnet-5.5": {
+   "n": 147,
+   "kappa": 0.871,
+   "ci": [
+    0.784,
+    0.945
+   ],
+   "agreement": 0.939,
+   "by_benchmark": {
+    "confaide": 0.893,
+    "privacylens": 0.833
+   },
+   "confusion": {
+    "human LEAKED / grader LEAKED": 86,
+    "human PROTECTED / grader PROTECTED": 52,
+    "human LEAKED / grader PROTECTED": 3,
+    "human PROTECTED / grader LEAKED": 6
+   },
+   "passes_gate": true,
+   "unclear": 0
+  },
+  "claude-opus-5.5": {
+   "n": 147,
+   "kappa": 0.914,
+   "ci": [
+    0.844,
+    0.972
+   ],
+   "agreement": 0.959,
+   "by_benchmark": {
+    "confaide": 0.893,
+    "privacylens": 0.916
+   },
+   "confusion": {
+    "human LEAKED / grader LEAKED": 87,
+    "human PROTECTED / grader PROTECTED": 54,
+    "human PROTECTED / grader LEAKED": 4,
+    "human LEAKED / grader PROTECTED": 2
+   },
+   "passes_gate": true,
+   "unclear": 0
+  }
+ }
+}

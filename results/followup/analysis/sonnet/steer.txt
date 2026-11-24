@@ -1,0 +1,22 @@
+
+=== Family F2 (points; Holm over the six tests; +-4 equivalence) ===
+  Qwen2.5-7B-Instruct          steer_P - P       +18.2 [ +13.8,  +22.6]  p_holm=0.000  equivalent(+-4)=False  by benchmark conf +24.6, priv +11.8
+  Qwen2.5-7B-Instruct          steer - P          +2.7 [  -1.1,   +6.7]  p_holm=0.176  equivalent(+-4)=False  by benchmark conf +7.9, priv -2.5
+  Qwen2.5-7B-Instruct          steer - random     +7.5 [  +3.7,  +11.3]  p_holm=0.000  equivalent(+-4)=False  by benchmark conf +15.0, priv +0.0
+  Mistral-7B-Instruct-v0.3     steer_P - P       +18.5 [ +13.1,  +24.0]  p_holm=0.000  equivalent(+-4)=False  by benchmark conf +25.4, priv +11.7
+  Mistral-7B-Instruct-v0.3     steer - P          +8.1 [  +3.1,  +13.1]  p_holm=0.004  equivalent(+-4)=False  by benchmark conf +7.5, priv +8.8
+  Mistral-7B-Instruct-v0.3     steer - random    +19.2 [ +14.4,  +24.0]  p_holm=0.000  equivalent(+-4)=False  by benchmark conf +25.8, priv +12.5
+
+=== Descriptive ===
+  Qwen2.5-7B-Instruct          steer - base      +10.0 [  +5.8,  +14.2]
+  Qwen2.5-7B-Instruct          random - base      +2.5 [  -0.8,   +5.8]
+  Qwen2.5-7B-Instruct          P - base           +7.1 [  +3.5,  +10.7]
+  Qwen2.5-7B-Instruct          random_P - P       -0.2 [  -3.7,   +3.2]
+  Mistral-7B-Instruct-v0.3     steer - base      +20.4 [ +15.8,  +25.2]
+  Mistral-7B-Instruct-v0.3     random - base      +1.2 [  -2.5,   +5.0]
+  Mistral-7B-Instruct-v0.3     P - base          +12.3 [  +8.1,  +16.7]
+  Mistral-7B-Instruct-v0.3     random_P - P       +2.1 [  -2.1,   +6.2]
+
+Absolute protection by condition (judge-only):
+  Qwen2.5-7B-Instruct: base 21.2; P 28.5; steer 31.4; steer_P 46.7; random 23.8; random_P 28.1
+  Mistral-7B-Instruct-v0.3: base 25.4; P 37.7; steer 45.8; steer_P 56.2; random 26.7; random_P 39.8

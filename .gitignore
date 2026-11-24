@@ -6,3 +6,26 @@ logs/
 # Activation caches are large and regenerable with scripts/probe.py
 results/**/*.npz
 notes/
+# Mirror of results copied from the cloud GPU by the dashboard
+results_pod/
+# Follow-up study: generations and labels are available on request (docs/followup/REPRODUCE.md);
+# only analysis outputs, the checksum manifest, the gate result and the environment record are published
+results/followup/*
+!results/followup/analysis/
+results/followup/analysis/*
+!results/followup/analysis/sonnet/
+!results/followup/MANIFEST.sha256
+!results/followup/calibration_gate.json
+!results/followup/env/
+# Third-party benchmark sources: download them as described in data/README.md
+data/external/*
+!data/external/awarebench_chat_evals.json
+!data/external/awarebench_deploy.json
+# LaTeX build files
+docs/followup/paper/*.aux
+docs/followup/paper/*.log
+docs/followup/paper/*.blg
+docs/followup/paper/*.out
+docs/followup/paper/*.bbl
+docs/followup/paper/main.pdf
+docs/followup/paper/build/

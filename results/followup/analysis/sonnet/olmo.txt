@@ -1,0 +1,29 @@
+mode=judge; models=['allenai/OLMo-2-1124-7B-Instruct']; strata=2; replies=2871; labelled=0
+
+Protection by cell (pooled mean over models and benchmarks, judge-only):
+  C0: 23.0
+  C1: nan
+  C2: nan
+  C3: nan
+  C4: nan
+  C5: nan
+  C6: nan
+  C7: 28.5
+  C8: 25.7
+  C9: nan
+  C10: nan
+  C11: nan
+
+=== Family F1 (cue components; points of protection, pooled over models; Holm-adjusted p) ===
+  P: C8-C0                             +2.7  [  -0.1,   +5.5]  p_holm=0.057  same sign in 1/1 models  equivalent(+-3)=False
+
+=== Other contrasts (exploratory unless named in the pre-registration) ===
+  bundle C7-C0                             +5.5  [  +2.3,   +8.7]  equivalent(+-3)=False
+
+=== Per model x benchmark (point estimates, points) ===
+  N: C1-C0: 
+  S: C2-C0: 
+  E: C3-C0: 
+  P: C8-C0: OLMo-2-112/conf +2.5; OLMo-2-112/priv +2.9
+  bundle C7-C0: OLMo-2-112/conf +8.5; OLMo-2-112/priv +2.5
+  additivity: C7-C1-C2-C3+2*C0: 

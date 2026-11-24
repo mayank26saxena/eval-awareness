@@ -1,0 +1,41 @@
+mode=judge; models=['Qwen/Qwen2.5-7B-Instruct', 'google/gemma-2-9b-it', 'meta-llama/Llama-3.1-8B-Instruct', 'mistralai/Mistral-7B-Instruct-v0.3']; strata=8; replies=45976; labelled=0
+
+Protection by cell (pooled mean over models and benchmarks, judge-only):
+  C0: 29.8
+  C1: 33.5
+  C2: 30.7
+  C3: 30.2
+  C4: 35.8
+  C5: 34.6
+  C6: 30.5
+  C7: 36.2
+  C8: 40.8
+  C9: 48.3
+  C10: 49.3
+  C11: 29.4
+
+=== Family F1 (cue components; points of protection, pooled over models; Holm-adjusted p) ===
+  N: C1-C0                             +3.7  [  +1.4,   +6.0]  p_holm=0.006  same sign in 4/4 models  equivalent(+-3)=False
+  S: C2-C0                             +0.9  [  -1.7,   +3.6]  p_holm=0.976  same sign in 2/4 models  equivalent(+-3)=False
+  E: C3-C0                             +0.4  [  -0.9,   +1.7]  p_holm=0.976  same sign in 2/4 models  equivalent(+-3)=True
+  P: C8-C0                            +11.0  [  +3.6,  +18.4]  p_holm=0.010  same sign in 4/4 models  equivalent(+-3)=False
+
+=== Other contrasts (exploratory unless named in the pre-registration) ===
+  bundle C7-C0                             +6.5  [  +2.8,  +10.2]  equivalent(+-3)=False
+  N+S interaction: C4-C1-C2+C0             +1.3  [  -1.1,   +3.8]  equivalent(+-3)=False
+  N+E interaction: C5-C1-C3+C0             +0.8  [  -1.1,   +2.6]  equivalent(+-3)=True
+  S+E interaction: C6-C2-C3+C0             -0.5  [  -2.7,   +1.7]  equivalent(+-3)=True
+  additivity: C7-C1-C2-C3+2*C0             +1.5  [  -1.8,   +4.8]  equivalent(+-3)=False
+  bundle+P vs P: C9-C8                     +7.5  [  +3.7,  +11.2]  equivalent(+-3)=False
+  bundle+P vs bundle: C9-C7               +12.1  [  +6.2,  +17.9]  equivalent(+-3)=False
+  P placement: C10-C8                      +8.4  [  +2.7,  +14.1]  equivalent(+-3)=False
+  renaming control: C11-C0                 -0.2  [  -1.8,   +1.4]  equivalent(+-3)=True
+  placeholders vs renaming: C1-C11         +3.9  [  +2.3,   +5.5]  equivalent(+-3)=False
+
+=== Per model x benchmark (point estimates, points) ===
+  N: C1-C0: Qwen2.5-7B/conf +7.1; Qwen2.5-7B/priv -0.6; gemma-2-9b/conf +8.4; gemma-2-9b/priv +0.6; Llama-3.1-/conf +9.0; Llama-3.1-/priv +4.0; Mistral-7B/conf +0.8; Mistral-7B/priv +0.5
+  S: C2-C0: Qwen2.5-7B/conf +2.5; Qwen2.5-7B/priv +1.5; gemma-2-9b/conf -1.7; gemma-2-9b/priv -1.5; Llama-3.1-/conf +9.4; Llama-3.1-/priv -0.6; Mistral-7B/conf -0.9; Mistral-7B/priv -0.7
+  E: C3-C0: Qwen2.5-7B/conf +2.3; Qwen2.5-7B/priv -2.9; gemma-2-9b/conf +1.8; gemma-2-9b/priv -0.2; Llama-3.1-/conf -1.5; Llama-3.1-/priv +3.8; Mistral-7B/conf +0.0; Mistral-7B/priv +0.0
+  P: C8-C0: Qwen2.5-7B/conf +6.2; Qwen2.5-7B/priv +1.0; gemma-2-9b/conf +33.0; gemma-2-9b/priv +4.8; Llama-3.1-/conf +21.2; Llama-3.1-/priv +11.1; Mistral-7B/conf +5.2; Mistral-7B/priv +6.0
+  bundle C7-C0: Qwen2.5-7B/conf +13.4; Qwen2.5-7B/priv +5.3; gemma-2-9b/conf +12.8; gemma-2-9b/priv +1.2; Llama-3.1-/conf +10.7; Llama-3.1-/priv +6.6; Mistral-7B/conf +0.4; Mistral-7B/priv +1.3
+  additivity: C7-C1-C2-C3+2*C0: Qwen2.5-7B/conf +1.5; Qwen2.5-7B/priv +7.4; gemma-2-9b/conf +4.2; gemma-2-9b/priv +2.3; Llama-3.1-/conf -6.1; Llama-3.1-/priv -0.5; Mistral-7B/conf +0.5; Mistral-7B/priv +1.5

@@ -184,3 +184,25 @@ d65e6751044601252ecb8d336af3e47e9b8d06ae2a911b7b0e597783cc1c1aa8  tools/followup
    Pilot review also found: 0 of 2,880 judge verdicts unparsed; 5.5% of replies hit the 384-token limit (PrivacyLens 9%),
    evenly across cells (11 to 15 per cell); truncated replies are mostly leaks already (12% judged protected), so
    truncation does not hide leaks. Truncation is reported per cell.
+8. 2026-11-18: OLMo-2's context window is 4,096 tokens, below the generator's default limit of 6,144, so its first main run failed at load. It reruns from the job queue with a 4,096-token limit (prompts plus 384 new tokens fit). No other setting changes.
+9. 2026-11-18 (after all replies were judged, before any protection contrast was computed): **Claude validation sample.**
+   Built by `scripts/followup_validation.py` (seed 20261119): 12 replies drawn uniformly at random in every (model,
+   benchmark, cell) stratum, not balanced on the judge's verdict: 1,152 main replies (144 per model x benchmark, slightly
+   below the planned ~150) and 360 steering-arm and OLMo replies (12 per model x benchmark x condition or cell). Graders
+   see the same cue-free view as the automated judge, rows shuffled, no cell, model or judge information. Grader: Claude
+   Sonnet 5.5 (the calibration grader), run as 16 independent blind instances of 3-4 pages (25 rows each); each read every
+   row and was told not to use scripts or keyword search. Result: 1,511 binary labels, 1 UNCLEAR (excluded), 0 missing
+   (`results/followup/validation/claude_{main,steer_olmo}.jsonl`). Its use as the reference still depends on the human gate
+   (deviation 4). Observed before any contrast: the judge agrees with Claude on PrivacyLens (kappa 0.68-0.88) but is lenient
+   on ConfAIde (specificity 0.32-0.70), which the misclassification correction (deviation 6) is designed to handle.
+10. 2026-11-18: recognition (R1) for Gemma-2-9B returned "test" for all 2,880 prompts (raw output "test"), so it carries
+    no information about cells; it is reported as a ceiling response and excluded from recognition-behavior comparisons.
+    Qwen and Mistral answer "real" to almost all prompts (0-14% "test"); only Llama varies across cells.
+11. 2026-11-18 (after the analysis above): **full Claude grading.** At the author's request every reply (48,960 main incl.
+    OLMo, 5,760 steering) is re-graded by Claude Sonnet, blind, so the conclusions can rest on Claude labels alone rather
+    than on the corrected automated judge. To limit cost the grader sees a short view (private detail, the whole user
+    message when at most 2,500 characters, otherwise its first and last paragraphs, and the reply). Because this view
+    differs from the gated one, it must pass the same human gate on the 150 calibration rows (kappa >= 0.70) before any
+    other page is graded; otherwise the full view is used. Package and procedure: `scripts/followup_sonnet_grade.py`,
+    `notes/sonnet_full/README.md` (seed 20261120, 50 rows per page). The judge-based results above remain reported as a
+    sensitivity analysis.

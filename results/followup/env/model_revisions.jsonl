@@ -1,0 +1,6 @@
+{"repo_id": "google/gemma-2-9b-it", "revision": "11c9b309abf73637e4b6f9a3fa1e92e615547819", "refs": ["main"], "seen_utc": "2026-11-18T02:41:35Z"}
+{"repo_id": "mistralai/Mistral-7B-Instruct-v0.3", "revision": "c170c708c41dac9275d15a8fff4eca08d52bab71", "refs": ["main"], "seen_utc": "2026-11-18T02:41:35Z"}
+{"repo_id": "allenai/OLMo-2-1124-7B-Instruct", "revision": "470b1fba1ae01581f270116362ee4aa1b97f4c84", "refs": ["main"], "seen_utc": "2026-11-18T02:41:35Z"}
+{"repo_id": "Qwen/Qwen2.5-7B-Instruct", "revision": "a09a35458c702b33eeacc393d103063234e8bc28", "refs": ["main"], "seen_utc": "2026-11-18T02:41:35Z"}
+{"repo_id": "Qwen/Qwen2.5-32B-Instruct", "revision": "5ede1c97bbab6ce5cda5812749b4c0bdf79b18dd", "refs": ["main"], "seen_utc": "2026-11-18T02:41:35Z"}
+{"repo_id": "meta-llama/Llama-3.1-8B-Instruct", "revision": "0e9e39f249a16976918f6564b8830bc894c89659", "refs": ["main"], "seen_utc": "2026-11-18T02:41:35Z"}

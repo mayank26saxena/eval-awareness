@@ -11,4 +11,5 @@ dependencies = [
   "transformers>=4.50",
   "accelerate>=1.0",
   "huggingface_hub>=0.30",
+  "matplotlib>=3.8",
 ]

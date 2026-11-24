@@ -1,0 +1,240 @@
+{
+ "N: C1-C0": {
+  "est": 0.02923683412670827,
+  "se": 0.01076470355576123,
+  "lo": 0.008138015157416259,
+  "hi": 0.05033565309600028,
+  "p": 0.006607778565180578,
+  "tau2": 0.00017014168347091448,
+  "equiv": false,
+  "n_models": 4,
+  "agree": 4,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.02354942481702549,
+   "google/gemma-2-9b-it": 0.037343335408953265,
+   "meta-llama/Llama-3.1-8B-Instruct": 0.05589387653795695,
+   "mistralai/Mistral-7B-Instruct-v0.3": 0.001455629014485732
+  }
+ },
+ "S: C2-C0": {
+  "est": 0.008694423316360313,
+  "se": 0.013924690250719492,
+  "lo": -0.018597969575049892,
+  "hi": 0.035986816207770514,
+  "p": 0.5323721522860072,
+  "tau2": 0.0005271378840009245,
+  "equiv": false,
+  "n_models": 4,
+  "agree": 2,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.03151343780555481,
+   "google/gemma-2-9b-it": -0.017874540212744816,
+   "meta-llama/Llama-3.1-8B-Instruct": 0.036271222624070745,
+   "mistralai/Mistral-7B-Instruct-v0.3": -0.010039547437360102
+  }
+ },
+ "E: C3-C0": {
+  "est": 0.001062999269821123,
+  "se": 0.007214255414988612,
+  "lo": -0.013076941343556558,
+  "hi": 0.015202939883198803,
+  "p": 0.8828580953984644,
+  "tau2": 0.0,
+  "equiv": true,
+  "n_models": 4,
+  "agree": 2,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.0004063053301973929,
+   "google/gemma-2-9b-it": 0.011457655633450387,
+   "meta-llama/Llama-3.1-8B-Instruct": -0.00837163451878642,
+   "mistralai/Mistral-7B-Instruct-v0.3": -0.0005661712668081909
+  }
+ },
+ "P: C8-C0": {
+  "est": 0.11299278139799204,
+  "se": 0.03622209722400596,
+  "lo": 0.04199747083894036,
+  "hi": 0.18398809195704374,
+  "p": 0.001811930807117168,
+  "tau2": 0.0048943253288187705,
+  "equiv": false,
+  "n_models": 4,
+  "agree": 4,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.03903526157694914,
+   "google/gemma-2-9b-it": 0.19575373440162952,
+   "meta-llama/Llama-3.1-8B-Instruct": 0.15120177817962627,
+   "mistralai/Mistral-7B-Instruct-v0.3": 0.06674533666969973
+  }
+ },
+ "bundle C7-C0": {
+  "est": 0.06459991067091564,
+  "se": 0.016815812165497827,
+  "lo": 0.031640918826539896,
+  "hi": 0.09755890251529138,
+  "p": 0.00012222642742387713,
+  "tau2": 0.0008302883339083954,
+  "equiv": false,
+  "n_models": 4,
+  "agree": 4,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.08952535525630846,
+   "google/gemma-2-9b-it": 0.07274667192849124,
+   "meta-llama/Llama-3.1-8B-Instruct": 0.08217696802782341,
+   "mistralai/Mistral-7B-Instruct-v0.3": 0.010448245048241017
+  }
+ },
+ "N+S interaction: C4-C1-C2+C0": {
+  "est": 0.015030033798490109,
+  "se": 0.014958932227865939,
+  "lo": -0.01428947336812713,
+  "hi": 0.04434954096510735,
+  "p": 0.3150157436451866,
+  "tau2": 0.00040758610253594315,
+  "equiv": false,
+  "n_models": 4,
+  "agree": 3,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.018742665772546685,
+   "google/gemma-2-9b-it": 0.051285226663057126,
+   "meta-llama/Llama-3.1-8B-Instruct": -0.023599698318145845,
+   "mistralai/Mistral-7B-Instruct-v0.3": 0.013705159251706123
+  }
+ },
+ "N+E interaction: C5-C1-C3+C0": {
+  "est": 0.0108490696309418,
+  "se": 0.010432624417146989,
+  "lo": -0.009598874226666299,
+  "hi": 0.0312970134885499,
+  "p": 0.2983781899543163,
+  "tau2": 0.0,
+  "equiv": false,
+  "n_models": 4,
+  "agree": 4,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.014921303581624967,
+   "google/gemma-2-9b-it": 0.0060450009382437275,
+   "meta-llama/Llama-3.1-8B-Instruct": 0.009026116337411683,
+   "mistralai/Mistral-7B-Instruct-v0.3": 0.012486002490436965
+  }
+ },
+ "S+E interaction: C6-C2-C3+C0": {
+  "est": -0.005142168761605135,
+  "se": 0.01015029964870021,
+  "lo": -0.025036756073057546,
+  "hi": 0.014752418549847275,
+  "p": 0.6124336443552967,
+  "tau2": 0.0,
+  "equiv": true,
+  "n_models": 4,
+  "agree": 2,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.0071155184411969274,
+   "google/gemma-2-9b-it": -0.004957361535296301,
+   "meta-llama/Llama-3.1-8B-Instruct": 0.002005475185854949,
+   "mistralai/Mistral-7B-Instruct-v0.3": -0.023276906318811796
+  }
+ },
+ "additivity: C7-C1-C2-C3+2*C0": {
+  "est": 0.02402901583251594,
+  "se": 0.015465830737442914,
+  "lo": -0.0062840124128721725,
+  "hi": 0.05434204407790405,
+  "p": 0.12025977950777755,
+  "tau2": 0.0,
+  "equiv": false,
+  "n_models": 4,
+  "agree": 3,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.03405618730353077,
+   "google/gemma-2-9b-it": 0.04182022109883232,
+   "meta-llama/Llama-3.1-8B-Instruct": -0.0016164966154179616,
+   "mistralai/Mistral-7B-Instruct-v0.3": 0.019598334737923495
+  }
+ },
+ "bundle+P vs P: C9-C8": {
+  "est": 0.06910635148747009,
+  "se": 0.020592015712046382,
+  "lo": 0.028746000691859182,
+  "hi": 0.109466702283081,
+  "p": 0.0007908486260499448,
+  "tau2": 0.001331273951107591,
+  "equiv": false,
+  "n_models": 4,
+  "agree": 4,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.10414029535864981,
+   "google/gemma-2-9b-it": 0.02592834135142741,
+   "meta-llama/Llama-3.1-8B-Instruct": 0.10238073913587409,
+   "mistralai/Mistral-7B-Instruct-v0.3": 0.043898809523809534
+  }
+ },
+ "bundle+P vs bundle: C9-C7": {
+  "est": 0.11801137061192175,
+  "se": 0.026511894530228678,
+  "lo": 0.06604805733267355,
+  "hi": 0.16997468389116996,
+  "p": 8.53673816303413e-06,
+  "tau2": 0.002430459699952665,
+  "equiv": false,
+  "n_models": 4,
+  "agree": 4,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.05365020167929049,
+   "google/gemma-2-9b-it": 0.1489354038245657,
+   "meta-llama/Llama-3.1-8B-Instruct": 0.17140554928767696,
+   "mistralai/Mistral-7B-Instruct-v0.3": 0.10019590114526825
+  }
+ },
+ "P placement: C10-C8": {
+  "est": 0.08414626377235615,
+  "se": 0.027538571900020344,
+  "lo": 0.03017066284831628,
+  "hi": 0.13812186469639604,
+  "p": 0.0022462691346891717,
+  "tau2": 0.0026468919011746295,
+  "equiv": false,
+  "n_models": 4,
+  "agree": 4,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.050402088152697186,
+   "google/gemma-2-9b-it": 0.033667186385137826,
+   "meta-llama/Llama-3.1-8B-Instruct": 0.15830027856171863,
+   "mistralai/Mistral-7B-Instruct-v0.3": 0.09862754018804978
+  }
+ },
+ "renaming control: C11-C0": {
+  "est": -0.01952542198352876,
+  "se": 0.007478847254147479,
+  "lo": -0.03418396260165782,
+  "hi": -0.0048668813653997,
+  "p": 0.009034315140223903,
+  "tau2": 0.0,
+  "equiv": false,
+  "n_models": 4,
+  "agree": 4,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": -0.020872104761035765,
+   "google/gemma-2-9b-it": -0.03102166661289954,
+   "meta-llama/Llama-3.1-8B-Instruct": -0.005782791125802891,
+   "mistralai/Mistral-7B-Instruct-v0.3": -0.026508631584268527
+  }
+ },
+ "placeholders vs renaming: C1-C11": {
+  "est": 0.048523623279491085,
+  "se": 0.009262831004415384,
+  "lo": 0.03036847451083693,
+  "hi": 0.06667877204814524,
+  "p": 1.618601774833195e-07,
+  "tau2": 3.927152113321716e-05,
+  "equiv": false,
+  "n_models": 4,
+  "agree": 4,
+  "per_model": {
+   "Qwen/Qwen2.5-7B-Instruct": 0.04442152957806125,
+   "google/gemma-2-9b-it": 0.0683650020218528,
+   "meta-llama/Llama-3.1-8B-Instruct": 0.06167666766375984,
+   "mistralai/Mistral-7B-Instruct-v0.3": 0.02796426059875426
+  }
+ }
+}

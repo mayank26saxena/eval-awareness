@@ -21,7 +21,7 @@
 \maketitle
 
 \begin{abstract}
-Privacy benchmarks for language models represent people either with realistic names or with placeholders such as ``Person A'', and this formatting choice is typically treated as neutral. If placeholders alter model behavior, however, developers and safety auditors comparing placeholder-based internal evaluations against realistic-name benchmarks can mistake surface artifact sensitivity for genuine contextual integrity. We test whether entity naming is neutral in a pre-specified, item-paired study across four open models (7--9B parameters) on 240 items from ConfAIde and PrivacyLens under published names, placeholders, and an alternative draw of realistic names. Claude Sonnet graded \nMain{} replies after passing an agreement gate against human labels ($\kappa=\kappaShort$). Placeholders raised the share of replies withholding private information by \estN{} percentage points (95\% CI \ciN; Holm $p=\pN$), with positive estimates across all four models (near zero for Mistral), whereas realistic renaming did not raise protection (\estR{} pp, \ciR). The pooled effect is driven by ConfAIde's short stories (\estNConf{} pp, \ciNConf, from a baseline of 12--25\% protection), while PrivacyLens agent tasks are inconclusive (\estNPriv{} pp, \ciNPriv; \exclPrivMean{} pp when excluding items with incomplete handle replacement). For the tested models and narrative tasks, placeholder-named benchmarks can overstate privacy protection under realistic naming; entity naming should therefore be tested as an experimental variable rather than assumed neutral.
+Privacy benchmarks write people either with realistic names or with placeholders such as ``Person A'', and the choice is usually treated as neutral. If it is not, a score from placeholder-named items can be mistaken for real privacy protection. We test whether entity naming is neutral in a pre-specified, item-paired study across four open models (7--9B parameters) on 240 items from ConfAIde and PrivacyLens under published names, placeholders, and an alternative draw of realistic names. Claude Sonnet graded \nMain{} replies after passing an agreement gate against human labels ($\kappa=\kappaShort$). Placeholders raised the share of replies withholding private information by \estN{} percentage points (95\% CI \ciN; Holm $p=\pN$), with positive estimates across all four models (near zero for Mistral), whereas realistic renaming did not raise protection (\estR{} pp, \ciR). The pooled effect is driven by ConfAIde's short stories (\estNConf{} pp, \ciNConf, from a baseline of 12--25\% protection), while PrivacyLens agent tasks are inconclusive (\estNPriv{} pp, \ciNPriv; \exclPrivMean{} pp when excluding items with incomplete handle replacement). For the tested models and narrative tasks, placeholder-named benchmarks can overstate privacy protection under realistic naming; entity naming should therefore be tested as an experimental variable rather than assumed neutral.
 \end{abstract}
 
 \section{Introduction}
@@ -58,7 +58,7 @@ Published (baseline) & Nothing: the benchmark prompt with its published realisti
 Placeholders & Every person becomes Person A, Person B, \ldots{} in order of appearance; emails become \texttt{userN@example.com}\\
 Realistic renaming & Every person gets a different realistic name from a fixed list, in the same positions (control for placeholders)\\
 Test-case wrapper & The prompt is wrapped in \#\#\# Case / \#\#\# Input / \#\#\# Response\\
-Scoring note & A neutral note: ``This response will be scored.''\\
+Scoring note & One of five neutral notes, e.g.\ ``[This response will be scored.]'' (Appendix~\ref{app:full})\\
 Cue combinations & Placeholders, wrapper and note in pairs and all three together\\
 Privacy instruction & The privacy sentence, in the system prompt or at the end of the user turn\\
 Cues and instruction & All three cues plus the system-prompt instruction\\\bottomrule
@@ -66,7 +66,7 @@ Cues and instruction & All three cues plus the system-prompt instruction\\\botto
 \caption{The twelve prompt versions, each applied to all 240 items.}\label{tab:versions}
 \end{table}
 
-\paragraph{Measurement and judge calibration.} Privacy \emph{protection} is defined as the fraction of clear replies omitting the sensitive detail. Claude Sonnet 5.5 classified each reply as \emph{protected}, \emph{leaked}, or \emph{unclear} given the private detail, user task, and model reply, blinded to model identity and condition label (though entity strings inside replies remain visible). Unclear verdicts (\nUnclearPaper{} of \nGradedPaper; \pctUnclearPaper\%) were excluded. Long PrivacyLens traces were evaluated via a standardized truncated view (full user message up to 2{,}500 characters, otherwise first and last paragraphs; identical across naming conditions in 236/240 items). Before full grading, Sonnet was required to achieve Cohen's $\kappa \geq 0.70$ \citep{cohen1960kappa} against blind human labels (one annotator, the author) on \nGateSampled{} pilot replies from Qwen2.5-7B (\nHuman{} clear verdicts). Sonnet achieved $\kappa=\kappaShort$ on the grading view and \kappaSonnet{} (\kappaciSonnet) on full traces (Claude Opus: \kappaOpus).
+\paragraph{Measurement and judge calibration.} Privacy \emph{protection} is defined as the fraction of clear replies omitting the sensitive detail. Claude Sonnet 5.5 (\texttt{claude-sonnet-5-5}, run through Claude Code subagents in November 2026; no dated snapshot identifier was recorded) classified each reply as \emph{protected}, \emph{leaked}, or \emph{unclear} given the private detail, user task, and model reply, blinded to model identity and condition label (though entity strings inside replies remain visible). Unclear verdicts (\nUnclearPaper{} of \nGradedPaper; \pctUnclearPaper\%) were excluded. Long PrivacyLens traces were evaluated via a standardized truncated view (full user message up to 2{,}500 characters, otherwise first and last paragraphs; identical across naming conditions in 236/240 items). Before full grading, Sonnet was required to achieve Cohen's $\kappa \geq 0.70$ \citep{cohen1960kappa} against blind human labels (one annotator, the author) on \nGateSampled{} pilot replies from Qwen2.5-7B (\nHuman{} clear verdicts). Sonnet achieved $\kappa=\kappaShort$ on the grading view and \kappaSonnet{} (\kappaciSonnet) on full traces (Claude Opus: \kappaOpus).
 
 \paragraph{Grader bias check.} Because a reply that says ``Person A'' reveals the naming condition, the grader could treat placeholder replies more leniently. In the check sample we found no sign of this: agreement was $\kappa=\gateKappaPh$ on the \gateNPh{} replies from placeholder versions and \gateKappaOther{} on the other \gateNOther, and Sonnet never called a placeholder reply protected that the human called leaked (\gateStrictPh{} disagreements went the other way). With 62 replies from one model, a bias of a few points cannot be excluded.
 
@@ -92,7 +92,7 @@ Pooled over the four models and both benchmarks, placeholders raised protection 
 \end{figure}
 
 \subsection{The Pooled Effect Is Carried by Narrative Stories}
-In an exploratory split, placeholders added \estNConf{} points on ConfAIde (\ciNConf). On PrivacyLens the estimate is \estNPriv{} (\ciNPriv). That interval includes zero and extends past the $\pm3$ equivalence bound, so the pre-specified rule calls it inconclusive; we did not test the difference between benchmarks formally. Llama's own PrivacyLens estimate is \dLlamaPriv{} points. On ConfAIde the gain was \dQwenConf{} for Qwen, \dLlamaConf{} for Llama, \dGemmaConf{} for Gemma and \dMistralConf{} for Mistral (Figure~\ref{fig:permodel}), from published-name protection of 12 to 25\% (Table~\ref{tab:relative}). The pooled \estN{} is an equal-weight average of the two benchmarks.
+In an exploratory split, placeholders added \estNConf{} points on ConfAIde (\ciNConf). On PrivacyLens the estimate is \estNPriv{} (\ciNPriv). That interval includes zero and extends past the $\pm3$ equivalence bound, so the pre-specified rule calls it inconclusive; we did not test the difference between benchmarks formally. One possible reason for the gap, discussed in Section~\ref{sec:discussion}, is that in a story a character's name is the main handle for disclosure, while agent tasks also expose private details in structured records and tool outputs. Llama's own PrivacyLens estimate is \dLlamaPriv{} points. On ConfAIde the gain was \dQwenConf{} for Qwen, \dLlamaConf{} for Llama, \dGemmaConf{} for Gemma and \dMistralConf{} for Mistral (Figure~\ref{fig:permodel}), from published-name protection of 12 to 25\% (Table~\ref{tab:relative}). The pooled \estN{} is an equal-weight average of the two benchmarks.
 
 \begin{figure}[t]\centering
 \includegraphics[width=\linewidth]{figures/per_model.pdf}
@@ -129,7 +129,7 @@ The score is binary, and the replies show that both ``protected'' and ``leaked''
 In other cases the score is harder to read (Table~\ref{tab:cases}). A blanket refusal of a harmless request counts as protection. A reply can drop a name while keeping a detail that identifies the person (``my brother'', in a story about three siblings), which the grader correctly scores as a leak. And on one PrivacyLens item placeholders lowered protection: with patients written as Person B, C and D, all four Llama-3.1-8B samples listed their diagnoses and prescriptions in an email to an outside vendor, while all four samples with the published names kept the records out.
 
 \subsection{Contextualizing Effect Size Against Prompt Cues}\label{sec:secondary}
-To put the placeholder effect in context, we compare it with the other prompt versions.
+To put the placeholder effect in context, we compare it with the other prompt versions. Rates for all twelve versions, including the three pairwise cue combinations and all cues with the instruction, are in Appendix~\ref{app:full} (Table~\ref{tab:full}).
 
 \paragraph{Test-like cues.} The test-case wrapper changed protection by \estS{} points (\ciS) and the scoring note by \estE{} (\ciE, equivalent to zero). All three cues together (placeholders, wrapper and note) gave \estBundle; we found no evidence that they interact (\estAdd, \ciAdd), but the interval is too wide to show additivity.
 
@@ -169,7 +169,7 @@ To put the placeholder effect in context, we compare it with the other prompt ve
 \section{Conclusion}
 Writing people as ``Person A'' made four small open language models look more protective on ConfAIde's privacy stories, while one draw of realistic names did not, and on PrivacyLens agent tasks the estimate is inconclusive. Part of what the score counts as protection is refusal, and in at least one case placeholders made disclosure worse. How a safety evaluation represents people can change the behavior it measures, so naming should be tested rather than assumed neutral.
 
-\paragraph{Code and data.} Code and reproduction instructions: \url{https://github.com/mayank26saxena/eval-awareness}. The repository also holds the item lists, rendered prompts, the pre-specified plan with its deviations, the analysis outputs and a checksum manifest. Model generations and human and model labels are available from the author on request. An interactive version with all figures and examples: \url{https://mayank26saxena.github.io/blog/placeholder-names-privacy/}.
+\paragraph{Code and data.} Code and reproduction instructions:\\ \url{https://github.com/mayank26saxena/eval-awareness}\\ The repository also holds the item lists, rendered prompts, the pre-specified plan with its deviations, the analysis outputs and a checksum manifest. Model generations and human and model labels are available from the author on request. An interactive version with all figures and examples:\\ \url{https://mayank26saxena.github.io/blog/placeholder-names-privacy/}
 
 \bibliographystyle{plainnat}
 \bibliography{refs}
@@ -180,7 +180,9 @@ In a separate greedy call, each model saw every prompt version and answered whet
 
 \begin{figure}[h]\centering
 \includegraphics[width=.6\linewidth]{figures/recognition.pdf}
-\caption{Llama-3.1-8B: change in self-reported ``test'' answers against change in protection, one point per prompt version and benchmark (22 points), relative to the published prompt. Labelled: placeholders and the two test cues.}\label{fig:recog}
+\caption{Llama-3.1-8B: change in self-reported ``test'' answers against change in protection, one point per prompt version and benchmark (22 points), relative to the published prompt. Labelled: placeholders and the two test cues; unlabelled points are the other cue combinations and the instruction versions.}\label{fig:recog}
 \end{figure}
+
+\input{appendix_full.tex}
 
 \end{document}
